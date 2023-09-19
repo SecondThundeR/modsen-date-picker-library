@@ -8,6 +8,8 @@ import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import dts from "rollup-plugin-dts";
 
 import packageJson from "./package.json" assert { type: "json" };
+import tsconfigJson from "./tsconfig.json" assert { type: "json" };
+
 
 /** @type {import('rollup').RollupOptions}*/
 export default [
@@ -43,6 +45,11 @@ export default [
   {
     input: "dist/esm/types/index.d.ts",
     output: [{ file: "dist/index.d.ts", format: "esm" }],
-    plugins: [dts()],
+    plugins: [dts({
+      compilerOptions: {
+        baseUrl: tsconfigJson.compilerOptions.baseUrl,
+        paths: tsconfigJson.compilerOptions.paths,
+      },
+    }),],
   },
 ];
