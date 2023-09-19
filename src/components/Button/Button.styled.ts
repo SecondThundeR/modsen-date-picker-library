@@ -4,7 +4,7 @@ export const StyledButton = styled.button`
   all: unset;
   color: white;
   font-family: Arial, Helvetica, sans-serif;
-  background-color: blue;
+  background-color: lightblue;
   font-size: 1em;
   margin: 1em;
   padding: 0.5em 1.5em;
@@ -12,7 +12,7 @@ export const StyledButton = styled.button`
   transition: 0.3s;
 
   &:hover {
-    background-color: lightblue;
+    background-color: aqua;
   }
 
   &:active {
