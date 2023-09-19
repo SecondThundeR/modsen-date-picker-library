@@ -23,9 +23,9 @@
 
 ### Дополнительный функционал
 
-- Развернуть приложение на хостинге (heroku, vercel)
-- Настроить CI/CD, используя [GitHub Actions](https://github.com/features/actions)
-- Собрать проект с нуля(с настройками всех конфигов: rollup, eslint, prettier, husky)
+- **Развернуть приложение на хостинге (heroku, vercel)**
+- **Настроить CI/CD, используя [GitHub Actions](https://github.com/features/actions)**
+- **Собрать проект с нуля(с настройками всех конфигов: rollup, eslint, prettier, husky)**
 
 ### Пример графического представления
 
