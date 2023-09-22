@@ -10,7 +10,6 @@ const meta: Meta<typeof FooterButton> = {
       name: "Button title",
       description: "Title of a button",
       type: "string",
-      defaultValue: "Click me!",
     },
   },
 };
@@ -18,4 +17,8 @@ const meta: Meta<typeof FooterButton> = {
 export default meta;
 type Story = StoryObj<typeof FooterButton>;
 
-export const Primary: Story = {};
+export const Primary: Story = {
+  args: {
+    title: "Click me!",
+  },
+};

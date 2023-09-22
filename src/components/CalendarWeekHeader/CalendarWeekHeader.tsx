@@ -2,15 +2,14 @@ import React, { memo } from "react";
 
 import { WEEKS_DATA } from "@/constants/weekData";
 
-import { Title, TitleWrapper, Wrapper } from "./CalendarWeekHeader.styled";
+import CalendarButton from "../CalendarButton";
+import { Wrapper } from "./CalendarWeekHeader.styled";
 
 const CalendarWeekHeader = memo(function CalendarWeekHeader() {
   return (
     <Wrapper>
-      {WEEKS_DATA.map((item) => (
-        <TitleWrapper key={item.id}>
-          <Title>{item.title}</Title>
-        </TitleWrapper>
+      {WEEKS_DATA.map(({ id, title }) => (
+        <CalendarButton key={id} title={title} />
       ))}
     </Wrapper>
   );
