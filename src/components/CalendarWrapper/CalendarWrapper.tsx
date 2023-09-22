@@ -1,10 +1,7 @@
-import React, { PropsWithChildren } from "react";
+import React from "react";
 
 import { Wrapper } from "./CalendarWrapper.styled";
-
-type CalendarWrapperProps = PropsWithChildren<{
-  removeBottomBorder?: boolean;
-}>;
+import { CalendarWrapperProps } from "./interfaces";
 
 function CalendarWrapper({
   children,

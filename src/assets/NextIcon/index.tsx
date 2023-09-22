@@ -1,6 +1,6 @@
-import React, { SVGProps } from "react";
+import React, { memo, SVGProps } from "react";
 
-function NextIcon(props: SVGProps<SVGSVGElement>) {
+const NextIcon = memo(function NextIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -19,6 +19,6 @@ function NextIcon(props: SVGProps<SVGSVGElement>) {
       />
     </svg>
   );
-}
+});
 
 export default NextIcon;

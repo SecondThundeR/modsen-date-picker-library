@@ -1,15 +1,14 @@
-import React from "react";
+import React, { memo } from "react";
 
 import NextIcon from "@/assets/NextIcon";
 import PrevIcon from "@/assets/PrevIcon";
 
 import { Header, HeaderTitle } from "./CalendarHeader.styled";
+import { CalendarHeaderProps } from "./interfaces";
 
-interface CalendarHeaderProps {
-  title: string;
-}
-
-function CalendarHeader({ title }: CalendarHeaderProps) {
+const CalendarHeader = memo(function CalendarHeader({
+  title,
+}: CalendarHeaderProps) {
   return (
     <Header>
       <PrevIcon />
@@ -17,6 +16,6 @@ function CalendarHeader({ title }: CalendarHeaderProps) {
       <NextIcon />
     </Header>
   );
-}
+});
 
 export default CalendarHeader;

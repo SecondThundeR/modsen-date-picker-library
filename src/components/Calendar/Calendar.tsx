@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 import CalendarHeader from "@/components/CalendarHeader";
 import CalendarWeekHeader from "@/components/CalendarWeekHeader";
@@ -6,12 +6,9 @@ import CalendarWrapper from "@/components/CalendarWrapper";
 import ClearButton from "@/components/ClearButton";
 
 import { Wrapper } from "./Calendar.styled";
+import { CalendarProps } from "./interfaces";
 
-interface CalendarProps {
-  hasClearButton: boolean;
-}
-
-function Calendar({ hasClearButton }: CalendarProps) {
+const Calendar = memo(function Calendar({ hasClearButton }: CalendarProps) {
   return (
     <Wrapper>
       <CalendarWrapper removeBottomBorder={hasClearButton}>
@@ -21,6 +18,6 @@ function Calendar({ hasClearButton }: CalendarProps) {
       {hasClearButton && <ClearButton />}
     </Wrapper>
   );
-}
+});
 
 export default Calendar;
