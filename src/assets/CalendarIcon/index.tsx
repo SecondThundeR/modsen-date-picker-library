@@ -1,6 +1,8 @@
-import React, { SVGProps } from "react";
+import React, { memo, SVGProps } from "react";
 
-function CalendarIcon(props: SVGProps<SVGSVGElement>) {
+const CalendarIcon = memo(function CalendarIcon(
+  props: SVGProps<SVGSVGElement>,
+) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -22,6 +24,6 @@ function CalendarIcon(props: SVGProps<SVGSVGElement>) {
       </defs>
     </svg>
   );
-}
+});
 
 export default CalendarIcon;

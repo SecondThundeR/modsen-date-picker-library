@@ -8,7 +8,6 @@ import dts from "rollup-plugin-dts";
 import packageJson from "./package.json" assert { type: "json" };
 import tsconfigJson from "./tsconfig.json" assert { type: "json" };
 
-
 /** @type {import('rollup').RollupOptions}*/
 export default [
   {

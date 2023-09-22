@@ -1,6 +1,6 @@
-import React, { SVGProps } from "react";
+import React, { memo, SVGProps } from "react";
 
-function PrevIcon(props: SVGProps<SVGSVGElement>) {
+const PrevIcon = memo(function PrevIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -19,6 +19,6 @@ function PrevIcon(props: SVGProps<SVGSVGElement>) {
       />
     </svg>
   );
-}
+});
 
 export default PrevIcon;

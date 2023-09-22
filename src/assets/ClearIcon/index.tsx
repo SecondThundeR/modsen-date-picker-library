@@ -1,6 +1,6 @@
-import React, { SVGProps } from "react";
+import React, { memo, SVGProps } from "react";
 
-function ClearIcon(props: SVGProps<SVGSVGElement>) {
+const ClearIcon = memo(function ClearIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -15,6 +15,6 @@ function ClearIcon(props: SVGProps<SVGSVGElement>) {
       />
     </svg>
   );
-}
+});
 
 export default ClearIcon;
