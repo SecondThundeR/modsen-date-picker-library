@@ -15,7 +15,6 @@ import {
   isDateInEndRange,
   isDateInStartRange,
 } from "@/utils/calendar";
-import { getDefaultEndDate, getDefaultStartDate } from "@/utils/date";
 
 import { Wrapper } from "./Calendar.styled";
 import { CalendarProps } from "./interfaces";
@@ -23,17 +22,17 @@ import { CalendarProps } from "./interfaces";
 const Calendar = memo(function Calendar({
   hasClearButton = false,
   date,
-  startDate = getDefaultStartDate(),
-  endDate = getDefaultEndDate(),
-  isSundayFirst,
+  startDate,
+  endDate,
+  isSundayFirst = true,
   onChange,
 }: CalendarProps) {
   const [dateState, setDateState] = useState<DateState>(() =>
     extractDateState(date),
   );
   const calendarData = useMemo(
-    () => getCalendarData(dateState.month, dateState.year),
-    [dateState.month, dateState.year],
+    () => getCalendarData(dateState.month, dateState.year, isSundayFirst),
+    [dateState.month, dateState.year, isSundayFirst],
   );
   const headerTitle = formatDateState(dateState);
 

@@ -106,4 +106,18 @@ describe("Calendar", () => {
     const title = getByTestId("calendar-title");
     expect(title).toHaveTextContent("December 2023");
   });
+
+  it("calls the onClick function when clicked", () => {
+    const { getByText } = render(
+      <Calendar
+        date={endDate}
+        startDate={startDate}
+        endDate={endDate}
+        onChange={onChange}
+        hasClearButton={true}
+      />,
+    );
+    const button = getByText("Clear");
+    expect(button).toBeInTheDocument();
+  });
 });

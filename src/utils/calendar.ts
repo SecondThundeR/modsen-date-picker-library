@@ -133,11 +133,26 @@ export const formatDateState = (dateState: DateState) => {
   return `${monthString} ${year}`;
 };
 
-export const getCalendarData = (monthNumber: number, year: number) => {
+export const getCalendarData = (
+  monthNumber: number,
+  year: number,
+  isSundayFirst: boolean,
+) => {
   const monthDays = getMonthDays(monthNumber, year);
   const monthFirstDay = getMonthFirstDay(monthNumber, year);
 
-  const daysFromPrevMonth = monthFirstDay - 1;
+  let daysFromPrevMonth: number;
+  if (isSundayFirst) {
+    daysFromPrevMonth = monthFirstDay - 1;
+  } else {
+    daysFromPrevMonth = monthFirstDay - 2;
+
+    if (daysFromPrevMonth === -1 && monthFirstDay === 1) {
+      daysFromPrevMonth = 6;
+    } else if (daysFromPrevMonth === -1) {
+      daysFromPrevMonth = 1;
+    }
+  }
   const daysFromNextMonth =
     CALENDAR_WEEKS * 7 - (daysFromPrevMonth + monthDays);
 

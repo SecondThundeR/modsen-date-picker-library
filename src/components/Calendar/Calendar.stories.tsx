@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
+import { getDefaultEndDate, getDefaultStartDate } from "@/utils/date";
+
 import Calendar from "./Calendar";
 
 const meta: Meta<typeof Calendar> = {
@@ -19,12 +21,10 @@ const meta: Meta<typeof Calendar> = {
     },
     startDate: {
       name: "Start date",
-      defaultValue: new Date(),
       description: "Start date of the range",
     },
     endDate: {
       name: "End date",
-      defaultValue: new Date(),
       description: "End date of the range",
     },
     isSundayFirst: {
@@ -48,6 +48,8 @@ export const Primary: Story = {
   args: {
     hasClearButton: false,
     date: new Date(),
+    startDate: getDefaultStartDate(),
+    endDate: getDefaultEndDate(),
     onChange: (date) => console.log("Selected:", date),
   },
 };
