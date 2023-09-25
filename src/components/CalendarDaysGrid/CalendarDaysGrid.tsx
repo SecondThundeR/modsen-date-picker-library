@@ -16,17 +16,24 @@ const CalendarDaysGrid = memo(function CalendarDaysGrid({
     [datesArray],
   );
 
+  const getDayKey = (date: Date) => {
+    return `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`;
+  };
+
   return (
     <Grid>
-      {monthDatesArray.map((date) => (
-        <CalendarDay
-          key={String(date.getTime())}
-          date={date}
-          selectedMonth={currentMonth}
-          selectedDate={currentDate}
-          onChange={onChange}
-        />
-      ))}
+      {monthDatesArray.map((date) => {
+        const dayKey = getDayKey(date);
+        return (
+          <CalendarDay
+            key={dayKey}
+            date={date}
+            selectedMonth={currentMonth}
+            selectedDate={currentDate}
+            onChange={onChange}
+          />
+        );
+      })}
     </Grid>
   );
 });
