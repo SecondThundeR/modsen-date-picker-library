@@ -1,8 +1,8 @@
 import React, { memo, useMemo } from "react";
 
+import CalendarButton from "@/components/CalendarButton";
 import { WEEK_DAYS } from "@/constants/date";
 
-import CalendarButton from "../CalendarButton";
 import { Wrapper } from "./CalendarWeekHeader.styled";
 import { CalendarWeekHeaderProps } from "./interfaces";
 
