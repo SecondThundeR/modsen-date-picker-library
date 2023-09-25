@@ -54,7 +54,7 @@ const Calendar = memo(function Calendar({
   }, [dateState, endDate]);
 
   return (
-    <Wrapper>
+    <Wrapper data-testid="calendar">
       <CalendarWrapper removeBottomBorder={hasClearButton}>
         <CalendarHeader
           title={headerTitle}

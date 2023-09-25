@@ -83,7 +83,9 @@ const Input = memo(function Input({
       <Title>{title}</Title>
       {isError && <ErrorMessage>Invalid date!</ErrorMessage>}
       <InputWrapper $isError={isError}>
-        {isCalendarEnabled && <CalendarIcon onClick={onCalendarClick} />}
+        {isCalendarEnabled && (
+          <CalendarIcon data-testid="calendar-icon" onClick={onCalendarClick} />
+        )}
         <StyledInput
           data-testid="input"
           type="text"
