@@ -98,6 +98,9 @@ devDependencies:
   jest-environment-jsdom:
     specifier: ^29.7.0
     version: 29.7.0
+  jest-styled-components:
+    specifier: ^7.1.1
+    version: 7.1.1(styled-components@6.0.8)
   lint-staged:
     specifier: '>=10'
     version: 14.0.1
@@ -8354,6 +8357,16 @@ packages:
       semver: 7.5.4
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /jest-styled-components@7.1.1(styled-components@6.0.8):
+    resolution: {integrity: sha512-OUq31R5CivBF8oy81dnegNQrRW13TugMol/Dz6ZnFfEyo03exLASod7YGwyHGuayYlKmCstPtz0RQ1+NrAbIIA==}
+    engines: {node: '>= 12'}
+    peerDependencies:
+      styled-components: '>= 5'
+    dependencies:
+      '@adobe/css-tools': 4.3.1
+      styled-components: 6.0.8(react-dom@18.2.0)(react@18.2.0)
     dev: true
 
   /jest-util@29.7.0:
