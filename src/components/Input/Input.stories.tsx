@@ -71,24 +71,24 @@ export default meta;
 type Story = StoryObj<typeof Input>;
 
 const InputExample = () => {
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState<Date | null>(new Date());
 
   const onDateChange = useCallback(
     (changedDate: Date) => {
-      if (changedDate.getTime() === date.getTime()) return;
-      setDate(date);
+      if (changedDate.getTime() === date?.getTime()) return;
+      setDate(changedDate);
     },
     [date],
   );
 
   const onClear = useCallback(() => {
-    setDate(new Date());
+    setDate(null);
   }, []);
 
   return (
     <Input
       title="Date"
-      dateString={date.toLocaleDateString("en-GB")}
+      dateString={date?.toLocaleDateString("en-GB") ?? ""}
       startDate={new Date("2021-01-01")}
       endDate={new Date("2030-12-31")}
       onDateChange={onDateChange}
