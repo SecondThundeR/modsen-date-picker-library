@@ -11,19 +11,19 @@ const DatePicker = memo(function DatePicker({
   startDate = getDefaultStartDate(),
   endDate = getDefaultEndDate(),
 }: DatePickerProps) {
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState<Date | null>(new Date());
   const [showCalendar, setShowCalendar] = useState(false);
 
   const onDateChange = useCallback(
     (changedDate: Date) => {
-      if (changedDate.getTime() === date.getTime()) return;
+      if (changedDate.getTime() === date?.getTime()) return;
       setDate(changedDate);
     },
     [date],
   );
 
   const onClearClick = useCallback(() => {
-    setDate(new Date());
+    setDate(null);
   }, []);
 
   const toggleCalendar = useCallback(() => {
@@ -33,7 +33,7 @@ const DatePicker = memo(function DatePicker({
   return (
     <Wrapper>
       <Input
-        dateString={date.toLocaleDateString("en-GB")}
+        dateString={date?.toLocaleDateString("en-GB") ?? ""}
         startDate={startDate}
         endDate={endDate}
         onCalendarClick={toggleCalendar}
@@ -42,7 +42,7 @@ const DatePicker = memo(function DatePicker({
       />
       {showCalendar && (
         <Calendar
-          date={date}
+          date={date ?? new Date()}
           startDate={startDate}
           endDate={endDate}
           onChange={onDateChange}
