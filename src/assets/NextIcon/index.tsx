@@ -1,11 +1,13 @@
 import React, { memo, SVGProps } from "react";
 
+import { Icon } from "./NextIcon.styled";
+
 const NextIcon = memo(function NextIcon(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg
+    <Icon
       xmlns="http://www.w3.org/2000/svg"
-      width="1em"
-      height="1em"
+      width="16px"
+      height="16px"
       fill="none"
       {...props}
     >
@@ -17,7 +19,7 @@ const NextIcon = memo(function NextIcon(props: SVGProps<SVGSVGElement>) {
         fill="#000"
         d="m8.667 4-.94.94L10.78 8l-3.053 3.06.94.94 4-4-4-4Z"
       />
-    </svg>
+    </Icon>
   );
 });
 
