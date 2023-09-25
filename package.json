@@ -13,7 +13,7 @@
   },
   "scripts": {
     "rollup": "rollup -c",
-    "test": "jest",
+    "test": "TZ=Europe/London jest",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "lint": "eslint \"src/**\" --cache --max-warnings=0",
