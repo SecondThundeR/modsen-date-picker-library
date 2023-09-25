@@ -14,7 +14,7 @@ const CalendarHeader = memo(function CalendarHeader({
   return (
     <Header data-testid="header">
       <PrevIcon data-testid="prev-button" onClick={onPrevClick} />
-      <HeaderTitle>{title}</HeaderTitle>
+      <HeaderTitle data-testid="calendar-title">{title}</HeaderTitle>
       <NextIcon data-testid="next-button" onClick={onNextClick} />
     </Header>
   );
