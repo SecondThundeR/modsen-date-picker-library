@@ -1,3 +1,6 @@
 export interface CalendarDaysGridProps {
-  days: string[];
+  currentDate: Date;
+  currentMonth: number;
+  datesArray: (string | number)[][];
+  onChange: (changedDate: Date) => void;
 }

@@ -1,16 +1,31 @@
-import React, { memo } from "react";
+import React, { memo, useMemo } from "react";
 
-import CalendarButton from "../CalendarButton";
+import CalendarDay from "@/components/CalendarDay";
+
 import { Grid } from "./CalendarDaysGrid.styled";
 import { CalendarDaysGridProps } from "./interfaces";
 
 const CalendarDaysGrid = memo(function CalendarDaysGrid({
-  days,
+  currentDate,
+  currentMonth,
+  datesArray,
+  onChange,
 }: CalendarDaysGridProps) {
+  const monthDatesArray = useMemo(
+    () => datesArray.map((date) => new Date(date.join("/"))),
+    [datesArray],
+  );
+
   return (
     <Grid>
-      {days.map((day) => (
-        <CalendarButton key={day} title={day} />
+      {monthDatesArray.map((date) => (
+        <CalendarDay
+          key={String(date.getTime())}
+          date={date}
+          selectedMonth={currentMonth}
+          selectedDate={currentDate}
+          onChange={onChange}
+        />
       ))}
     </Grid>
   );

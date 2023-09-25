@@ -1,6 +1,6 @@
 import React, { memo, useMemo } from "react";
 
-import { WEEKS_DATA } from "@/constants/weekData";
+import { WEEK_DAYS } from "@/constants/date";
 
 import CalendarButton from "../CalendarButton";
 import { Wrapper } from "./CalendarWeekHeader.styled";
@@ -10,13 +10,14 @@ const CalendarWeekHeader = memo(function CalendarWeekHeader({
   isSundayFirst = true,
 }: CalendarWeekHeaderProps) {
   const weeksArray = useMemo(() => {
-    return isSundayFirst ? WEEKS_DATA : [...WEEKS_DATA.slice(1), WEEKS_DATA[0]];
+    const weekDays = Object.values(WEEK_DAYS);
+    return isSundayFirst ? weekDays : [...weekDays.slice(1), weekDays[0]];
   }, [isSundayFirst]);
 
   return (
     <Wrapper>
-      {weeksArray.map(({ id, title }) => (
-        <CalendarButton key={id} title={title} />
+      {weeksArray.map((day) => (
+        <CalendarButton key={day} title={day} />
       ))}
     </Wrapper>
   );
