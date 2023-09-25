@@ -7,7 +7,14 @@ function CalendarWrapper({
   children,
   removeBottomBorder = false,
 }: CalendarWrapperProps) {
-  return <Wrapper $removeBottomBorder={removeBottomBorder}>{children}</Wrapper>;
+  return (
+    <Wrapper
+      data-testid="calendar-wrapper"
+      $removeBottomBorder={removeBottomBorder}
+    >
+      {children}
+    </Wrapper>
+  );
 }
 
 export default CalendarWrapper;

@@ -14,7 +14,7 @@ type Story = StoryObj<typeof CalendarWrapper>;
 export const Primary: Story = {
   render: () => (
     <CalendarWrapper>
-      <h1>Hi!</h1>
+      <h1>Some text in wrapper!</h1>
     </CalendarWrapper>
   ),
 };
@@ -22,7 +22,7 @@ export const Primary: Story = {
 export const WithoutBottomBorder: Story = {
   render: () => (
     <CalendarWrapper removeBottomBorder>
-      <h1>Hi!</h1>
+      <h1>Some text in wrapper!</h1>
     </CalendarWrapper>
   ),
 };
