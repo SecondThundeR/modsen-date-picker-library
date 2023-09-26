@@ -16,6 +16,18 @@ const meta: Meta<typeof DatePicker> = {
       defaultValue: new Date(),
       description: "End date of the range",
     },
+    displayWeekends: {
+      name: "Display weekends",
+      description: "Display weekends with different color",
+      type: "boolean",
+      defaultValue: true,
+    },
+    isSundayFirst: {
+      name: "Is Sunday first",
+      description: "Is Sunday first day of the week",
+      type: "boolean",
+      defaultValue: true,
+    },
   },
 };
 

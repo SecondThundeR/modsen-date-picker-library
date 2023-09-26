@@ -42,6 +42,10 @@ export const isDate = (date: unknown): date is Date => {
   return isDate && (isValidDate as boolean);
 };
 
+export const isDateAWeekday = (date: Date) => {
+  return date.getDay() === 0 || date.getDay() === 6;
+};
+
 export const isSameMonth = (date: Date, basedate = new Date()) => {
   if (!(isDate(date) && isDate(basedate))) return false;
 
