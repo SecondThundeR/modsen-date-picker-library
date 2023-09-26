@@ -1,6 +1,7 @@
 import React, { memo, useCallback, useState } from "react";
 
 import Calendar from "@/components/Calendar";
+import ErrorBoundary from "@/components/ErrorBoundary";
 import Input from "@/components/Input";
 import { getDefaultEndDate, getDefaultStartDate } from "@/utils/date";
 
@@ -34,27 +35,29 @@ const DatePicker = memo(function DatePicker({
   }, []);
 
   return (
-    <Wrapper>
-      <Input
-        dateString={date?.toLocaleDateString("en-GB") ?? ""}
-        startDate={startDate}
-        endDate={endDate}
-        onCalendarClick={toggleCalendar}
-        onDateChange={onDateChange}
-        onClearClick={onClearClick}
-      />
-      {showCalendar && (
-        <Calendar
-          date={date ?? new Date()}
+    <ErrorBoundary>
+      <Wrapper>
+        <Input
+          dateString={date?.toLocaleDateString("en-GB") ?? ""}
           startDate={startDate}
           endDate={endDate}
-          isSundayFirst={isSundayFirst}
-          displayWeekends={displayWeekends}
-          holidays={holidays}
-          onChange={onDateChange}
+          onCalendarClick={toggleCalendar}
+          onDateChange={onDateChange}
+          onClearClick={onClearClick}
         />
-      )}
-    </Wrapper>
+        {showCalendar && (
+          <Calendar
+            date={date ?? new Date()}
+            startDate={startDate}
+            endDate={endDate}
+            isSundayFirst={isSundayFirst}
+            displayWeekends={displayWeekends}
+            holidays={holidays}
+            onChange={onDateChange}
+          />
+        )}
+      </Wrapper>
+    </ErrorBoundary>
   );
 });
 
