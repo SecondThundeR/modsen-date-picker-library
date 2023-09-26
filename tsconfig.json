@@ -19,6 +19,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "./jestSetup.ts"],
   "exclude": ["node_modules", "dist"]
 }

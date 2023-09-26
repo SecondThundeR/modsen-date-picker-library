@@ -1,13 +1,15 @@
 import React, { memo, SVGProps } from "react";
 
+import { Icon } from "./CalendarIcon.styled";
+
 const CalendarIcon = memo(function CalendarIcon(
   props: SVGProps<SVGSVGElement>,
 ) {
   return (
-    <svg
+    <Icon
       xmlns="http://www.w3.org/2000/svg"
-      width="1em"
-      height="1em"
+      width="16px"
+      height="16px"
       fill="none"
       {...props}
     >
@@ -22,7 +24,7 @@ const CalendarIcon = memo(function CalendarIcon(
           <path fill="#fff" d="M0 0h16v16H0z" />
         </clipPath>
       </defs>
-    </svg>
+    </Icon>
   );
 });
 

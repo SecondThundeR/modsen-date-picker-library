@@ -8,12 +8,14 @@ import { CalendarHeaderProps } from "./interfaces";
 
 const CalendarHeader = memo(function CalendarHeader({
   title,
+  onPrevClick,
+  onNextClick,
 }: CalendarHeaderProps) {
   return (
-    <Header>
-      <PrevIcon />
-      <HeaderTitle>{title}</HeaderTitle>
-      <NextIcon />
+    <Header data-testid="header">
+      <PrevIcon data-testid="prev-button" onClick={onPrevClick} />
+      <HeaderTitle data-testid="calendar-title">{title}</HeaderTitle>
+      <NextIcon data-testid="next-button" onClick={onNextClick} />
     </Header>
   );
 });

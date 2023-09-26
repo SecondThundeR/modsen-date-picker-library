@@ -1,9 +1,9 @@
 import { rgba } from "polished";
 import styled from "styled-components";
 
-import { RangeState } from "./interfaces";
+import { CalendarButtonStyleProps } from "./interfaces";
 
-export const Item = styled.button<{ $selected?: boolean; $range?: RangeState }>`
+export const Item = styled.button<CalendarButtonStyleProps>`
   cursor: pointer;
   width: 32px;
   height: 32px;
@@ -13,7 +13,7 @@ export const Item = styled.button<{ $selected?: boolean; $range?: RangeState }>`
   padding: 10px;
   border-radius: ${(props) => (props.$range === "between" ? "0" : "8px")};
   background-color: ${(props) =>
-    props.$selected || props.$range !== undefined
+    props.$isSelected || props.$range !== undefined
       ? rgba(
           47,
           128,
@@ -22,10 +22,12 @@ export const Item = styled.button<{ $selected?: boolean; $range?: RangeState }>`
         )
       : "transparent"};
   color: ${(props) =>
-    props.$selected || props.$range === "start" || props.$range === "end"
+    props.$isSelected || props.$range === "start" || props.$range === "end"
       ? "white"
       : props.$range === "between"
       ? "#2F80ED"
+      : props.$isDisabled
+      ? "#aaa"
       : "#333"};
   border: none;
   font-family: Open Sans;
@@ -43,12 +45,8 @@ export const Item = styled.button<{ $selected?: boolean; $range?: RangeState }>`
     props.$range === "end" || props.$range === "between" ? "0px" : "8px"};
   transition: 0.2s;
 
-  &:disabled {
-    color: #aaa;
-  }
-
   &:hover {
-    background-color: ${(props) => (props.$selected ? "#1261ca" : "#f1f1f1")};
+    background-color: ${(props) => (props.$isSelected ? "#1261ca" : "#f1f1f1")};
   }
 
   &:active {
