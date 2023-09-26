@@ -42,7 +42,7 @@ describe("DatePicker", () => {
 
     const input = getByTestId("input");
     const formattedDate = `${zeroPad(nextDate.getDate(), 2)}/${zeroPad(
-      nextDate.getMonth() + 1,
+      nextDate.getMonth(),
       2,
     )}/${nextDate.getFullYear()}`;
     expect(input).toHaveValue(formattedDate);
