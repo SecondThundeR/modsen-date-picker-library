@@ -11,7 +11,7 @@ const calculateTextColor = ({
 }: CalendarButtonStyleProps) => {
   if ($isSelected || $range === "start" || $range === "end") return "#fff";
   if ($range === "between") return "#2f80ed";
-  if ($isWeekday) return "#F6546A";
+  if ($isWeekday) return "#f6546a";
   if ($isDisabled) return "#aaa";
   return "#333";
 };

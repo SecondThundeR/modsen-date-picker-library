@@ -63,7 +63,16 @@ describe("CalendarButton", () => {
 
     expect(button).toHaveStyleRule("border-radius", "0");
     expect(button).toHaveStyleRule("background-color", "rgba(47,128,237,0.1)");
-    expect(button).toHaveStyleRule("color", "#2F80ED");
+    expect(button).toHaveStyleRule("color", "#2f80ed");
+  });
+
+  it("sets red color when isWeekday is true", () => {
+    const { getByText } = render(
+      <CalendarButton title="Test Button" isWeekday={true} onClick={onClick} />,
+    );
+    const button = getByText("Test Button");
+
+    expect(button).toHaveStyleRule("color", "#f6546a");
   });
 
   it("change background-color when rangeState is start", () => {
