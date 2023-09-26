@@ -19,6 +19,8 @@ describe("CalendarDaysGrid", () => {
         currentDate={currentDate}
         currentMonth={currentMonth}
         datesArray={datesArray}
+        displayWeekends={false}
+        holidays={null}
         onChange={onChange}
       />,
     );
@@ -33,6 +35,8 @@ describe("CalendarDaysGrid", () => {
         currentDate={currentDate}
         currentMonth={currentMonth}
         datesArray={datesArray}
+        displayWeekends={false}
+        holidays={null}
         onChange={onChange}
       />,
     );

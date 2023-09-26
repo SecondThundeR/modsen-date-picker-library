@@ -75,6 +75,15 @@ describe("CalendarButton", () => {
     expect(button).toHaveStyleRule("color", "#f6546a");
   });
 
+  it("sets deep pink color when isHoliday is true", () => {
+    const { getByText } = render(
+      <CalendarButton title="Test Button" isHoliday={true} onClick={onClick} />,
+    );
+    const button = getByText("Test Button");
+
+    expect(button).toHaveStyleRule("color", "#b0578d");
+  });
+
   it("change background-color when rangeState is start", () => {
     const { getByText } = render(
       <CalendarButton
