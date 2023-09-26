@@ -31,6 +31,10 @@ const meta: Meta<typeof Calendar> = {
       description: "Display weekends with different color",
       type: "boolean",
     },
+    holidays: {
+      name: "Holidays data",
+      description: "Defines data for days, which defined as holidays",
+    },
     hasClearButton: {
       name: "Has clear button",
       type: "boolean",
@@ -55,6 +59,7 @@ export const Primary: Story = {
     endDate: getDefaultEndDate(),
     isSundayFirst: true,
     displayWeekends: true,
+    holidays: null,
     hasClearButton: false,
     onChange: (date) => console.log("Selected:", date),
   },
