@@ -10,6 +10,9 @@ import { DatePickerProps } from "./interfaces";
 const DatePicker = memo(function DatePicker({
   startDate = getDefaultStartDate(),
   endDate = getDefaultEndDate(),
+  holidays = null,
+  isSundayFirst = true,
+  displayWeekends = true,
 }: DatePickerProps) {
   const [date, setDate] = useState<Date | null>(new Date());
   const [showCalendar, setShowCalendar] = useState(false);
@@ -45,6 +48,9 @@ const DatePicker = memo(function DatePicker({
           date={date ?? new Date()}
           startDate={startDate}
           endDate={endDate}
+          isSundayFirst={isSundayFirst}
+          displayWeekends={displayWeekends}
+          holidays={holidays}
           onChange={onDateChange}
         />
       )}

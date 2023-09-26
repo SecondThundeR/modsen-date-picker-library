@@ -21,6 +21,15 @@ const meta: Meta<typeof CalendarDaysGrid> = {
       name: "Dates array",
       description: "Array of dates",
     },
+    displayWeekends: {
+      name: "Display weekends",
+      description: "Display weekends with different color",
+      type: "boolean",
+    },
+    holidays: {
+      name: "Holidays data",
+      description: "Defines data for days, which defined as holidays",
+    },
     onChange: {
       name: "On change",
       description: "Function that will be called on change",
@@ -41,5 +50,10 @@ export const Primary: Story = {
       new Date().getFullYear(),
       true,
     ),
+    displayWeekends: true,
+    holidays: null,
+    onChange(changedDate) {
+      console.log(changedDate);
+    },
   },
 };

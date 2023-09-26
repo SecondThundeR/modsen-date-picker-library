@@ -3,6 +3,21 @@ import styled from "styled-components";
 
 import { CalendarButtonStyleProps } from "./interfaces";
 
+const calculateTextColor = ({
+  $isSelected,
+  $range,
+  $isDisabled,
+  $isWeekday,
+  $isHoliday,
+}: CalendarButtonStyleProps) => {
+  if ($isSelected || $range === "start" || $range === "end") return "#fff";
+  if ($range === "between") return "#2f80ed";
+  if ($isHoliday) return "#b0578d";
+  if ($isWeekday) return "#f6546a";
+  if ($isDisabled) return "#aaa";
+  return "#333";
+};
+
 export const Item = styled.button<CalendarButtonStyleProps>`
   cursor: pointer;
   width: 32px;
@@ -21,16 +36,9 @@ export const Item = styled.button<CalendarButtonStyleProps>`
           props.$range === "start" ? 0.6 : props.$range === "between" ? 0.1 : 1,
         )
       : "transparent"};
-  color: ${(props) =>
-    props.$isSelected || props.$range === "start" || props.$range === "end"
-      ? "white"
-      : props.$range === "between"
-      ? "#2F80ED"
-      : props.$isDisabled
-      ? "#aaa"
-      : "#333"};
+  color: ${(props) => calculateTextColor(props)};
   border: none;
-  font-family: Open Sans;
+  font-family: "Open Sans";
   font-size: 13px;
   font-style: normal;
   font-weight: 600;

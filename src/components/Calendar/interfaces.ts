@@ -1,8 +1,12 @@
+import { Holidays } from "@/utils/calendar";
+
 export interface CalendarProps {
-  hasClearButton?: boolean;
   date: Date;
   startDate: Date;
   endDate: Date;
-  isSundayFirst?: boolean;
+  isSundayFirst: boolean;
+  displayWeekends: boolean;
+  holidays: Holidays | null;
+  hasClearButton?: boolean;
   onChange: (date: Date) => void;
 }

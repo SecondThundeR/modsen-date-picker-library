@@ -8,12 +8,6 @@ const meta: Meta<typeof Calendar> = {
   title: "Component/Calendar",
   component: Calendar,
   argTypes: {
-    hasClearButton: {
-      name: "Has clear button",
-      type: "boolean",
-      defaultValue: false,
-      description: "State of clear button visibility",
-    },
     date: {
       name: "Date",
       defaultValue: new Date(),
@@ -31,7 +25,21 @@ const meta: Meta<typeof Calendar> = {
       name: "Is Sunday first",
       description: "Is Sunday first day of the week",
       type: "boolean",
-      defaultValue: true,
+    },
+    displayWeekends: {
+      name: "Display weekends",
+      description: "Display weekends with different color",
+      type: "boolean",
+    },
+    holidays: {
+      name: "Holidays data",
+      description: "Defines data for days, which defined as holidays",
+    },
+    hasClearButton: {
+      name: "Has clear button",
+      type: "boolean",
+      defaultValue: false,
+      description: "State of clear button visibility",
     },
     onChange: {
       name: "On change",
@@ -46,10 +54,13 @@ type Story = StoryObj<typeof Calendar>;
 
 export const Primary: Story = {
   args: {
-    hasClearButton: false,
     date: new Date(),
     startDate: getDefaultStartDate(),
     endDate: getDefaultEndDate(),
+    isSundayFirst: true,
+    displayWeekends: true,
+    holidays: null,
+    hasClearButton: false,
     onChange: (date) => console.log("Selected:", date),
   },
 };

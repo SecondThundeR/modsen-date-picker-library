@@ -15,6 +15,9 @@ describe("Calendar", () => {
         date={date}
         startDate={startDate}
         endDate={endDate}
+        isSundayFirst={false}
+        displayWeekends={false}
+        holidays={null}
         onChange={onChange}
       />,
     );
@@ -29,6 +32,9 @@ describe("Calendar", () => {
         date={date}
         startDate={startDate}
         endDate={endDate}
+        isSundayFirst={false}
+        displayWeekends={false}
+        holidays={null}
         onChange={onChange}
       />,
     );
@@ -45,6 +51,9 @@ describe("Calendar", () => {
         date={date}
         startDate={startDate}
         endDate={endDate}
+        isSundayFirst={false}
+        displayWeekends={false}
+        holidays={null}
         onChange={onChange}
       />,
     );
@@ -62,6 +71,9 @@ describe("Calendar", () => {
         date={startDate}
         startDate={startDate}
         endDate={endDate}
+        isSundayFirst={false}
+        displayWeekends={false}
+        holidays={null}
         onChange={onChange}
       />,
     );
@@ -79,6 +91,9 @@ describe("Calendar", () => {
         date={date}
         startDate={startDate}
         endDate={endDate}
+        isSundayFirst={false}
+        displayWeekends={false}
+        holidays={null}
         onChange={onChange}
       />,
     );
@@ -96,6 +111,9 @@ describe("Calendar", () => {
         date={endDate}
         startDate={startDate}
         endDate={endDate}
+        isSundayFirst={false}
+        displayWeekends={false}
+        holidays={null}
         onChange={onChange}
       />,
     );
@@ -114,6 +132,9 @@ describe("Calendar", () => {
         startDate={startDate}
         endDate={endDate}
         onChange={onChange}
+        isSundayFirst={false}
+        displayWeekends={false}
+        holidays={null}
         hasClearButton={true}
       />,
     );
