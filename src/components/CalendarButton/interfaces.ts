@@ -5,6 +5,7 @@ export interface CalendarButtonProps {
   isSelected?: boolean;
   isDisabled?: boolean;
   isWeekday?: boolean;
+  isHoliday?: boolean;
   rangeState?: RangeState;
   onClick?: () => void;
 }
@@ -14,5 +15,6 @@ export interface CalendarButtonStyleProps {
   $isDisabled?: boolean;
   $isCurrentMonth?: boolean;
   $isWeekday?: boolean;
+  $isHoliday?: boolean;
   $range?: RangeState;
 }

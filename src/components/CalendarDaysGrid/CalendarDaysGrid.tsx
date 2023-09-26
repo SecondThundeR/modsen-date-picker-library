@@ -10,6 +10,7 @@ const CalendarDaysGrid = memo(function CalendarDaysGrid({
   currentMonth,
   datesArray,
   displayWeekends,
+  holidays,
   onChange,
 }: CalendarDaysGridProps) {
   const monthDatesArray = useMemo(
@@ -32,6 +33,7 @@ const CalendarDaysGrid = memo(function CalendarDaysGrid({
             selectedMonth={currentMonth}
             selectedDate={currentDate}
             displayWeekends={displayWeekends}
+            holidays={holidays}
             onChange={onChange}
           />
         );

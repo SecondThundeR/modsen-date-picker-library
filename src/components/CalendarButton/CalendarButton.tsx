@@ -9,6 +9,7 @@ const CalendarButton = memo(function CalendarButton({
   isSelected = false,
   isDisabled = false,
   isWeekday = false,
+  isHoliday = false,
   onClick,
 }: CalendarButtonProps) {
   return (
@@ -17,6 +18,7 @@ const CalendarButton = memo(function CalendarButton({
       $range={rangeState}
       $isDisabled={isDisabled}
       $isWeekday={isWeekday}
+      $isHoliday={isHoliday}
       onClick={onClick}
     >
       {title}

@@ -26,6 +26,7 @@ const Calendar = memo(function Calendar({
   endDate,
   displayWeekends,
   isSundayFirst,
+  holidays,
   onChange,
 }: CalendarProps) {
   const [dateState, setDateState] = useState<DateState>(() =>
@@ -67,6 +68,7 @@ const Calendar = memo(function Calendar({
           datesArray={calendarData}
           currentMonth={dateState.month}
           displayWeekends={displayWeekends}
+          holidays={holidays}
           onChange={onChange}
         />
       </CalendarWrapper>

@@ -12,8 +12,26 @@ export interface DateState {
   year: number;
 }
 
+/**
+ * Defines structure for holidays data
+ *
+ * Example of usage: `{ "1": [1, 2, 3, 4], ... }`
+ * (where __key__ - month number and __array of numbers__ - days)
+ *
+ * This allows us to quickly grab array of holidays for day's month
+ */
+export interface Holidays {
+  [month: string]: number[];
+}
+
 export const zeroPad = (value: number | string, length: number) => {
   return `${value}`.padStart(length, "0");
+};
+
+export const getNextDay = () => {
+  const nextDay = new Date();
+  nextDay.setDate(nextDay.getDate() + 1);
+  return nextDay;
 };
 
 export const getMonthDays = (monthNumber = THIS_MONTH, year = THIS_YEAR) => {
@@ -33,6 +51,15 @@ export const getMonthFirstDay = (
   year = THIS_YEAR,
 ) => {
   return new Date(`${year}-${zeroPad(monthNumber, 2)}-01`).getDay() + 1;
+};
+
+export const isDateAHoliday = (date: Date, holidays: Holidays | null) => {
+  if (holidays === null) return false;
+
+  const monthHolidays = holidays[String(date.getMonth() + 1)];
+  if (!monthHolidays) return false;
+
+  return monthHolidays.includes(date.getDate());
 };
 
 export const isDate = (date: unknown): date is Date => {

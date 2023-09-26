@@ -28,6 +28,11 @@ const meta: Meta<typeof DatePicker> = {
       type: "boolean",
       defaultValue: true,
     },
+    holidays: {
+      name: "Holidays data",
+      description: "Defines data for days, which defined as holidays",
+      defaultValue: {},
+    },
   },
 };
 
@@ -35,5 +40,7 @@ export default meta;
 type Story = StoryObj<typeof DatePicker>;
 
 export const Primary: Story = {
-  args: {},
+  args: {
+    holidays: { [new Date().getMonth() + 1]: [3, 6, 8, 10, 23, 30] },
+  },
 };

@@ -26,6 +26,10 @@ const meta: Meta<typeof CalendarDaysGrid> = {
       description: "Display weekends with different color",
       type: "boolean",
     },
+    holidays: {
+      name: "Holidays data",
+      description: "Defines data for days, which defined as holidays",
+    },
     onChange: {
       name: "On change",
       description: "Function that will be called on change",
@@ -47,5 +51,9 @@ export const Primary: Story = {
       true,
     ),
     displayWeekends: true,
+    holidays: null,
+    onChange(changedDate) {
+      console.log(changedDate);
+    },
   },
 };
