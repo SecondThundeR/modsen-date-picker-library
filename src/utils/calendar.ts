@@ -7,6 +7,8 @@ import {
   THIS_YEAR,
 } from "@/constants/date";
 
+import { isInRange } from "./date";
+
 export interface DateState {
   month: number;
   year: number;
@@ -114,7 +116,20 @@ export const getNextMonth = (monthNumber: number, year: number) => {
   return { month: nextMonth, year: nextMonthYear };
 };
 
-export const isDateInStartRange = (startDate: Date, currentDate: DateState) => {
+export const isStartRangeCorrect = (endRange: Date | null, newDate: Date) => {
+  if (!isDate(endRange) || !isDate(newDate)) return false;
+  return endRange.getTime() > newDate.getTime();
+};
+
+export const isEndRangeCorrect = (startRange: Date | null, newDate: Date) => {
+  if (!isDate(startRange) || !isDate(newDate)) return false;
+  return startRange.getTime() < newDate.getTime();
+};
+
+export const isDateInStartRange = (
+  startDate: Date | null,
+  currentDate: DateState,
+) => {
   if (!isDate(startDate)) return false;
 
   const startDateMonth = startDate.getMonth();
@@ -128,7 +143,10 @@ export const isDateInStartRange = (startDate: Date, currentDate: DateState) => {
   return true;
 };
 
-export const isDateInEndRange = (endDate: Date, currentDate: DateState) => {
+export const isDateInEndRange = (
+  endDate: Date | null,
+  currentDate: DateState,
+) => {
   if (!isDate(endDate)) return false;
 
   const endDateMonth = endDate.getMonth();
@@ -140,6 +158,15 @@ export const isDateInEndRange = (endDate: Date, currentDate: DateState) => {
     return false;
 
   return true;
+};
+
+export const isDateInRange = (
+  startDate: Date | null,
+  endDate: Date | null,
+  date: Date,
+) => {
+  if (!(isDate(startDate) && isDate(endDate) && isDate(date))) return false;
+  return isInRange(date, startDate, endDate);
 };
 
 export const extractDateState = (date = new Date()) => {

@@ -15,7 +15,8 @@ export const isInRange = (date: Date, startDate?: Date, endDate?: Date) => {
   return date >= startDate && date <= endDate;
 };
 
-export const isDatesEqual = (date1: Date, date2: Date) => {
+export const isDatesEqual = (date1: Date | null, date2: Date | null) => {
+  if (!date1 || !date2) return false;
   return (
     date1.getDate() === date2.getDate() &&
     date1.getMonth() === date2.getMonth() &&

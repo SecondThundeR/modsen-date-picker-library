@@ -21,6 +21,14 @@ const meta: Meta<typeof Calendar> = {
       name: "End date",
       description: "End date of the range",
     },
+    startRange: {
+      name: "Start range",
+      description: "Start date of the range",
+    },
+    endRange: {
+      name: "End range",
+      description: "End date of the range",
+    },
     isSundayFirst: {
       name: "Is Sunday first",
       description: "Is Sunday first day of the week",
@@ -57,6 +65,26 @@ export const Primary: Story = {
     date: new Date(),
     startDate: getDefaultStartDate(),
     endDate: getDefaultEndDate(),
+    startRange: null,
+    endRange: null,
+    isSundayFirst: true,
+    displayWeekends: true,
+    holidays: null,
+    hasClearButton: false,
+    onChange: (date) => console.log("Selected:", date),
+  },
+};
+
+const startRange = new Date();
+startRange.setDate(startRange.getDate() - 5);
+const endRange = new Date();
+endRange.setDate(endRange.getDate() + 5);
+export const WithRange: Story = {
+  args: {
+    startDate: getDefaultStartDate(),
+    endDate: getDefaultEndDate(),
+    startRange,
+    endRange,
     isSundayFirst: true,
     displayWeekends: true,
     holidays: null,

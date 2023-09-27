@@ -9,6 +9,11 @@ const meta: Meta<typeof DatePicker> = {
   title: "Component/DatePicker",
   component: DatePicker,
   argTypes: {
+    title: {
+      name: "Title",
+      defaultValue: "Date picker",
+      description: "Title of the date picker",
+    },
     startDate: {
       name: "Start date",
       defaultValue: new Date(),
@@ -18,6 +23,28 @@ const meta: Meta<typeof DatePicker> = {
       name: "End date",
       defaultValue: new Date(),
       description: "End date of the range",
+    },
+    startRange: {
+      name: "Start range",
+      description: "Start date of the range",
+      defaultValue: null,
+    },
+    isPickingStart: {
+      name: "Is picking start",
+      description: "Defines is picking date for start range",
+      type: "boolean",
+      defaultValue: false,
+    },
+    endRange: {
+      name: "End range",
+      description: "End date of the range",
+      defaultValue: null,
+    },
+    isPickingEnd: {
+      name: "Is picking end",
+      description: "Defines is picking date for end range",
+      type: "boolean",
+      defaultValue: false,
     },
     displayWeekends: {
       name: "Display weekends",
@@ -35,6 +62,10 @@ const meta: Meta<typeof DatePicker> = {
       name: "Holidays data",
       description: "Defines data for days, which defined as holidays",
       defaultValue: {},
+    },
+    onChange: {
+      name: "On change",
+      description: "Callback, which will be called on date change",
     },
   },
 };
