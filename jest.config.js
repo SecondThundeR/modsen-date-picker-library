@@ -5,6 +5,7 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: [
     "src/components/**/*.{ts,tsx}",
+    "src/hooks/**/*.{ts,tsx}",
     "!src/**/*.stories.{ts,tsx}",
   ],
   coverageDirectory: "coverage",
