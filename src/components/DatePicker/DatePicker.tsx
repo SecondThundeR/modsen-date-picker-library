@@ -3,32 +3,54 @@ import React, { memo, useCallback, useState } from "react";
 import Calendar from "@/components/Calendar";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import Input from "@/components/Input";
+import { isEndRangeCorrect, isStartRangeCorrect } from "@/utils/calendar";
 import { getDefaultEndDate, getDefaultStartDate } from "@/utils/date";
 
 import { Wrapper } from "./DatePicker.styled";
 import { DatePickerProps } from "./interfaces";
 
 const DatePicker = memo(function DatePicker({
+  title,
   startDate = getDefaultStartDate(),
   endDate = getDefaultEndDate(),
+  startRange = null,
+  isPickingStart = false,
+  endRange = null,
+  isPickingEnd = false,
   holidays = null,
   isSundayFirst = true,
   displayWeekends = false,
+  onChange,
 }: DatePickerProps) {
   const [date, setDate] = useState<Date | null>(new Date());
   const [showCalendar, setShowCalendar] = useState(false);
 
   const onDateChange = useCallback(
     (changedDate: Date) => {
-      if (changedDate.getTime() === date?.getTime()) return;
+      if (changedDate.getDate() === date?.getDate()) return;
+      if (
+        isPickingStart &&
+        endRange &&
+        !isStartRangeCorrect(endRange, changedDate)
+      )
+        return;
+      if (
+        isPickingEnd &&
+        startRange &&
+        !isEndRangeCorrect(startRange, changedDate)
+      )
+        return;
+
       setDate(changedDate);
+      onChange?.(changedDate);
     },
-    [date],
+    [date, endRange, isPickingEnd, isPickingStart, onChange, startRange],
   );
 
   const onClearClick = useCallback(() => {
     setDate(null);
-  }, []);
+    onChange?.(null);
+  }, [onChange]);
 
   const toggleCalendar = useCallback(() => {
     setShowCalendar((prev) => !prev);
@@ -38,6 +60,7 @@ const DatePicker = memo(function DatePicker({
     <ErrorBoundary>
       <Wrapper>
         <Input
+          title={title}
           dateString={date?.toLocaleDateString("en-GB") ?? ""}
           startDate={startDate}
           endDate={endDate}
@@ -50,6 +73,8 @@ const DatePicker = memo(function DatePicker({
             date={date ?? new Date()}
             startDate={startDate}
             endDate={endDate}
+            startRange={startRange}
+            endRange={endRange}
             isSundayFirst={isSundayFirst}
             displayWeekends={displayWeekends}
             holidays={holidays}

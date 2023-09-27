@@ -24,6 +24,8 @@ const Calendar = memo(function Calendar({
   date,
   startDate,
   endDate,
+  startRange,
+  endRange,
   displayWeekends,
   isSundayFirst,
   holidays,
@@ -66,6 +68,8 @@ const Calendar = memo(function Calendar({
         <CalendarDaysGrid
           currentDate={date}
           datesArray={calendarData}
+          startRange={startRange}
+          endRange={endRange}
           currentMonth={dateState.month}
           displayWeekends={displayWeekends}
           holidays={holidays}
