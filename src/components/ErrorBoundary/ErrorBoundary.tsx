@@ -23,7 +23,7 @@ class ErrorBoundary extends React.Component<
   public render() {
     if (this.state.hasError)
       return (
-        <Wrapper>
+        <Wrapper data-testid="error-boundary">
           <Title>Something went wrong :c</Title>
           <Message>Error details: {this.state.errorMessage}</Message>
         </Wrapper>

@@ -19,11 +19,14 @@ describe("ErrorBoundary", () => {
     const ChildComponent = () => {
       throw new Error("Test error");
     };
-    const { getByText } = render(
+    const { getByText, getByTestId } = render(
       <ErrorBoundary>
         <ChildComponent />
       </ErrorBoundary>,
     );
+
+    expect(getByTestId("error-boundary")).toBeInTheDocument();
+
     const errorTitle = getByText("Something went wrong :c");
     const errorMessage = getByText("Error details: Test error");
     expect(errorTitle).toBeInTheDocument();

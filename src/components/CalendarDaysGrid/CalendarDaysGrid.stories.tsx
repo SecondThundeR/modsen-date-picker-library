@@ -21,6 +21,14 @@ const meta: Meta<typeof CalendarDaysGrid> = {
       name: "Dates array",
       description: "Array of dates",
     },
+    startRange: {
+      name: "Start range",
+      description: "Start date of the range",
+    },
+    endRange: {
+      name: "End range",
+      description: "End date of the range",
+    },
     displayWeekends: {
       name: "Display weekends",
       description: "Display weekends with different color",
@@ -50,6 +58,32 @@ export const Primary: Story = {
       new Date().getFullYear(),
       true,
     ),
+    startRange: null,
+    endRange: null,
+    displayWeekends: true,
+    holidays: null,
+    onChange(changedDate) {
+      console.log(changedDate);
+    },
+  },
+};
+
+const startRange = new Date();
+startRange.setDate(startRange.getDate() - 5);
+const endRange = new Date();
+endRange.setDate(endRange.getDate() + 5);
+
+export const WithRange: Story = {
+  args: {
+    currentDate: new Date(),
+    currentMonth: new Date().getMonth() + 1,
+    datesArray: getCalendarData(
+      new Date().getMonth() + 1,
+      new Date().getFullYear(),
+      true,
+    ),
+    startRange,
+    endRange,
     displayWeekends: true,
     holidays: null,
     onChange(changedDate) {
