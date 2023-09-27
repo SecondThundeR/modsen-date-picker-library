@@ -13,7 +13,7 @@ const DatePicker = memo(function DatePicker({
   endDate = getDefaultEndDate(),
   holidays = null,
   isSundayFirst = true,
-  displayWeekends = true,
+  displayWeekends = false,
 }: DatePickerProps) {
   const [date, setDate] = useState<Date | null>(new Date());
   const [showCalendar, setShowCalendar] = useState(false);
