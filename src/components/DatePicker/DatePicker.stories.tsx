@@ -1,9 +1,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { withHolidays } from "@/hocs/withHolidays";
-import { withMondayFirst } from "@/hocs/withMondayFirst";
-import { withWeekends } from "@/hocs/withWeekends";
+import { withHolidays, withMondayFirst, withWeekends } from "@/hocs";
 
 import DatePicker from "./DatePicker";
 

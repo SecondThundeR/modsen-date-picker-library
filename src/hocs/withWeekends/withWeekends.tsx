@@ -4,7 +4,7 @@ import { DatePickerProps } from "@/components/DatePicker/interfaces";
 
 interface WithWeekendsProps extends Pick<DatePickerProps, "displayWeekends"> {}
 
-export function withWeekends<T extends WithWeekendsProps>(
+function withWeekends<T extends WithWeekendsProps>(
   WrappedComponent: ComponentType<T>,
 ) {
   const displayName =
@@ -18,3 +18,5 @@ export function withWeekends<T extends WithWeekendsProps>(
 
   return ComponentWithWeekends;
 }
+
+export default withWeekends;

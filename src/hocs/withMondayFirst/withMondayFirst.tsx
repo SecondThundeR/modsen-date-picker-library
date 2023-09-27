@@ -4,7 +4,7 @@ import { DatePickerProps } from "@/components/DatePicker/interfaces";
 
 interface WithMondayFirstProps extends Pick<DatePickerProps, "isSundayFirst"> {}
 
-export function withMondayFirst<T extends WithMondayFirstProps>(
+function withMondayFirst<T extends WithMondayFirstProps>(
   WrappedComponent: ComponentType<T>,
 ) {
   const displayName =
@@ -20,3 +20,5 @@ export function withMondayFirst<T extends WithMondayFirstProps>(
 
   return ComponentWithMondayFirst;
 }
+
+export default withMondayFirst;

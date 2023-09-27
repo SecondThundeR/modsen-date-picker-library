@@ -4,7 +4,7 @@ import { DatePickerProps } from "@/components/DatePicker/interfaces";
 
 interface WithHolidaysProps extends Pick<DatePickerProps, "holidays"> {}
 
-export function withHolidays<T extends WithHolidaysProps>(
+function withHolidays<T extends WithHolidaysProps>(
   WrappedComponent: ComponentType<T>,
   holidays: WithHolidaysProps,
 ) {
@@ -19,3 +19,5 @@ export function withHolidays<T extends WithHolidaysProps>(
 
   return ComponentWithHolidays;
 }
+
+export default withHolidays;
