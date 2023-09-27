@@ -66,9 +66,9 @@ describe("CalendarButton", () => {
     expect(button).toHaveStyleRule("color", "#2f80ed");
   });
 
-  it("sets red color when isWeekday is true", () => {
+  it("sets red color when isWeekend is true", () => {
     const { getByText } = render(
-      <CalendarButton title="Test Button" isWeekday={true} onClick={onClick} />,
+      <CalendarButton title="Test Button" isWeekend={true} onClick={onClick} />,
     );
     const button = getByText("Test Button");
 

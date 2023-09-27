@@ -69,7 +69,7 @@ export const isDate = (date: unknown): date is Date => {
   return isDate && (isValidDate as boolean);
 };
 
-export const isDateAWeekday = (date: Date) => {
+export const isDateAWeekend = (date: Date) => {
   return date.getDay() === 0 || date.getDay() === 6;
 };
 
