@@ -20,7 +20,6 @@ import { Wrapper } from "./Calendar.styled";
 import { CalendarProps } from "./interfaces";
 
 const Calendar = memo(function Calendar({
-  hasClearButton = false,
   date,
   startDate,
   endDate,
@@ -29,6 +28,8 @@ const Calendar = memo(function Calendar({
   displayWeekends,
   isSundayFirst,
   holidays,
+  isTodosEnabled,
+  hasClearButton = false,
   onChange,
 }: CalendarProps) {
   const [dateState, setDateState] = useState<DateState>(() =>
@@ -72,6 +73,7 @@ const Calendar = memo(function Calendar({
           endRange={endRange}
           currentMonth={dateState.month}
           displayWeekends={displayWeekends}
+          isTodosEnabled={isTodosEnabled}
           holidays={holidays}
           onChange={onChange}
         />

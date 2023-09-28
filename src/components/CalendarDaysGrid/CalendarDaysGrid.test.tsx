@@ -22,6 +22,7 @@ describe("CalendarDaysGrid", () => {
         startRange={null}
         endRange={null}
         displayWeekends={false}
+        isTodosEnabled={false}
         holidays={null}
         onChange={onChange}
       />,
@@ -40,6 +41,7 @@ describe("CalendarDaysGrid", () => {
         startRange={null}
         endRange={null}
         displayWeekends={false}
+        isTodosEnabled={false}
         holidays={null}
         onChange={onChange}
       />,

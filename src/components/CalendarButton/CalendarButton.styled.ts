@@ -20,8 +20,8 @@ const calculateTextColor = ({
 
 export const Item = styled.button<CalendarButtonStyleProps>`
   cursor: pointer;
-  width: 32px;
-  height: 32px;
+  width: ${(props) => (props.$unlockedSize ? "auto" : "32px")};
+  height: ${(props) => (props.$unlockedSize ? "auto" : "32px")};
   display: flex;
   justify-content: center;
   align-items: center;

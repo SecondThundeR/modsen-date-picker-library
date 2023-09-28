@@ -18,8 +18,9 @@ const DatePicker = memo(function DatePicker({
   endRange = null,
   isPickingEnd = false,
   holidays = null,
-  isSundayFirst = true,
   displayWeekends = false,
+  isSundayFirst = true,
+  isTodosEnabled = false,
   onChange,
 }: DatePickerProps) {
   const [date, setDate] = useState<Date | null>(new Date());
@@ -77,6 +78,7 @@ const DatePicker = memo(function DatePicker({
             endRange={endRange}
             isSundayFirst={isSundayFirst}
             displayWeekends={displayWeekends}
+            isTodosEnabled={isTodosEnabled}
             holidays={holidays}
             onChange={onDateChange}
           />

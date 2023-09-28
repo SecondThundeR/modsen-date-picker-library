@@ -34,6 +34,11 @@ const meta: Meta<typeof CalendarDay> = {
       description: "Display weekends with different color",
       type: "boolean",
     },
+    isTodosEnabled: {
+      name: "Is todos enabled",
+      description: "Allow user to use todos",
+      type: "boolean",
+    },
     holidays: {
       name: "Holidays data",
       description: "Defines data for days, which defined as holidays",
@@ -57,6 +62,23 @@ export const Primary: Story = {
     selectedDate: getNextDay(),
     selectedMonth: new Date().getMonth() + 1,
     displayWeekends: true,
+    isTodosEnabled: false,
+    holidays: null,
+    onChange(changedDate) {
+      console.log(changedDate);
+    },
+  },
+};
+
+export const WithTodos: Story = {
+  args: {
+    date: new Date(),
+    startRange: null,
+    endRange: null,
+    selectedDate: getNextDay(),
+    selectedMonth: new Date().getMonth() + 1,
+    displayWeekends: true,
+    isTodosEnabled: true,
     holidays: null,
     onChange(changedDate) {
       console.log(changedDate);
@@ -72,6 +94,7 @@ export const Selected: Story = {
     selectedDate: new Date(),
     selectedMonth: new Date().getMonth() + 1,
     displayWeekends: true,
+    isTodosEnabled: false,
     holidays: null,
     onChange(changedDate) {
       console.log(changedDate);
@@ -87,6 +110,7 @@ export const Holiday: Story = {
     selectedDate: getNextDay(),
     selectedMonth: new Date().getMonth() + 1,
     displayWeekends: true,
+    isTodosEnabled: false,
     holidays: { [new Date().getMonth() + 1]: [new Date().getDate()] },
     onChange(changedDate) {
       console.log(changedDate);
@@ -102,6 +126,7 @@ export const RangeStart: Story = {
     selectedDate: new Date(),
     selectedMonth: new Date().getMonth() + 1,
     displayWeekends: true,
+    isTodosEnabled: false,
     holidays: null,
     onChange(changedDate) {
       console.log(changedDate);
@@ -121,6 +146,7 @@ export const RangeBetween: Story = {
     endRange: endRange,
     selectedMonth: new Date().getMonth() + 1,
     displayWeekends: true,
+    isTodosEnabled: false,
     holidays: null,
     onChange(changedDate) {
       console.log(changedDate);
@@ -136,6 +162,7 @@ export const RangeEnd: Story = {
     selectedDate: new Date(),
     selectedMonth: new Date().getMonth() + 1,
     displayWeekends: true,
+    isTodosEnabled: false,
     holidays: null,
     onChange(changedDate) {
       console.log(changedDate);

@@ -1,7 +1,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { withHolidays, withMondayFirst, withWeekends } from "@/hocs";
+import { withHolidays, withMondayFirst, withTodos, withWeekends } from "@/hocs";
 
 import RangePicker from "./RangePicker";
 
@@ -23,18 +23,20 @@ const meta: Meta<typeof RangePicker> = {
       name: "Display weekends",
       description: "Display weekends with different color",
       type: "boolean",
-      defaultValue: true,
     },
     isSundayFirst: {
       name: "Is Sunday first",
       description: "Is Sunday first day of the week",
       type: "boolean",
-      defaultValue: true,
+    },
+    isTodosEnabled: {
+      name: "Is todos enabled",
+      description: "Allows user to use todos",
+      type: "boolean",
     },
     holidays: {
       name: "Holidays data",
       description: "Defines data for days, which defined as holidays",
-      defaultValue: {},
     },
   },
 };
@@ -66,4 +68,10 @@ const RangePickerWithMondayFirst = withMondayFirst(RangePicker);
 
 export const WithMondayFirstHOC: Story = {
   render: () => <RangePickerWithMondayFirst />,
+};
+
+const RangePickerWithTodos = withTodos(RangePicker);
+
+export const WithTodosHOC: Story = {
+  render: () => <RangePickerWithTodos />,
 };

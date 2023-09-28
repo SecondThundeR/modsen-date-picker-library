@@ -8,5 +8,6 @@ export interface CalendarDayProps {
   selectedMonth: number;
   displayWeekends: boolean;
   holidays: Holidays | null;
+  isTodosEnabled: boolean;
   onChange: (changedDate: Date) => void;
 }

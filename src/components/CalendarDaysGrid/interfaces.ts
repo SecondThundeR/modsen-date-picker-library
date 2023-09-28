@@ -8,5 +8,6 @@ export interface CalendarDaysGridProps {
   endRange: Date | null;
   displayWeekends: boolean;
   holidays: Holidays | null;
+  isTodosEnabled: boolean;
   onChange: (changedDate: Date) => void;
 }

@@ -2,17 +2,17 @@ import React, { memo } from "react";
 
 import DatePicker from "@/components/DatePicker";
 import { useRangePicker } from "@/hooks";
-import { getDefaultEndDate, getDefaultStartDate } from "@/utils/date";
 
 import { RangePickerProps } from "./interfaces";
 import { Wrapper } from "./RangePicker.styled";
 
 const RangePicker = memo(function RangePicker({
-  startDate = getDefaultStartDate(),
-  endDate = getDefaultEndDate(),
-  holidays = null,
-  isSundayFirst = true,
-  displayWeekends = false,
+  startDate,
+  endDate,
+  holidays,
+  isSundayFirst,
+  displayWeekends,
+  isTodosEnabled,
 }: RangePickerProps) {
   const {
     values: { startRange, endRange },
@@ -31,6 +31,7 @@ const RangePicker = memo(function RangePicker({
         endRange={endRange}
         isSundayFirst={isSundayFirst}
         displayWeekends={displayWeekends}
+        isTodosEnabled={isTodosEnabled}
         onChange={updateStartRange}
       />
       <DatePicker
@@ -43,6 +44,7 @@ const RangePicker = memo(function RangePicker({
         endRange={endRange}
         isSundayFirst={isSundayFirst}
         displayWeekends={displayWeekends}
+        isTodosEnabled={isTodosEnabled}
         onChange={updateEndRange}
       />
     </Wrapper>

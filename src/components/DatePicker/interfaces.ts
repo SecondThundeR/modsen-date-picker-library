@@ -11,5 +11,6 @@ export interface DatePickerProps {
   holidays?: Holidays | null;
   displayWeekends?: boolean;
   isSundayFirst?: boolean;
+  isTodosEnabled?: boolean;
   onChange?: (date: Date | null) => void;
 }
