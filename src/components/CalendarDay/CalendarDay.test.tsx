@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 
 import CalendarDay from "./CalendarDay";
 
@@ -19,6 +19,7 @@ describe("CalendarDay", () => {
         selectedDate={tomorrowDate}
         selectedMonth={1}
         displayWeekends={false}
+        isTodosEnabled={false}
         holidays={null}
         onChange={() => {}}
       />,
@@ -33,6 +34,7 @@ describe("CalendarDay", () => {
         selectedDate={tomorrowDate}
         selectedMonth={1}
         displayWeekends={true}
+        isTodosEnabled={false}
         holidays={null}
         onChange={() => {}}
       />,
@@ -49,6 +51,7 @@ describe("CalendarDay", () => {
         selectedDate={date}
         selectedMonth={1}
         displayWeekends={false}
+        isTodosEnabled={false}
         holidays={null}
         onChange={() => {}}
       />,
@@ -66,6 +69,7 @@ describe("CalendarDay", () => {
         selectedDate={date}
         selectedMonth={1}
         displayWeekends={true}
+        isTodosEnabled={false}
         holidays={null}
         onChange={() => {}}
       />,
@@ -83,6 +87,7 @@ describe("CalendarDay", () => {
         selectedDate={tomorrowDate}
         selectedMonth={1}
         displayWeekends={true}
+        isTodosEnabled={false}
         holidays={null}
         onChange={() => {}}
       />,
@@ -95,5 +100,29 @@ describe("CalendarDay", () => {
       "rgba(47,128,237,0.1)",
     );
     expect(betweenRangeButton).toHaveStyleRule("color", "#2f80ed");
+  });
+
+  test("double click opens modal", () => {
+    const { getByRole, getByTestId } = render(
+      <CalendarDay
+        date={date}
+        startRange={null}
+        endRange={null}
+        selectedDate={tomorrowDate}
+        selectedMonth={1}
+        displayWeekends={false}
+        isTodosEnabled={true}
+        holidays={null}
+        onChange={() => {}}
+      />,
+    );
+    const button = getByRole("button");
+    fireEvent.doubleClick(button);
+
+    const modal = getByTestId("todo-modal");
+    expect(modal).toBeInTheDocument();
+
+    fireEvent.click(getByTestId("backdrop"));
+    expect(modal).not.toBeInTheDocument();
   });
 });

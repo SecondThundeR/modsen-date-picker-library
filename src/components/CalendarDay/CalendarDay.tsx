@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from "react";
+import React, { memo, useCallback, useState } from "react";
 
 import CalendarButton from "@/components/CalendarButton";
 import {
@@ -8,6 +8,7 @@ import {
 } from "@/utils/calendar";
 import { isDatesEqual } from "@/utils/date";
 
+import CalendarTodo from "../CalendarTodoList";
 import { CalendarDayProps } from "./interfaces";
 
 const CalendarDay = memo(function CalendarDay({
@@ -18,8 +19,10 @@ const CalendarDay = memo(function CalendarDay({
   selectedMonth,
   displayWeekends,
   holidays,
+  isTodosEnabled,
   onChange,
 }: CalendarDayProps) {
+  const [isTodoVisible, setIsTodoVisible] = useState(false);
   const isDateSelected = isDatesEqual(date, selectedDate);
   const isNotCurrentMonth = date.getMonth() !== selectedMonth - 1;
   const isWeekend = displayWeekends && isDateAWeekend(date);
@@ -40,16 +43,30 @@ const CalendarDay = memo(function CalendarDay({
     onChange(date);
   }, [date, onChange]);
 
+  const onModalClose = useCallback(() => {
+    setIsTodoVisible(false);
+  }, []);
+
+  const onDoubleClick = useCallback(() => {
+    setIsTodoVisible(true);
+  }, []);
+
   return (
-    <CalendarButton
-      title={date.getDate()}
-      rangeState={rangeState}
-      isSelected={isDateSelected}
-      isDisabled={isNotCurrentMonth}
-      isWeekend={isWeekend}
-      isHoliday={isHoliday}
-      onClick={onClick}
-    />
+    <>
+      <CalendarButton
+        title={date.getDate()}
+        rangeState={rangeState}
+        isSelected={isDateSelected}
+        isDisabled={isNotCurrentMonth}
+        isWeekend={isWeekend}
+        isHoliday={isHoliday}
+        onClick={onClick}
+        onDoubleClick={isTodosEnabled ? onDoubleClick : undefined}
+      />
+      {isTodoVisible && (
+        <CalendarTodo todoDate={date} closeModal={onModalClose} />
+      )}
+    </>
   );
 });
 

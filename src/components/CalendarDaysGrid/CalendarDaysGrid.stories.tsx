@@ -34,6 +34,11 @@ const meta: Meta<typeof CalendarDaysGrid> = {
       description: "Display weekends with different color",
       type: "boolean",
     },
+    isTodosEnabled: {
+      name: "Is todos enabled",
+      description: "Allow user to use todos",
+      type: "boolean",
+    },
     holidays: {
       name: "Holidays data",
       description: "Defines data for days, which defined as holidays",
@@ -61,6 +66,27 @@ export const Primary: Story = {
     startRange: null,
     endRange: null,
     displayWeekends: true,
+    isTodosEnabled: false,
+    holidays: null,
+    onChange(changedDate) {
+      console.log(changedDate);
+    },
+  },
+};
+
+export const WithTodos: Story = {
+  args: {
+    currentDate: new Date(),
+    currentMonth: new Date().getMonth() + 1,
+    datesArray: getCalendarData(
+      new Date().getMonth() + 1,
+      new Date().getFullYear(),
+      true,
+    ),
+    startRange: null,
+    endRange: null,
+    displayWeekends: true,
+    isTodosEnabled: true,
     holidays: null,
     onChange(changedDate) {
       console.log(changedDate);
@@ -85,6 +111,7 @@ export const WithRange: Story = {
     startRange,
     endRange,
     displayWeekends: true,
+    isTodosEnabled: true,
     holidays: null,
     onChange(changedDate) {
       console.log(changedDate);

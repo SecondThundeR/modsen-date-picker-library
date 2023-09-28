@@ -19,6 +19,7 @@ describe("Calendar", () => {
         endRange={null}
         isSundayFirst={false}
         displayWeekends={false}
+        isTodosEnabled={false}
         holidays={null}
         onChange={onChange}
       />,
@@ -38,6 +39,7 @@ describe("Calendar", () => {
         endRange={null}
         isSundayFirst={false}
         displayWeekends={false}
+        isTodosEnabled={false}
         holidays={null}
         onChange={onChange}
       />,
@@ -59,6 +61,7 @@ describe("Calendar", () => {
         endRange={null}
         isSundayFirst={false}
         displayWeekends={false}
+        isTodosEnabled={false}
         holidays={null}
         onChange={onChange}
       />,
@@ -81,6 +84,7 @@ describe("Calendar", () => {
         endRange={null}
         isSundayFirst={false}
         displayWeekends={false}
+        isTodosEnabled={false}
         holidays={null}
         onChange={onChange}
       />,
@@ -103,6 +107,7 @@ describe("Calendar", () => {
         endRange={null}
         isSundayFirst={false}
         displayWeekends={false}
+        isTodosEnabled={false}
         holidays={null}
         onChange={onChange}
       />,
@@ -125,6 +130,7 @@ describe("Calendar", () => {
         endRange={null}
         isSundayFirst={false}
         displayWeekends={false}
+        isTodosEnabled={false}
         holidays={null}
         onChange={onChange}
       />,
@@ -148,6 +154,7 @@ describe("Calendar", () => {
         onChange={onChange}
         isSundayFirst={false}
         displayWeekends={false}
+        isTodosEnabled={false}
         holidays={null}
         hasClearButton={true}
       />,

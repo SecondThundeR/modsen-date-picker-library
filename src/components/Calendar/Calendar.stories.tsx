@@ -39,6 +39,11 @@ const meta: Meta<typeof Calendar> = {
       description: "Display weekends with different color",
       type: "boolean",
     },
+    isTodosEnabled: {
+      name: "Is todos enabled",
+      description: "Allow user to use todos",
+      type: "boolean",
+    },
     holidays: {
       name: "Holidays data",
       description: "Defines data for days, which defined as holidays",
@@ -69,6 +74,23 @@ export const Primary: Story = {
     endRange: null,
     isSundayFirst: true,
     displayWeekends: true,
+    isTodosEnabled: false,
+    holidays: null,
+    hasClearButton: false,
+    onChange: (date) => console.log("Selected:", date),
+  },
+};
+
+export const WithTodos: Story = {
+  args: {
+    date: new Date(),
+    startDate: getDefaultStartDate(),
+    endDate: getDefaultEndDate(),
+    startRange: null,
+    endRange: null,
+    isSundayFirst: true,
+    displayWeekends: true,
+    isTodosEnabled: true,
     holidays: null,
     hasClearButton: false,
     onChange: (date) => console.log("Selected:", date),
@@ -87,6 +109,7 @@ export const WithRange: Story = {
     endRange,
     isSundayFirst: true,
     displayWeekends: true,
+    isTodosEnabled: false,
     holidays: null,
     hasClearButton: false,
     onChange: (date) => console.log("Selected:", date),

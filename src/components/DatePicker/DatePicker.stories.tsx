@@ -1,7 +1,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { withHolidays, withMondayFirst, withWeekends } from "@/hocs";
+import { withHolidays, withMondayFirst, withTodos, withWeekends } from "@/hocs";
 
 import DatePicker from "./DatePicker";
 
@@ -58,6 +58,12 @@ const meta: Meta<typeof DatePicker> = {
       type: "boolean",
       defaultValue: true,
     },
+    isTodosEnabled: {
+      name: "Is todos enabled",
+      description: "Allows user to use todos",
+      type: "boolean",
+      defaultValue: false,
+    },
     holidays: {
       name: "Holidays data",
       description: "Defines data for days, which defined as holidays",
@@ -97,4 +103,10 @@ const DatePickerWithMondayFirst = withMondayFirst(DatePicker);
 
 export const WithMondayFirstHOC: Story = {
   render: () => <DatePickerWithMondayFirst />,
+};
+
+const DatePickerWithTodos = withTodos(DatePicker);
+
+export const WithTodosHOC: Story = {
+  render: () => <DatePickerWithTodos />,
 };

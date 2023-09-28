@@ -9,6 +9,7 @@ export interface CalendarProps {
   isSundayFirst: boolean;
   displayWeekends: boolean;
   holidays: Holidays | null;
+  isTodosEnabled: boolean;
   hasClearButton?: boolean;
   onChange: (date: Date) => void;
 }
