@@ -46,7 +46,7 @@ type Story = StoryObj<typeof RangePicker>;
 
 export const Primary: Story = {
   args: {
-    holidays: { [new Date().getMonth() + 1]: [3, 6, 8, 10, 23, 30] },
+    holidays: null,
   },
 };
 
