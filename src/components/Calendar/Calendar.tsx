@@ -1,15 +1,13 @@
-import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 
-import CalendarDaysGrid from "@/components/CalendarDaysGrid";
 import CalendarHeader from "@/components/CalendarHeader";
-import CalendarWeekHeader from "@/components/CalendarWeekHeader";
+import CalendarRegular from "@/components/CalendarRegular";
 import CalendarWrapper from "@/components/CalendarWrapper";
 import FooterButton from "@/components/FooterButton";
 import {
   DateState,
   extractDateState,
   formatDateState,
-  getCalendarData,
   getNextMonth,
   getPreviousMonth,
   isDateInEndRange,
@@ -21,6 +19,7 @@ import { CalendarProps } from "./interfaces";
 
 const Calendar = memo(function Calendar({
   date,
+  type = "regular",
   startDate,
   endDate,
   startRange,
@@ -35,11 +34,7 @@ const Calendar = memo(function Calendar({
   const [dateState, setDateState] = useState<DateState>(() =>
     extractDateState(date),
   );
-  const calendarData = useMemo(
-    () => getCalendarData(dateState.month, dateState.year, isSundayFirst),
-    [dateState.month, dateState.year, isSundayFirst],
-  );
-  const headerTitle = formatDateState(dateState);
+  const headerTitle = formatDateState(type, dateState);
 
   useEffect(() => {
     setDateState(extractDateState(date));
@@ -65,18 +60,21 @@ const Calendar = memo(function Calendar({
           onPrevClick={onPrevClick}
           onNextClick={onNextClick}
         />
-        <CalendarWeekHeader isSundayFirst={isSundayFirst} />
-        <CalendarDaysGrid
-          currentDate={date}
-          datesArray={calendarData}
-          startRange={startRange}
-          endRange={endRange}
-          currentMonth={dateState.month}
-          displayWeekends={displayWeekends}
-          isTodosEnabled={isTodosEnabled}
-          holidays={holidays}
-          onChange={onChange}
-        />
+        {type === "regular" && (
+          <CalendarRegular
+            date={date}
+            dateState={dateState}
+            startDate={startDate}
+            endDate={endDate}
+            startRange={startRange}
+            endRange={endRange}
+            displayWeekends={displayWeekends}
+            isTodosEnabled={isTodosEnabled}
+            holidays={holidays}
+            isSundayFirst={isSundayFirst}
+            onChange={onChange}
+          />
+        )}
       </CalendarWrapper>
       {hasClearButton && <FooterButton title="Clear" />}
     </Wrapper>

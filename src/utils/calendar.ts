@@ -1,3 +1,4 @@
+import { CalendarType } from "@/components/Calendar/interfaces";
 import {
   CALENDAR_MONTHS,
   CALENDAR_WEEKS,
@@ -184,8 +185,14 @@ export const extractDateState = (date = new Date()) => {
   };
 };
 
-export const formatDateState = (dateState: DateState) => {
+export const formatDateState = (
+  calendarType: CalendarType,
+  dateState: DateState,
+) => {
   const { month, year } = dateState;
+  if (calendarType === "month") return String(year);
+  if (calendarType === "year") return `to be formed!`;
+
   const monthString =
     Object.keys(CALENDAR_MONTHS)[Math.max(0, Math.min(month - 1, 11))];
   return `${monthString} ${year}`;

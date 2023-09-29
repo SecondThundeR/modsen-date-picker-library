@@ -7,6 +7,8 @@ import { CalendarDaysGridProps } from "./interfaces";
 
 const CalendarDaysGrid = memo(function CalendarDaysGrid({
   currentDate,
+  startDate,
+  endDate,
   currentMonth,
   datesArray,
   startRange,
@@ -33,6 +35,8 @@ const CalendarDaysGrid = memo(function CalendarDaysGrid({
           <CalendarDay
             key={dayKey}
             date={date}
+            startDate={startDate}
+            endDate={endDate}
             startRange={startRange}
             endRange={endRange}
             selectedMonth={currentMonth}
