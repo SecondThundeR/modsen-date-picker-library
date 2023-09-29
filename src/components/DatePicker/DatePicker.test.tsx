@@ -107,10 +107,12 @@ describe("DatePicker", () => {
 
   test("should not call onChange if new startRange is greater than endRange", () => {
     const startRange = new Date();
+    console.log(startRange);
     startRange.setDate(startRange.getDate() - 1);
     const endRange = new Date();
     endRange.setDate(endRange.getDate() + 1);
-    const exceedRangeDateNumber = endRange.getDate() + 1;
+    const exceedRangeDateNumber = new Date();
+    exceedRangeDateNumber.setDate(exceedRangeDateNumber.getDate() + 2);
     const { getAllByText, getByTestId } = render(
       <DatePicker
         onChange={onChangeStart}
@@ -124,7 +126,7 @@ describe("DatePicker", () => {
     fireEvent.click(calendarIcon);
     expect(getByTestId("calendar")).toBeInTheDocument();
 
-    const button = getAllByText(String(exceedRangeDateNumber)).at(-1);
+    const button = getAllByText(String(exceedRangeDateNumber.getDate())).at(-1);
     if (!button) throw new Error("Button not found");
 
     fireEvent.click(button);
@@ -136,7 +138,8 @@ describe("DatePicker", () => {
     startRange.setDate(startRange.getDate() - 1);
     const endRange = new Date();
     endRange.setDate(endRange.getDate() + 1);
-    const exceedRangeDateNumber = startRange.getDate() - 1;
+    const exceedRangeDateNumber = new Date();
+    exceedRangeDateNumber.setDate(exceedRangeDateNumber.getDate() - 2);
     const { getAllByText, getByTestId } = render(
       <DatePicker
         onChange={onChangeEnd}
@@ -150,7 +153,7 @@ describe("DatePicker", () => {
     fireEvent.click(calendarIcon);
     expect(getByTestId("calendar")).toBeInTheDocument();
 
-    const button = getAllByText(String(exceedRangeDateNumber))[0];
+    const button = getAllByText(String(exceedRangeDateNumber.getDate()))[0];
     fireEvent.click(button);
     expect(onChangeEnd).not.toHaveBeenCalled();
   });
