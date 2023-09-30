@@ -11,6 +11,10 @@ describe("CalendarDaysGrid", () => {
     ["2022", "01", "02"],
     ["2022", "01", "03"],
   ];
+  const startDate = new Date("2022-01-01");
+  const endDate = new Date("2022-12-31");
+  const startRange = null;
+  const endRange = null;
   const onChange = jest.fn();
 
   it("renders the correct number of days", () => {
@@ -19,8 +23,10 @@ describe("CalendarDaysGrid", () => {
         currentDate={currentDate}
         currentMonth={currentMonth}
         datesArray={datesArray}
-        startRange={null}
-        endRange={null}
+        startDate={startDate}
+        endDate={endDate}
+        startRange={startRange}
+        endRange={endRange}
         displayWeekends={false}
         isTodosEnabled={false}
         holidays={null}
@@ -38,8 +44,10 @@ describe("CalendarDaysGrid", () => {
         currentDate={currentDate}
         currentMonth={currentMonth}
         datesArray={datesArray}
-        startRange={null}
-        endRange={null}
+        startDate={startDate}
+        endDate={endDate}
+        startRange={startRange}
+        endRange={endRange}
         displayWeekends={false}
         isTodosEnabled={false}
         holidays={null}

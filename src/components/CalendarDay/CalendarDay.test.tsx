@@ -14,6 +14,8 @@ describe("CalendarDay", () => {
     const { rerender } = render(
       <CalendarDay
         date={date}
+        startDate={previousDate}
+        endDate={tomorrowDate}
         startRange={null}
         endRange={null}
         selectedDate={tomorrowDate}
@@ -29,6 +31,8 @@ describe("CalendarDay", () => {
     rerender(
       <CalendarDay
         date={date}
+        startDate={previousDate}
+        endDate={tomorrowDate}
         startRange={null}
         endRange={null}
         selectedDate={tomorrowDate}
@@ -46,6 +50,8 @@ describe("CalendarDay", () => {
     const { rerender } = render(
       <CalendarDay
         date={date}
+        startDate={previousDate}
+        endDate={tomorrowDate}
         startRange={date}
         endRange={null}
         selectedDate={date}
@@ -64,6 +70,8 @@ describe("CalendarDay", () => {
     rerender(
       <CalendarDay
         date={date}
+        startDate={previousDate}
+        endDate={tomorrowDate}
         startRange={null}
         endRange={date}
         selectedDate={date}
@@ -82,6 +90,8 @@ describe("CalendarDay", () => {
     rerender(
       <CalendarDay
         date={date}
+        startDate={previousDate}
+        endDate={tomorrowDate}
         startRange={previousDate}
         endRange={tomorrowDate}
         selectedDate={tomorrowDate}
@@ -106,6 +116,8 @@ describe("CalendarDay", () => {
     const { getByRole, getByTestId } = render(
       <CalendarDay
         date={date}
+        startDate={previousDate}
+        endDate={tomorrowDate}
         startRange={null}
         endRange={null}
         selectedDate={tomorrowDate}
