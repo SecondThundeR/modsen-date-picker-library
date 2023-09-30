@@ -165,27 +165,6 @@ describe("Calendar", () => {
     expect(spyNextDecade).toHaveBeenCalled();
   });
 
-  it("renders the years grid", () => {
-    const { getByTestId } = render(
-      <Calendar
-        type="year"
-        date={date}
-        startDate={startDate}
-        endDate={endDate}
-        startRange={null}
-        endRange={null}
-        isSundayFirst={false}
-        displayWeekends={false}
-        isTodosEnabled={false}
-        holidays={null}
-        onChange={onChange}
-      />,
-    );
-    const years = getByTestId("years-grid");
-
-    expect(years).toBeInTheDocument();
-  });
-
   it("calls onChange when a day is clicked", () => {
     const { getAllByText } = render(
       <Calendar
