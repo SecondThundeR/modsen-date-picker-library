@@ -10,7 +10,7 @@ describe("CalendarDay", () => {
   const tomorrowDate = new Date(2022, 0, 1);
   tomorrowDate.setDate(tomorrowDate.getDate() + 1);
 
-  test("isWeekend is true for weekend dates when displayWeekends is true", () => {
+  it("isWeekend is true for weekend dates when displayWeekends is true", () => {
     const { rerender } = render(
       <CalendarDay
         date={date}
@@ -42,7 +42,7 @@ describe("CalendarDay", () => {
     expect(screen.getByRole("button")).toHaveStyleRule("color", "#f6546a");
   });
 
-  test("rangeState works correctly", () => {
+  it("rangeState works correctly", () => {
     const { rerender } = render(
       <CalendarDay
         date={date}
@@ -102,7 +102,7 @@ describe("CalendarDay", () => {
     expect(betweenRangeButton).toHaveStyleRule("color", "#2f80ed");
   });
 
-  test("double click opens modal", () => {
+  it("double click opens modal", () => {
     const { getByRole, getByTestId } = render(
       <CalendarDay
         date={date}

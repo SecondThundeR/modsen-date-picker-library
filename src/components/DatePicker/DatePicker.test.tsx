@@ -64,7 +64,7 @@ describe("DatePicker", () => {
     expect(input).toHaveValue("");
   });
 
-  test("should not call onChange if clicking already selected date", () => {
+  it("should not call onChange if clicking already selected date", () => {
     const currDate = new Date();
     const { getAllByText, getByTestId } = render(
       <DatePicker onChange={onChange} />,
@@ -83,7 +83,7 @@ describe("DatePicker", () => {
     expect(onChange).not.toHaveBeenCalled();
   });
 
-  test("should fallback to currentDate on clear button", () => {
+  it("should fallback to currentDate on clear button", () => {
     const currDate = new Date();
     const { getAllByText, getByTestId } = render(
       <DatePicker onChange={onChange} />,
@@ -105,9 +105,8 @@ describe("DatePicker", () => {
     expect(button).toHaveStyleRule("background-color", "#2f80ed");
   });
 
-  test("should not call onChange if new startRange is greater than endRange", () => {
+  it("should not call onChange if new startRange is greater than endRange", () => {
     const startRange = new Date();
-    console.log(startRange);
     startRange.setDate(startRange.getDate() - 1);
     const endRange = new Date();
     endRange.setDate(endRange.getDate() + 1);
@@ -133,7 +132,7 @@ describe("DatePicker", () => {
     expect(onChangeStart).not.toHaveBeenCalled();
   });
 
-  test("should not call onChange if new endRange is less than startRange", () => {
+  it("should not call onChange if new endRange is less than startRange", () => {
     const startRange = new Date();
     startRange.setDate(startRange.getDate() - 1);
     const endRange = new Date();

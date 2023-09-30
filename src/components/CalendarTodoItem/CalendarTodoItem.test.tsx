@@ -9,7 +9,7 @@ describe("CalendarTodoItem", () => {
   const onDone = jest.fn();
   const onDelete = jest.fn();
 
-  test("should render correctly", () => {
+  it("should render correctly", () => {
     const { getByText } = render(
       <CalendarTodoItem todo={todo} onDone={onDone} onDelete={onDelete} />,
     );
@@ -17,7 +17,7 @@ describe("CalendarTodoItem", () => {
     expect(getByText("Test")).toBeInTheDocument();
   });
 
-  test("should call onDone when checkbox is clicked", () => {
+  it("should call onDone when checkbox is clicked", () => {
     const { getByRole } = render(
       <CalendarTodoItem todo={todo} onDone={onDone} onDelete={onDelete} />,
     );
@@ -27,7 +27,7 @@ describe("CalendarTodoItem", () => {
     expect(onDone).toHaveBeenCalled();
   });
 
-  test("should have proper decoration for done todo", () => {
+  it("should have proper decoration for done todo", () => {
     const { getByText } = render(
       <CalendarTodoItem todo={todoDone} onDone={onDone} onDelete={onDelete} />,
     );
@@ -38,7 +38,7 @@ describe("CalendarTodoItem", () => {
     );
   });
 
-  test("should call onDelete when delete button is clicked", () => {
+  it("should call onDelete when delete button is clicked", () => {
     const { getByRole } = render(
       <CalendarTodoItem todo={todo} onDone={onDone} onDelete={onDelete} />,
     );
