@@ -23,21 +23,21 @@ describe("useTodoList", () => {
     });
   });
 
-  test("should correctly init data", () => {
+  it("should correctly init data", () => {
     const { result } = renderHook(() => useTodoList(date));
 
     expect(result.current.todos).toEqual([]);
     expect(result.current.todoInput).toEqual("");
   });
 
-  test("should correctly init data", () => {
+  it("should correctly init data", () => {
     const { result } = renderHook(() => useTodoList(date));
 
     expect(result.current.todos).toEqual([]);
     expect(result.current.todoInput).toEqual("");
   });
 
-  test("should not add todo on empty input", () => {
+  it("should not add todo on empty input", () => {
     const { result } = renderHook(() => useTodoList(date));
     act(() => {
       result.current.handlers.onAddClick();
@@ -47,7 +47,7 @@ describe("useTodoList", () => {
     expect(result.current.todoInput).toEqual("");
   });
 
-  test("should add todo on non-empty input", () => {
+  it("should add todo on non-empty input", () => {
     jest.spyOn(Date.prototype, "getTime").mockReturnValueOnce(123);
     const { result } = renderHook(() => useTodoList(date));
     act(() => {
@@ -72,7 +72,7 @@ describe("useTodoList", () => {
     expect(result.current.todoInput).toEqual("");
   });
 
-  test("should correctly toggle todo", () => {
+  it("should correctly toggle todo", () => {
     jest.spyOn(Date.prototype, "getTime").mockReturnValueOnce(123);
     const { result } = renderHook(() => useTodoList(date));
     act(() => {
@@ -121,7 +121,7 @@ describe("useTodoList", () => {
     ]);
   });
 
-  test("should not call local storage delete on non-last todo removal", () => {
+  it("should not call local storage delete on non-last todo removal", () => {
     jest.spyOn(Date.prototype, "getTime").mockReturnValueOnce(123);
     const { result } = renderHook(() => useTodoList(date));
     act(() => {
@@ -156,7 +156,7 @@ describe("useTodoList", () => {
     expect(onLocalDelete).not.toHaveBeenCalled();
   });
 
-  test("should call local storage delete on last todo removal", () => {
+  it("should call local storage delete on last todo removal", () => {
     jest.spyOn(Date.prototype, "getTime").mockReturnValueOnce(123);
     const { result } = renderHook(() => useTodoList(date));
     act(() => {

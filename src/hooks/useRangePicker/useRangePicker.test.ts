@@ -3,7 +3,7 @@ import { act, renderHook } from "@testing-library/react";
 import useRangePicker from "./useRangePicker";
 
 describe("useRangePicker", () => {
-  test("should update startRange state", () => {
+  it("should update startRange state", () => {
     const { result } = renderHook(() => useRangePicker());
 
     act(() => {
@@ -13,7 +13,7 @@ describe("useRangePicker", () => {
     expect(result.current.values.startRange).toEqual(new Date("2022-01-01"));
   });
 
-  test("should update endRange state", () => {
+  it("should update endRange state", () => {
     const { result } = renderHook(() => useRangePicker());
 
     act(() => {
