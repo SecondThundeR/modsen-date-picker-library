@@ -164,7 +164,10 @@ export const isDateInStartRange = (
   const { month: currentDateMonth, year: currentDateYear } = currentDate;
 
   if (startDateYear > currentDateYear) return false;
-  if (startDateYear === currentDateYear && startDateMonth > currentDateMonth)
+  if (
+    startDateYear === currentDateYear &&
+    startDateMonth > currentDateMonth - 1
+  )
     return false;
 
   return true;
@@ -181,7 +184,7 @@ export const isDateInEndRange = (
   const { month: currentDateMonth, year: currentDateYear } = currentDate;
 
   if (endDateYear < currentDateYear) return false;
-  if (endDateYear === currentDateYear && endDateMonth < currentDateMonth)
+  if (endDateYear === currentDateYear && endDateMonth < currentDateMonth + 1)
     return false;
 
   return true;

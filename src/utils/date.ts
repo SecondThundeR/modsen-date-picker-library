@@ -97,6 +97,6 @@ export const getDefaultStartDate = () => {
 
 export const getDefaultEndDate = () => {
   const today = new Date();
-  const year = today.getFullYear() + 10;
-  return new Date(year, 11, 31);
+  const year = today.getFullYear() + 11;
+  return new Date(year, 0, 1);
 };
