@@ -13,6 +13,12 @@ const meta: Meta<typeof Calendar> = {
       defaultValue: new Date(),
       description: "Date to be displayed",
     },
+    type: {
+      name: "Calendar type",
+      description: "Type of calendar",
+      type: "string",
+      defaultValue: "regular",
+    },
     startDate: {
       name: "Start date",
       description: "Start date of the range",
@@ -60,12 +66,6 @@ const meta: Meta<typeof Calendar> = {
       type: "function",
     },
   },
-};
-
-export default meta;
-type Story = StoryObj<typeof Calendar>;
-
-export const Primary: Story = {
   args: {
     date: new Date(),
     startDate: getDefaultStartDate(),
@@ -81,19 +81,26 @@ export const Primary: Story = {
   },
 };
 
+export default meta;
+type Story = StoryObj<typeof Calendar>;
+
+export const Primary: Story = {};
+
+export const Months: Story = {
+  args: {
+    type: "month",
+  },
+};
+
+export const Years: Story = {
+  args: {
+    type: "year",
+  },
+};
+
 export const WithTodos: Story = {
   args: {
-    date: new Date(),
-    startDate: getDefaultStartDate(),
-    endDate: getDefaultEndDate(),
-    startRange: null,
-    endRange: null,
-    isSundayFirst: true,
-    displayWeekends: true,
     isTodosEnabled: true,
-    holidays: null,
-    hasClearButton: false,
-    onChange: (date) => console.log("Selected:", date),
   },
 };
 
@@ -103,15 +110,7 @@ const endRange = new Date();
 endRange.setDate(endRange.getDate() + 5);
 export const WithRange: Story = {
   args: {
-    startDate: getDefaultStartDate(),
-    endDate: getDefaultEndDate(),
     startRange,
     endRange,
-    isSundayFirst: true,
-    displayWeekends: true,
-    isTodosEnabled: false,
-    holidays: null,
-    hasClearButton: false,
-    onChange: (date) => console.log("Selected:", date),
   },
 };
