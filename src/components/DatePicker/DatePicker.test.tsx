@@ -1,6 +1,7 @@
 import React from "react";
 import { fireEvent, render } from "@testing-library/react";
 
+import { CALENDAR_MONTHS } from "@/constants/date";
 import { zeroPad } from "@/utils/calendar";
 
 import DatePicker from "./DatePicker";
@@ -35,19 +36,18 @@ describe("DatePicker", () => {
     const calendar = getByTestId("calendar");
     expect(calendar).toBeInTheDocument();
 
-    const currentDate = new Date();
-    const nextDate = new Date();
-    nextDate.setDate(currentDate.getDate() + 1);
+    const prevDate = new Date();
+    prevDate.setDate(prevDate.getDate() - 1);
 
-    const days = queryAllByText(String(nextDate.getDate()));
+    const days = queryAllByText(String(prevDate.getDate()));
     const day = days[0];
     fireEvent.click(day);
 
     const input = getByTestId("input");
-    const formattedDate = `${zeroPad(nextDate.getDate(), 2)}/${zeroPad(
-      nextDate.getMonth(),
+    const formattedDate = `${zeroPad(prevDate.getDate(), 2)}/${zeroPad(
+      prevDate.getMonth(),
       2,
-    )}/${nextDate.getFullYear()}`;
+    )}/${prevDate.getFullYear()}`;
     expect(input).toHaveValue(formattedDate);
   });
 
@@ -78,6 +78,39 @@ describe("DatePicker", () => {
       currDate.getDate() < 15 ? 0 : -1,
     );
     if (!button) throw new Error("Button not found");
+
+    fireEvent.click(button);
+    expect(onChange).not.toHaveBeenCalled();
+  });
+
+  it("should not call onChange if clicking already selected month", () => {
+    const currDate = new Date();
+    const { getByText, getByTestId } = render(
+      <DatePicker type="month" onChange={onChange} />,
+    );
+    const calendarIcon = getByTestId("calendar-icon");
+
+    fireEvent.click(calendarIcon);
+    expect(getByTestId("calendar")).toBeInTheDocument();
+
+    const monthName = Object.values(CALENDAR_MONTHS)[currDate.getMonth()];
+    const button = getByText(monthName);
+
+    fireEvent.click(button);
+    expect(onChange).not.toHaveBeenCalled();
+  });
+
+  it("should not call onChange if clicking already selected year", () => {
+    const currDate = new Date();
+    const { getByText, getByTestId } = render(
+      <DatePicker type="year" onChange={onChange} />,
+    );
+    const calendarIcon = getByTestId("calendar-icon");
+
+    fireEvent.click(calendarIcon);
+    expect(getByTestId("calendar")).toBeInTheDocument();
+
+    const button = getByText(currDate.getFullYear().toString());
 
     fireEvent.click(button);
     expect(onChange).not.toHaveBeenCalled();

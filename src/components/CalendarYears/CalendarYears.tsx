@@ -33,7 +33,7 @@ const CalendarYears = memo(function CalendarYears({
   );
 
   return (
-    <Grid>
+    <Grid data-testid="years-grid">
       {yearsArray.map((yearData) => {
         const { yearDate, title } = yearData;
         return (

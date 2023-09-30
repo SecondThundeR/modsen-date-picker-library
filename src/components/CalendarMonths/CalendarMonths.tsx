@@ -34,7 +34,7 @@ const CalendarMonths = memo(function CalendarMonths({
   );
 
   return (
-    <Grid>
+    <Grid data-testid="months-grid">
       {monthsArray.map((monthData) => {
         const { monthDate, title } = monthData;
         const key = `${monthDate.getMonth()}-${title}`;
