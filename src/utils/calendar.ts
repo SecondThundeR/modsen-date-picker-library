@@ -1,6 +1,9 @@
+import { CalendarType } from "@/components/Calendar/interfaces";
 import {
   CALENDAR_MONTHS,
+  CALENDAR_NON_REGULAR_GRID_SIZE,
   CALENDAR_WEEKS,
+  DEFAULT_MONTH,
   FEBRUARY_MONTH_NUMBER,
   MONTHS_WITH_30_DAYS,
   THIS_MONTH,
@@ -109,11 +112,31 @@ export const getPreviousMonth = (monthNumber: number, year: number) => {
   return { month: prevMonth, year: prevMonthYear };
 };
 
+export const getPreviousYear = (monthNumber: number, year: number) => {
+  const prevYear = year - 1;
+  return { month: monthNumber, year: prevYear };
+};
+
+export const getPreviousDecade = (year: number) => {
+  const [startYear, _endYear] = getYearPickerRange(year);
+  return { month: DEFAULT_MONTH, year: startYear - 1 };
+};
+
 export const getNextMonth = (monthNumber: number, year: number) => {
   const nextMonth = monthNumber < 12 ? monthNumber + 1 : 1;
   const nextMonthYear = monthNumber < 12 ? year : year + 1;
 
   return { month: nextMonth, year: nextMonthYear };
+};
+
+export const getNextYear = (monthNumber: number, year: number) => {
+  const nextYear = year + 1;
+  return { month: monthNumber, year: nextYear };
+};
+
+export const getNextDecade = (year: number) => {
+  const [_startYear, endYear] = getYearPickerRange(year);
+  return { month: DEFAULT_MONTH, year: endYear + 1 };
 };
 
 export const isStartRangeCorrect = (endRange: Date | null, newDate: Date) => {
@@ -132,14 +155,13 @@ export const isDateInStartRange = (
 ) => {
   if (!isDate(startDate)) return false;
 
-  const startDateMonth = startDate.getMonth();
+  const startDateMonth = startDate.getMonth() - 1;
   const startDateYear = startDate.getFullYear();
   const { month: currentDateMonth, year: currentDateYear } = currentDate;
 
   if (startDateYear > currentDateYear) return false;
   if (startDateYear === currentDateYear && startDateMonth > currentDateMonth)
     return false;
-
   return true;
 };
 
@@ -149,14 +171,13 @@ export const isDateInEndRange = (
 ) => {
   if (!isDate(endDate)) return false;
 
-  const endDateMonth = endDate.getMonth();
+  const endDateMonth = endDate.getMonth() + 1;
   const endDateYear = endDate.getFullYear();
   const { month: currentDateMonth, year: currentDateYear } = currentDate;
 
   if (endDateYear < currentDateYear) return false;
   if (endDateYear === currentDateYear && endDateMonth < currentDateMonth)
     return false;
-
   return true;
 };
 
@@ -184,11 +205,54 @@ export const extractDateState = (date = new Date()) => {
   };
 };
 
-export const formatDateState = (dateState: DateState) => {
+export const formatDateState = (
+  calendarType: CalendarType,
+  dateState: DateState,
+) => {
   const { month, year } = dateState;
+  if (calendarType === "month") return String(year);
+  if (calendarType === "year") {
+    const [startYear, endYear] = getYearPickerRange(year);
+    return `${startYear} - ${endYear}`;
+  }
+
   const monthString =
     Object.keys(CALENDAR_MONTHS)[Math.max(0, Math.min(month - 1, 11))];
   return `${monthString} ${year}`;
+};
+
+export const getCalendarMonthsData = (year: number) => {
+  const monthsTitles = Object.values(CALENDAR_MONTHS);
+  const monthsData = new Array(CALENDAR_NON_REGULAR_GRID_SIZE)
+    .fill(0)
+    .map((_, index) => {
+      const monthNum = index + 1;
+      return [year, zeroPad(monthNum, 2), monthsTitles[index]];
+    });
+
+  return monthsData;
+};
+
+const getYearPickerRange = (year: number) => {
+  let startYear;
+  if (year % CALENDAR_NON_REGULAR_GRID_SIZE === 0)
+    startYear = year - CALENDAR_NON_REGULAR_GRID_SIZE + 1;
+  else startYear = year - (year % CALENDAR_NON_REGULAR_GRID_SIZE) + 1;
+  const endYear = startYear + CALENDAR_NON_REGULAR_GRID_SIZE - 1;
+  return [startYear, endYear];
+};
+
+export const getCalendarYearsData = (year: number) => {
+  const [startYear, endYear] = getYearPickerRange(year);
+
+  const yearsData = new Array(endYear - startYear + 1)
+    .fill(0)
+    .map((_, index) => {
+      const yearNum = startYear + index;
+      return yearNum;
+    });
+
+  return yearsData;
 };
 
 export const getCalendarData = (

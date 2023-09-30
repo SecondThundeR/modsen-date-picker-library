@@ -11,8 +11,8 @@ describe("Input", () => {
         title="Date"
         onDateChange={onDateChange}
         dateString="22/09/2021"
-        onCalendarClick={() => {}}
-        onClearClick={() => {}}
+        onCalendarClick={jest.fn()}
+        onClearClick={jest.fn()}
       />,
     );
     const input = getByTestId("input");
@@ -27,9 +27,9 @@ describe("Input", () => {
     const { getByTestId } = render(
       <Input
         title="Date"
-        onDateChange={() => {}}
+        onDateChange={jest.fn()}
         dateString="22/09/2021"
-        onCalendarClick={() => {}}
+        onCalendarClick={jest.fn()}
         onClearClick={onClearClick}
       />,
     );
@@ -50,8 +50,8 @@ describe("Input", () => {
         title="Date"
         onDateChange={onDateChange}
         dateString="22/09/2021"
-        onCalendarClick={() => {}}
-        onClearClick={() => {}}
+        onCalendarClick={jest.fn()}
+        onClearClick={jest.fn()}
       />,
     );
     const input = getByTestId("input");
@@ -72,9 +72,9 @@ describe("Input", () => {
         dateString="22/09/2021"
         startDate={new Date(2023, 0, 1)}
         endDate={new Date(2023, 11, 31)}
-        onDateChange={() => {}}
-        onCalendarClick={() => {}}
-        onClearClick={() => {}}
+        onDateChange={jest.fn()}
+        onCalendarClick={jest.fn()}
+        onClearClick={jest.fn()}
       />,
     );
     const input = getByTestId("input");
@@ -90,11 +90,46 @@ describe("Input", () => {
         dateString="22/09/2021"
         startDate={new Date(2023, 0, 1)}
         endDate={new Date(2023, 11, 31)}
-        onDateChange={() => {}}
-        onCalendarClick={() => {}}
-        onClearClick={() => {}}
+        onDateChange={jest.fn()}
+        onCalendarClick={jest.fn()}
+        onClearClick={jest.fn()}
       />,
     );
     expect(getByText("Date")).toBeInTheDocument();
+  });
+
+  it("should change maxLength attribute when changing type", () => {
+    const { rerender, getByTestId } = render(
+      <Input
+        type="regular"
+        dateString="22/09/2021"
+        onDateChange={jest.fn()}
+        onCalendarClick={jest.fn()}
+        onClearClick={jest.fn()}
+      />,
+    );
+    expect(getByTestId("input")).toHaveAttribute("maxlength", "10");
+
+    rerender(
+      <Input
+        type="month"
+        dateString="22/09/2021"
+        onDateChange={jest.fn()}
+        onCalendarClick={jest.fn()}
+        onClearClick={jest.fn()}
+      />,
+    );
+    expect(getByTestId("input")).toHaveAttribute("maxlength", "7");
+
+    rerender(
+      <Input
+        type="year"
+        dateString="22/09/2021"
+        onDateChange={jest.fn()}
+        onCalendarClick={jest.fn()}
+        onClearClick={jest.fn()}
+      />,
+    );
+    expect(getByTestId("input")).toHaveAttribute("maxlength", "4");
   });
 });

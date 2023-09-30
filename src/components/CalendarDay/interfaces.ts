@@ -2,6 +2,8 @@ import { Holidays } from "@/utils/calendar";
 
 export interface CalendarDayProps {
   date: Date;
+  startDate: Date;
+  endDate: Date;
   startRange: Date | null;
   endRange: Date | null;
   selectedDate: Date;

@@ -15,7 +15,7 @@ describe("useTodoItem", () => {
     },
   } as ChangeEvent<HTMLInputElement>;
 
-  test("should call onDone handler", () => {
+  it("should call onDone handler", () => {
     const { result } = renderHook(() => useTodoItem(todoId, handlers));
 
     expect(result.current[0]).toBeInstanceOf(Function);
@@ -27,7 +27,7 @@ describe("useTodoItem", () => {
     expect(handlers.onDone).toHaveBeenCalledWith(todoId, true);
   });
 
-  test("should call onDone handler", () => {
+  it("should call onDone handler", () => {
     const { result } = renderHook(() => useTodoItem(todoId, handlers));
 
     expect(result.current[1]).toBeInstanceOf(Function);

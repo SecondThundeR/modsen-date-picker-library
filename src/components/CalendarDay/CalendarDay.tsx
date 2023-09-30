@@ -1,18 +1,23 @@
 import React, { memo, useCallback, useState } from "react";
 
 import CalendarButton from "@/components/CalendarButton";
+import CalendarTodo from "@/components/CalendarTodoList";
 import {
+  extractDateState,
   isDateAHoliday,
   isDateAWeekend,
+  isDateInEndRange,
   isDateInRange,
+  isDateInStartRange,
 } from "@/utils/calendar";
 import { isDatesEqual } from "@/utils/date";
 
-import CalendarTodo from "../CalendarTodoList";
 import { CalendarDayProps } from "./interfaces";
 
 const CalendarDay = memo(function CalendarDay({
   date,
+  startDate,
+  endDate,
   startRange,
   endRange,
   selectedDate,
@@ -40,8 +45,13 @@ const CalendarDay = memo(function CalendarDay({
     : undefined;
 
   const onClick = useCallback(() => {
+    if (
+      !isDateInStartRange(startDate, extractDateState(date)) ||
+      !isDateInEndRange(endDate, extractDateState(date))
+    )
+      return;
     onChange(date);
-  }, [date, onChange]);
+  }, [date, endDate, onChange, startDate]);
 
   const onModalClose = useCallback(() => {
     setIsTodoVisible(false);

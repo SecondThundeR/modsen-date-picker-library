@@ -7,7 +7,7 @@ describe("CalendarTodoList", () => {
   const todoDate = new Date("2022-01-01");
   const onModalClose = jest.fn();
 
-  test("should stop propagation on click", () => {
+  it("should stop propagation on click", () => {
     const { getByTestId } = render(
       <CalendarTodoList todoDate={todoDate} closeModal={onModalClose} />,
     );
@@ -18,7 +18,7 @@ describe("CalendarTodoList", () => {
     expect(onModalClose).not.toHaveBeenCalled();
   });
 
-  test("should not render empty todos", () => {
+  it("should not render empty todos", () => {
     const { getByText } = render(
       <CalendarTodoList todoDate={todoDate} closeModal={jest.fn()} />,
     );
@@ -26,7 +26,7 @@ describe("CalendarTodoList", () => {
     expect(getByText("Hint: Try to add some todos!")).toBeInTheDocument();
   });
 
-  test("should not render empty todos", () => {
+  it("should not render empty todos", () => {
     const { getByText, getByTestId } = render(
       <CalendarTodoList todoDate={todoDate} closeModal={jest.fn()} />,
     );

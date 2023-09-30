@@ -1,4 +1,4 @@
-import React, { memo, useMemo } from "react";
+import React, { memo, useCallback, useMemo } from "react";
 
 import CalendarDay from "@/components/CalendarDay";
 
@@ -7,6 +7,8 @@ import { CalendarDaysGridProps } from "./interfaces";
 
 const CalendarDaysGrid = memo(function CalendarDaysGrid({
   currentDate,
+  startDate,
+  endDate,
   currentMonth,
   datesArray,
   startRange,
@@ -21,9 +23,9 @@ const CalendarDaysGrid = memo(function CalendarDaysGrid({
     [datesArray],
   );
 
-  const getDayKey = (date: Date) => {
+  const getDayKey = useCallback((date: Date) => {
     return `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`;
-  };
+  }, []);
 
   return (
     <Grid>
@@ -33,6 +35,8 @@ const CalendarDaysGrid = memo(function CalendarDaysGrid({
           <CalendarDay
             key={dayKey}
             date={date}
+            startDate={startDate}
+            endDate={endDate}
             startRange={startRange}
             endRange={endRange}
             selectedMonth={currentMonth}

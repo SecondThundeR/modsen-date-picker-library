@@ -1,6 +1,8 @@
 import React from "react";
 import { fireEvent, render } from "@testing-library/react";
 
+import * as utils from "@/utils/calendar";
+
 import Calendar from "./Calendar";
 
 describe("Calendar", () => {
@@ -27,6 +29,161 @@ describe("Calendar", () => {
     const title = getByText("January 2022");
 
     expect(title).toBeInTheDocument();
+  });
+
+  it("renders the months and years grid", () => {
+    const { getByTestId, rerender } = render(
+      <Calendar
+        type="month"
+        date={date}
+        startDate={startDate}
+        endDate={endDate}
+        startRange={null}
+        endRange={null}
+        isSundayFirst={false}
+        displayWeekends={false}
+        isTodosEnabled={false}
+        holidays={null}
+        onChange={onChange}
+      />,
+    );
+    const monthsGrid = getByTestId("months-grid");
+
+    expect(monthsGrid).toBeInTheDocument();
+
+    rerender(
+      <Calendar
+        type="year"
+        date={date}
+        startDate={startDate}
+        endDate={endDate}
+        startRange={null}
+        endRange={null}
+        isSundayFirst={false}
+        displayWeekends={false}
+        isTodosEnabled={false}
+        holidays={null}
+        onChange={onChange}
+      />,
+    );
+    const years = getByTestId("years-grid");
+
+    expect(years).toBeInTheDocument();
+  });
+
+  it("should call correct utils function when calling onPrevClick with other types", () => {
+    const spyPrevYear = jest.spyOn(utils, "getPreviousYear");
+    const spyPrevDecade = jest.spyOn(utils, "getPreviousDecade");
+    const { getByTestId, rerender } = render(
+      <Calendar
+        type="month"
+        date={date}
+        startDate={startDate}
+        endDate={endDate}
+        startRange={null}
+        endRange={null}
+        isSundayFirst={false}
+        displayWeekends={false}
+        isTodosEnabled={false}
+        holidays={null}
+        onChange={onChange}
+      />,
+    );
+    const monthsGrid = getByTestId("months-grid");
+    expect(monthsGrid).toBeInTheDocument();
+
+    fireEvent.click(getByTestId("prev-button"));
+    expect(spyPrevYear).toHaveBeenCalled();
+
+    rerender(
+      <Calendar
+        type="year"
+        date={date}
+        startDate={startDate}
+        endDate={endDate}
+        startRange={null}
+        endRange={null}
+        isSundayFirst={false}
+        displayWeekends={false}
+        isTodosEnabled={false}
+        holidays={null}
+        onChange={onChange}
+      />,
+    );
+    const years = getByTestId("years-grid");
+
+    expect(years).toBeInTheDocument();
+
+    fireEvent.click(getByTestId("prev-button"));
+    expect(spyPrevDecade).toHaveBeenCalled();
+  });
+
+  it("should call correct utils function when calling onNextClick with other types", () => {
+    const spyNextYear = jest.spyOn(utils, "getNextYear");
+    const spyNextDecade = jest.spyOn(utils, "getNextDecade");
+    const { getByTestId, rerender } = render(
+      <Calendar
+        type="month"
+        date={date}
+        startDate={startDate}
+        endDate={endDate}
+        startRange={null}
+        endRange={null}
+        isSundayFirst={false}
+        displayWeekends={false}
+        isTodosEnabled={false}
+        holidays={null}
+        onChange={onChange}
+      />,
+    );
+    const monthsGrid = getByTestId("months-grid");
+    expect(monthsGrid).toBeInTheDocument();
+
+    fireEvent.click(getByTestId("next-button"));
+    expect(spyNextYear).toHaveBeenCalled();
+
+    rerender(
+      <Calendar
+        type="year"
+        date={date}
+        startDate={startDate}
+        endDate={endDate}
+        startRange={null}
+        endRange={null}
+        isSundayFirst={false}
+        displayWeekends={false}
+        isTodosEnabled={false}
+        holidays={null}
+        onChange={onChange}
+      />,
+    );
+    const years = getByTestId("years-grid");
+
+    expect(years).toBeInTheDocument();
+
+    fireEvent.click(getByTestId("next-button"));
+    expect(spyNextDecade).toHaveBeenCalled();
+  });
+
+  it("renders the years grid", () => {
+    const { getByTestId } = render(
+      <Calendar
+        type="year"
+        date={date}
+        startDate={startDate}
+        endDate={endDate}
+        startRange={null}
+        endRange={null}
+        isSundayFirst={false}
+        displayWeekends={false}
+        isTodosEnabled={false}
+        holidays={null}
+        onChange={onChange}
+      />,
+    );
+    const years = getByTestId("years-grid");
+
+    expect(years).toBeInTheDocument();
   });
 
   it("calls onChange when a day is clicked", () => {

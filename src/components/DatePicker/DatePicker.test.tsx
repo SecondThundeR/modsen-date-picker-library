@@ -1,6 +1,7 @@
 import React from "react";
 import { fireEvent, render } from "@testing-library/react";
 
+import { CALENDAR_MONTHS } from "@/constants/date";
 import { zeroPad } from "@/utils/calendar";
 
 import DatePicker from "./DatePicker";
@@ -35,19 +36,18 @@ describe("DatePicker", () => {
     const calendar = getByTestId("calendar");
     expect(calendar).toBeInTheDocument();
 
-    const currentDate = new Date();
-    const nextDate = new Date();
-    nextDate.setDate(currentDate.getDate() + 1);
+    const prevDate = new Date();
+    prevDate.setDate(prevDate.getDate() - 1);
 
-    const days = queryAllByText(String(nextDate.getDate()));
+    const days = queryAllByText(String(prevDate.getDate()));
     const day = days[0];
     fireEvent.click(day);
 
     const input = getByTestId("input");
-    const formattedDate = `${zeroPad(nextDate.getDate(), 2)}/${zeroPad(
-      nextDate.getMonth(),
+    const formattedDate = `${zeroPad(prevDate.getDate(), 2)}/${zeroPad(
+      prevDate.getMonth(),
       2,
-    )}/${nextDate.getFullYear()}`;
+    )}/${prevDate.getFullYear()}`;
     expect(input).toHaveValue(formattedDate);
   });
 
@@ -64,7 +64,7 @@ describe("DatePicker", () => {
     expect(input).toHaveValue("");
   });
 
-  test("should not call onChange if clicking already selected date", () => {
+  it("should not call onChange if clicking already selected date", () => {
     const currDate = new Date();
     const { getAllByText, getByTestId } = render(
       <DatePicker onChange={onChange} />,
@@ -83,7 +83,40 @@ describe("DatePicker", () => {
     expect(onChange).not.toHaveBeenCalled();
   });
 
-  test("should fallback to currentDate on clear button", () => {
+  it("should not call onChange if clicking already selected month", () => {
+    const currDate = new Date();
+    const { getByText, getByTestId } = render(
+      <DatePicker type="month" onChange={onChange} />,
+    );
+    const calendarIcon = getByTestId("calendar-icon");
+
+    fireEvent.click(calendarIcon);
+    expect(getByTestId("calendar")).toBeInTheDocument();
+
+    const monthName = Object.values(CALENDAR_MONTHS)[currDate.getMonth()];
+    const button = getByText(monthName);
+
+    fireEvent.click(button);
+    expect(onChange).not.toHaveBeenCalled();
+  });
+
+  it("should not call onChange if clicking already selected year", () => {
+    const currDate = new Date();
+    const { getByText, getByTestId } = render(
+      <DatePicker type="year" onChange={onChange} />,
+    );
+    const calendarIcon = getByTestId("calendar-icon");
+
+    fireEvent.click(calendarIcon);
+    expect(getByTestId("calendar")).toBeInTheDocument();
+
+    const button = getByText(currDate.getFullYear().toString());
+
+    fireEvent.click(button);
+    expect(onChange).not.toHaveBeenCalled();
+  });
+
+  it("should fallback to currentDate on clear button", () => {
     const currDate = new Date();
     const { getAllByText, getByTestId } = render(
       <DatePicker onChange={onChange} />,
@@ -105,9 +138,8 @@ describe("DatePicker", () => {
     expect(button).toHaveStyleRule("background-color", "#2f80ed");
   });
 
-  test("should not call onChange if new startRange is greater than endRange", () => {
+  it("should not call onChange if new startRange is greater than endRange", () => {
     const startRange = new Date();
-    console.log(startRange);
     startRange.setDate(startRange.getDate() - 1);
     const endRange = new Date();
     endRange.setDate(endRange.getDate() + 1);
@@ -133,7 +165,7 @@ describe("DatePicker", () => {
     expect(onChangeStart).not.toHaveBeenCalled();
   });
 
-  test("should not call onChange if new endRange is less than startRange", () => {
+  it("should not call onChange if new endRange is less than startRange", () => {
     const startRange = new Date();
     startRange.setDate(startRange.getDate() - 1);
     const endRange = new Date();

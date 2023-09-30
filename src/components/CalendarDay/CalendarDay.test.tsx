@@ -9,11 +9,58 @@ describe("CalendarDay", () => {
   previousDate.setDate(previousDate.getDate() - 1);
   const tomorrowDate = new Date(2022, 0, 1);
   tomorrowDate.setDate(tomorrowDate.getDate() + 1);
+  const onChange = jest.fn();
 
-  test("isWeekend is true for weekend dates when displayWeekends is true", () => {
+  it("should not call onChange when date is not within startRange", () => {
+    const { getByRole } = render(
+      <CalendarDay
+        date={previousDate}
+        startDate={date}
+        endDate={tomorrowDate}
+        startRange={null}
+        endRange={null}
+        selectedDate={previousDate}
+        selectedMonth={1}
+        displayWeekends={false}
+        isTodosEnabled={false}
+        holidays={null}
+        onChange={onChange}
+      />,
+    );
+    const button = getByRole("button");
+
+    fireEvent.click(button);
+    expect(onChange).not.toHaveBeenCalled();
+  });
+
+  // it("should not call onChange when date is not within endRange", () => {
+  //   const { getByRole } = render(
+  //     <CalendarDay
+  //       date={tomorrowDate}
+  //       startDate={previousDate}
+  //       endDate={date}
+  //       startRange={null}
+  //       endRange={null}
+  //       selectedDate={tomorrowDate}
+  //       selectedMonth={1}
+  //       displayWeekends={false}
+  //       isTodosEnabled={false}
+  //       holidays={null}
+  //       onChange={onChange}
+  //     />,
+  //   );
+  //   const button = getByRole("button");
+
+  //   fireEvent.click(button);
+  //   expect(onChange).not.toHaveBeenCalled();
+  // });
+
+  it("isWeekend is true for weekend dates when displayWeekends is true", () => {
     const { rerender } = render(
       <CalendarDay
         date={date}
+        startDate={previousDate}
+        endDate={tomorrowDate}
         startRange={null}
         endRange={null}
         selectedDate={tomorrowDate}
@@ -21,7 +68,7 @@ describe("CalendarDay", () => {
         displayWeekends={false}
         isTodosEnabled={false}
         holidays={null}
-        onChange={() => {}}
+        onChange={onChange}
       />,
     );
     expect(screen.getByRole("button")).not.toHaveStyleRule("color", "#f6546a");
@@ -29,6 +76,8 @@ describe("CalendarDay", () => {
     rerender(
       <CalendarDay
         date={date}
+        startDate={previousDate}
+        endDate={tomorrowDate}
         startRange={null}
         endRange={null}
         selectedDate={tomorrowDate}
@@ -36,16 +85,18 @@ describe("CalendarDay", () => {
         displayWeekends={true}
         isTodosEnabled={false}
         holidays={null}
-        onChange={() => {}}
+        onChange={onChange}
       />,
     );
     expect(screen.getByRole("button")).toHaveStyleRule("color", "#f6546a");
   });
 
-  test("rangeState works correctly", () => {
+  it("rangeState works correctly", () => {
     const { rerender } = render(
       <CalendarDay
         date={date}
+        startDate={previousDate}
+        endDate={tomorrowDate}
         startRange={date}
         endRange={null}
         selectedDate={date}
@@ -53,7 +104,7 @@ describe("CalendarDay", () => {
         displayWeekends={false}
         isTodosEnabled={false}
         holidays={null}
-        onChange={() => {}}
+        onChange={onChange}
       />,
     );
     expect(screen.getByRole("button")).toHaveStyleRule(
@@ -64,6 +115,8 @@ describe("CalendarDay", () => {
     rerender(
       <CalendarDay
         date={date}
+        startDate={previousDate}
+        endDate={tomorrowDate}
         startRange={null}
         endRange={date}
         selectedDate={date}
@@ -71,7 +124,7 @@ describe("CalendarDay", () => {
         displayWeekends={true}
         isTodosEnabled={false}
         holidays={null}
-        onChange={() => {}}
+        onChange={onChange}
       />,
     );
     const endRangeButton = screen.getByRole("button");
@@ -82,6 +135,8 @@ describe("CalendarDay", () => {
     rerender(
       <CalendarDay
         date={date}
+        startDate={previousDate}
+        endDate={tomorrowDate}
         startRange={previousDate}
         endRange={tomorrowDate}
         selectedDate={tomorrowDate}
@@ -89,7 +144,7 @@ describe("CalendarDay", () => {
         displayWeekends={true}
         isTodosEnabled={false}
         holidays={null}
-        onChange={() => {}}
+        onChange={onChange}
       />,
     );
 
@@ -102,10 +157,12 @@ describe("CalendarDay", () => {
     expect(betweenRangeButton).toHaveStyleRule("color", "#2f80ed");
   });
 
-  test("double click opens modal", () => {
+  it("double click opens modal", () => {
     const { getByRole, getByTestId } = render(
       <CalendarDay
         date={date}
+        startDate={previousDate}
+        endDate={tomorrowDate}
         startRange={null}
         endRange={null}
         selectedDate={tomorrowDate}
@@ -113,7 +170,7 @@ describe("CalendarDay", () => {
         displayWeekends={false}
         isTodosEnabled={true}
         holidays={null}
-        onChange={() => {}}
+        onChange={onChange}
       />,
     );
     const button = getByRole("button");
