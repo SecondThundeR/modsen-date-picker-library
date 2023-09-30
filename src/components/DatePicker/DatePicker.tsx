@@ -1,8 +1,8 @@
 import React, { memo, useCallback, useState } from "react";
 
 import Calendar from "@/components/Calendar";
+import DateInput from "@/components/DateInput";
 import ErrorBoundary from "@/components/ErrorBoundary";
-import Input from "@/components/Input";
 import { isEndRangeCorrect, isStartRangeCorrect } from "@/utils/calendar";
 import { getDefaultEndDate, getDefaultStartDate } from "@/utils/date";
 
@@ -66,7 +66,7 @@ const DatePicker = memo(function DatePicker({
   return (
     <ErrorBoundary>
       <Wrapper>
-        <Input
+        <DateInput
           title={title}
           type={type}
           dateString={date?.toLocaleDateString("en-GB") ?? ""}

@@ -1,11 +1,11 @@
 import React, { useCallback, useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import Input from "./Input";
+import DateInput from "./DateInput";
 
-const meta: Meta<typeof Input> = {
+const meta: Meta<typeof DateInput> = {
   title: "Component/Input",
-  component: Input,
+  component: DateInput,
   argTypes: {
     title: {
       name: "Title",
@@ -68,7 +68,7 @@ export interface InputProps {
 }
 
 export default meta;
-type Story = StoryObj<typeof Input>;
+type Story = StoryObj<typeof DateInput>;
 
 const InputExample = () => {
   const [date, setDate] = useState<Date | null>(new Date());
@@ -86,7 +86,7 @@ const InputExample = () => {
   }, []);
 
   return (
-    <Input
+    <DateInput
       title="Date"
       dateString={date?.toLocaleDateString("en-GB") ?? ""}
       startDate={new Date("2021-01-01")}

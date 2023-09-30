@@ -36,7 +36,7 @@ export const InputWrapper = styled.div<{ $isError?: boolean }>`
   border-radius: 8px;
 `;
 
-export const StyledInput = styled.input`
+export const Input = styled.input`
   height: 100%;
   box-sizing: border-box;
   border: none;
