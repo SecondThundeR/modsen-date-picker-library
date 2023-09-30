@@ -118,8 +118,8 @@ export const getPreviousYear = (monthNumber: number, year: number) => {
 };
 
 export const getPreviousDecade = (year: number) => {
-  const prevDecadeYear = year - (year % CALENDAR_NON_REGULAR_GRID_SIZE) - 1;
-  return { month: DEFAULT_MONTH, year: prevDecadeYear };
+  const [startYear, _endYear] = getYearPickerRange(year);
+  return { month: DEFAULT_MONTH, year: startYear - 1 };
 };
 
 export const getNextMonth = (monthNumber: number, year: number) => {
@@ -135,12 +135,8 @@ export const getNextYear = (monthNumber: number, year: number) => {
 };
 
 export const getNextDecade = (year: number) => {
-  const nextDecadeYear =
-    year +
-    CALENDAR_NON_REGULAR_GRID_SIZE -
-    (year % CALENDAR_NON_REGULAR_GRID_SIZE) +
-    1;
-  return { month: DEFAULT_MONTH, year: nextDecadeYear };
+  const [_startYear, endYear] = getYearPickerRange(year);
+  return { month: DEFAULT_MONTH, year: endYear + 1 };
 };
 
 export const isStartRangeCorrect = (endRange: Date | null, newDate: Date) => {
@@ -159,17 +155,13 @@ export const isDateInStartRange = (
 ) => {
   if (!isDate(startDate)) return false;
 
-  const startDateMonth = startDate.getMonth();
+  const startDateMonth = startDate.getMonth() - 1;
   const startDateYear = startDate.getFullYear();
   const { month: currentDateMonth, year: currentDateYear } = currentDate;
 
   if (startDateYear > currentDateYear) return false;
-  if (
-    startDateYear === currentDateYear &&
-    startDateMonth > currentDateMonth - 1
-  )
+  if (startDateYear === currentDateYear && startDateMonth > currentDateMonth)
     return false;
-
   return true;
 };
 
@@ -179,14 +171,13 @@ export const isDateInEndRange = (
 ) => {
   if (!isDate(endDate)) return false;
 
-  const endDateMonth = endDate.getMonth();
+  const endDateMonth = endDate.getMonth() + 1;
   const endDateYear = endDate.getFullYear();
   const { month: currentDateMonth, year: currentDateYear } = currentDate;
 
   if (endDateYear < currentDateYear) return false;
-  if (endDateYear === currentDateYear && endDateMonth < currentDateMonth + 1)
+  if (endDateYear === currentDateYear && endDateMonth < currentDateMonth)
     return false;
-
   return true;
 };
 
