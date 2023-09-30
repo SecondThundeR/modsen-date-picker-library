@@ -9,6 +9,7 @@ import React, {
 import CalendarIcon from "@/assets/CalendarIcon";
 import ClearIcon from "@/assets/ClearIcon";
 import {
+  formatDateForValue,
   getDefaultEndDate,
   getDefaultStartDate,
   isInRange,
@@ -28,6 +29,7 @@ import { InputProps } from "./interfaces";
 
 const Input = memo(function Input({
   title = "Date",
+  type = "regular",
   dateString,
   startDate = getDefaultStartDate(),
   endDate = getDefaultEndDate(),
@@ -36,11 +38,14 @@ const Input = memo(function Input({
   onCalendarClick,
   onClearClick,
 }: InputProps) {
-  const [value, setValue] = useState(dateString);
+  const [value, setValue] = useState(() =>
+    formatDateForValue(dateString, type),
+  );
   const [isClearVisible, setIsClearVisible] = useState(
     () => value.length !== 0,
   );
   const [isError, setIsError] = useState(false);
+  const maxLength = type === "regular" ? 10 : type === "month" ? 7 : 4;
 
   const onClear = useCallback(() => {
     setValue("");
@@ -49,12 +54,12 @@ const Input = memo(function Input({
   }, [onClearClick]);
 
   useEffect(() => {
-    setValue(dateString);
-  }, [dateString]);
+    setValue(() => formatDateForValue(dateString, type));
+  }, [dateString, type]);
 
   useEffect(() => {
-    setIsClearVisible(value.length !== 0);
-  }, [value.length]);
+    setIsClearVisible(value !== undefined && value.length !== 0);
+  }, [value]);
 
   const onInputChange: ChangeEventHandler<HTMLInputElement> = useCallback(
     (event) => {
@@ -64,7 +69,7 @@ const Input = memo(function Input({
       if (!isValidValue(inputValue)) return;
 
       setValue(inputValue);
-      if (!isValidDate(inputValue)) return;
+      if (!isValidDate(inputValue, type)) return;
 
       const parsedDate = parseDate(inputValue);
 
@@ -75,7 +80,7 @@ const Input = memo(function Input({
 
       onDateChange(parsedDate);
     },
-    [startDate, endDate, onDateChange],
+    [type, startDate, endDate, onDateChange],
   );
 
   return (
@@ -91,7 +96,7 @@ const Input = memo(function Input({
           type="text"
           placeholder="Choose date"
           value={value}
-          maxLength={10}
+          maxLength={maxLength}
           onChange={onInputChange}
         />
         {isClearVisible && <ClearIcon data-testid="clear" onClick={onClear} />}

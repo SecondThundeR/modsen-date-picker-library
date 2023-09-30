@@ -1,5 +1,8 @@
+import { CalendarType } from "../Calendar/interfaces";
+
 export interface InputProps {
   title?: string;
+  type?: CalendarType;
   dateString: string;
   startDate?: Date;
   endDate?: Date;
