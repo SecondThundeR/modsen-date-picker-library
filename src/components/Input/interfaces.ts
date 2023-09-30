@@ -1,4 +1,4 @@
-import { CalendarType } from "../Calendar/interfaces";
+import { CalendarType } from "@/components/Calendar/interfaces";
 
 export interface InputProps {
   title?: string;

@@ -1,9 +1,9 @@
 import React, { memo, useMemo } from "react";
 
+import CalendarMonthsButton from "@/components/CalendarMonthsButton";
 import { DEFAULT_DAY } from "@/constants/date";
 import { getCalendarMonthsData } from "@/utils/calendar";
 
-import CalendarMonthsButton from "../CalendarMonthsButton";
 import { Grid } from "./CalendarMonths.styled";
 import { CalendarMonthsProps } from "./interfaces";
 

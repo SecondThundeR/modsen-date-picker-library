@@ -1,4 +1,4 @@
-import { DatePickerProps } from "../DatePicker/interfaces";
+import { DatePickerProps } from "@/components/DatePicker/interfaces";
 
 export interface RangePickerProps
   extends Pick<

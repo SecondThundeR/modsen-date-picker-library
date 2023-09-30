@@ -1,6 +1,7 @@
 import React, { memo, useCallback, useState } from "react";
 
 import CalendarButton from "@/components/CalendarButton";
+import CalendarTodo from "@/components/CalendarTodoList";
 import {
   extractDateState,
   isDateAHoliday,
@@ -11,7 +12,6 @@ import {
 } from "@/utils/calendar";
 import { isDatesEqual } from "@/utils/date";
 
-import CalendarTodo from "../CalendarTodoList";
 import { CalendarDayProps } from "./interfaces";
 
 const CalendarDay = memo(function CalendarDay({
