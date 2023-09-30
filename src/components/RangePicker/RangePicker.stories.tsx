@@ -1,7 +1,13 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { withHolidays, withMondayFirst, withTodos, withWeekends } from "@/hocs";
+import {
+  withCalendarType,
+  withHolidays,
+  withMondayFirst,
+  withTodos,
+  withWeekends,
+} from "@/hocs";
 
 import RangePicker from "./RangePicker";
 
@@ -9,6 +15,11 @@ const meta: Meta<typeof RangePicker> = {
   title: "Component/RangePicker",
   component: RangePicker,
   argTypes: {
+    type: {
+      name: "Calendar type",
+      description: "Type of calendar",
+      type: "string",
+    },
     startDate: {
       name: "Start date",
       defaultValue: new Date(),
@@ -39,19 +50,28 @@ const meta: Meta<typeof RangePicker> = {
       description: "Defines data for days, which defined as holidays",
     },
   },
+  args: {
+    type: "regular",
+    holidays: null,
+  },
 };
 
 export default meta;
 type Story = StoryObj<typeof RangePicker>;
 
-export const Primary: Story = {
-  args: {
-    holidays: null,
-  },
+export const Primary: Story = {};
+
+const RangePickerWithCalendarTypeMonth = withCalendarType(RangePicker, "month");
+export const WithCalendarTypeMonthHOC: Story = {
+  render: () => <RangePickerWithCalendarTypeMonth />,
+};
+
+const RangePickerWithCalendarTypeYear = withCalendarType(RangePicker, "year");
+export const WithCalendarTypeYearHOC: Story = {
+  render: () => <RangePickerWithCalendarTypeYear />,
 };
 
 const RangePickerWithWeekends = withWeekends(RangePicker);
-
 export const WithWeekendsHOC: Story = {
   render: () => <RangePickerWithWeekends />,
 };
@@ -59,19 +79,16 @@ export const WithWeekendsHOC: Story = {
 const RangePickerWithHolidays = withHolidays(RangePicker, {
   [new Date().getMonth() + 1]: [2, 10, 18, 19, 20, 30],
 });
-
 export const WithHolidaysHOC: Story = {
   render: () => <RangePickerWithHolidays />,
 };
 
 const RangePickerWithMondayFirst = withMondayFirst(RangePicker);
-
 export const WithMondayFirstHOC: Story = {
   render: () => <RangePickerWithMondayFirst />,
 };
 
 const RangePickerWithTodos = withTodos(RangePicker);
-
 export const WithTodosHOC: Story = {
   render: () => <RangePickerWithTodos />,
 };
