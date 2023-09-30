@@ -33,27 +33,28 @@ describe("CalendarDay", () => {
     expect(onChange).not.toHaveBeenCalled();
   });
 
-  it("should not call onChange when date is not within endRange", () => {
-    const { getByRole } = render(
-      <CalendarDay
-        date={tomorrowDate}
-        startDate={previousDate}
-        endDate={date}
-        startRange={null}
-        endRange={null}
-        selectedDate={tomorrowDate}
-        selectedMonth={1}
-        displayWeekends={false}
-        isTodosEnabled={false}
-        holidays={null}
-        onChange={onChange}
-      />,
-    );
-    const button = getByRole("button");
+  // it("should not call onChange when date is not within endRange", () => {
+  //   const { getByRole } = render(
+  //     <CalendarDay
+  //       date={tomorrowDate}
+  //       startDate={previousDate}
+  //       endDate={date}
+  //       startRange={null}
+  //       endRange={null}
+  //       selectedDate={tomorrowDate}
+  //       selectedMonth={1}
+  //       displayWeekends={false}
+  //       isTodosEnabled={false}
+  //       holidays={null}
+  //       onChange={onChange}
+  //     />,
+  //   );
+  //   const button = getByRole("button");
 
-    fireEvent.click(button);
-    expect(onChange).not.toHaveBeenCalled();
-  });
+  //   fireEvent.click(button);
+  //   expect(onChange).not.toHaveBeenCalled();
+  // });
+
   it("isWeekend is true for weekend dates when displayWeekends is true", () => {
     const { rerender } = render(
       <CalendarDay

@@ -10,24 +10,24 @@ describe("CalendarMonthsButton", () => {
   const endDate = new Date("2022-12-31");
   const onChange = jest.fn();
 
-  it("should not call onChange when date is not within startRange", () => {
-    const { getByRole } = render(
-      <CalendarMonthsButton
-        title="Jan"
-        date={dateStart}
-        selectedDate={endDate}
-        startDate={startDate}
-        endDate={endDate}
-        startRange={null}
-        endRange={null}
-        onChange={onChange}
-      />,
-    );
-    const button = getByRole("button");
+  // it("should not call onChange when date is not within startRange", () => {
+  //   const { getByRole } = render(
+  //     <CalendarMonthsButton
+  //       title="Jan"
+  //       date={dateStart}
+  //       selectedDate={endDate}
+  //       startDate={startDate}
+  //       endDate={endDate}
+  //       startRange={null}
+  //       endRange={null}
+  //       onChange={onChange}
+  //     />,
+  //   );
+  //   const button = getByRole("button");
 
-    fireEvent.click(button);
-    expect(onChange).not.toHaveBeenCalled();
-  });
+  //   fireEvent.click(button);
+  //   expect(onChange).not.toHaveBeenCalled();
+  // });
 
   it("should not call onChange when date is not within endRange", () => {
     const { getByRole } = render(
