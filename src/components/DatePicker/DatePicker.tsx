@@ -11,7 +11,7 @@ import { DatePickerProps } from "./interfaces";
 
 const DatePicker = memo(function DatePicker({
   title,
-  type,
+  type = "regular",
   startDate = getDefaultStartDate(),
   endDate = getDefaultEndDate(),
   startRange = null,
