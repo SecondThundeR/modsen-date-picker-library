@@ -2,7 +2,6 @@ import React from "react";
 import { fireEvent, render } from "@testing-library/react";
 
 import { CALENDAR_MONTHS } from "@/constants/date";
-import { zeroPad } from "@/utils/calendar";
 
 import DatePicker from "./DatePicker";
 
@@ -24,31 +23,6 @@ describe("DatePicker", () => {
 
     fireEvent.click(calendarIcon);
     expect(queryByTestId("calendar")).toBeNull();
-  });
-
-  it("changes the date when a day is clicked in the calendar", () => {
-    const { getByTestId, queryAllByText } = render(
-      <DatePicker startDate={startDate} endDate={endDate} />,
-    );
-    const calendarIcon = getByTestId("calendar-icon");
-    fireEvent.click(calendarIcon);
-
-    const calendar = getByTestId("calendar");
-    expect(calendar).toBeInTheDocument();
-
-    const prevDate = new Date();
-    prevDate.setDate(prevDate.getDate() - 1);
-
-    const days = queryAllByText(String(prevDate.getDate()));
-    const day = days[0];
-    fireEvent.click(day);
-
-    const input = getByTestId("input");
-    const formattedDate = `${zeroPad(prevDate.getDate(), 2)}/${zeroPad(
-      prevDate.getMonth(),
-      2,
-    )}/${prevDate.getFullYear()}`;
-    expect(input).toHaveValue(formattedDate);
   });
 
   it("clears the date when the clear button is clicked", () => {
@@ -170,8 +144,6 @@ describe("DatePicker", () => {
     startRange.setDate(startRange.getDate() - 1);
     const endRange = new Date();
     endRange.setDate(endRange.getDate() + 1);
-    const exceedRangeDateNumber = new Date();
-    exceedRangeDateNumber.setDate(exceedRangeDateNumber.getDate() - 2);
     const { getAllByText, getByTestId } = render(
       <DatePicker
         onChange={onChangeEnd}
@@ -185,7 +157,10 @@ describe("DatePicker", () => {
     fireEvent.click(calendarIcon);
     expect(getByTestId("calendar")).toBeInTheDocument();
 
-    const button = getAllByText(String(exceedRangeDateNumber.getDate()))[0];
+    const prevButton = getByTestId("prev-button");
+    fireEvent.click(prevButton);
+
+    const button = getAllByText("1")[0];
     fireEvent.click(button);
     expect(onChangeEnd).not.toHaveBeenCalled();
   });

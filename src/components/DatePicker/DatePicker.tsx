@@ -29,7 +29,11 @@ const DatePicker = memo(function DatePicker({
 
   const onDateChange = useCallback(
     (changedDate: Date) => {
-      if (type === "regular" && changedDate.getDate() === date?.getDate())
+      if (
+        type === "regular" &&
+        changedDate.getDate() === date?.getDate() &&
+        changedDate.getMonth() === date?.getMonth()
+      )
         return;
       if (type === "month" && changedDate.getMonth() === date?.getMonth())
         return;
