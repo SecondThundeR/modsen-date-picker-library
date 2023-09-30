@@ -110,6 +110,7 @@ const endRange = new Date();
 endRange.setDate(endRange.getDate() + 5);
 export const WithRange: Story = {
   args: {
+    date: undefined,
     startRange,
     endRange,
   },
