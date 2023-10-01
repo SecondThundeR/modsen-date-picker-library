@@ -1,4 +1,5 @@
 import { CalendarType } from "@/components/Calendar/interfaces";
+import { RangeState } from "@/components/CalendarButton/interfaces";
 import {
   CALENDAR_MONTHS,
   CALENDAR_NON_REGULAR_GRID_SIZE,
@@ -31,6 +32,17 @@ export interface Holidays {
 
 export const zeroPad = (value: number | string, length: number) => {
   return `${value}`.padStart(length, "0");
+};
+
+export const getDayKey = (date: Date) =>
+  `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`;
+
+export const getRangeState = (
+  isStart: boolean,
+  isBetween: boolean,
+  isEnd: boolean,
+): RangeState | undefined => {
+  return isStart ? "start" : isEnd ? "end" : isBetween ? "between" : undefined;
 };
 
 export const getNextDay = () => {
