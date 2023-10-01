@@ -6,9 +6,9 @@ import * as utils from "@/utils/calendar";
 import Calendar from "./Calendar";
 
 describe("Calendar", () => {
-  const date = new Date("2022-01-01");
-  const startDate = new Date("2021-01-01");
-  const endDate = new Date("2023-12-31");
+  const date = new Date("01/01/2022");
+  const startDate = new Date("01/01/2021");
+  const endDate = new Date("12/31/2023");
   const onChange = jest.fn();
 
   it("renders the correct header title", () => {
@@ -180,11 +180,10 @@ describe("Calendar", () => {
         onChange={onChange}
       />,
     );
-    const days = getAllByText("1");
-    const firstDay = days[0];
+    const secondDay = getAllByText(/.*\b2\b.*/i)[0];
 
-    fireEvent.click(firstDay);
-    expect(onChange).toHaveBeenCalledWith(new Date("2022-01-01"));
+    fireEvent.click(secondDay);
+    expect(onChange).toHaveBeenCalledWith(new Date("01/02/2022"));
   });
 
   it("sets the previous month when the start date is not reached", () => {

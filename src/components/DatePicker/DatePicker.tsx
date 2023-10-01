@@ -1,9 +1,9 @@
-import React, { memo, useCallback, useState } from "react";
+import React, { memo } from "react";
 
 import Calendar from "@/components/Calendar";
 import DateInput from "@/components/DateInput";
 import ErrorBoundary from "@/components/ErrorBoundary";
-import { isEndRangeCorrect, isStartRangeCorrect } from "@/utils/calendar";
+import useDatePicker from "@/hooks/useDatePicker";
 import { getDefaultEndDate, getDefaultStartDate } from "@/utils/date";
 
 import { Wrapper } from "./DatePicker.styled";
@@ -24,48 +24,18 @@ const DatePicker = memo(function DatePicker({
   isTodosEnabled = false,
   onChange,
 }: DatePickerProps) {
-  const [date, setDate] = useState<Date | null>(new Date());
-  const [showCalendar, setShowCalendar] = useState(false);
-
-  const onDateChange = useCallback(
-    (changedDate: Date) => {
-      if (
-        type === "regular" &&
-        changedDate.getDate() === date?.getDate() &&
-        changedDate.getMonth() === date?.getMonth()
-      )
-        return;
-      if (type === "month" && changedDate.getMonth() === date?.getMonth())
-        return;
-      if (type === "year" && changedDate.getFullYear() === date?.getFullYear())
-        return;
-      if (
-        isPickingStart &&
-        endRange &&
-        !isStartRangeCorrect(endRange, changedDate)
-      )
-        return;
-      if (
-        isPickingEnd &&
-        startRange &&
-        !isEndRangeCorrect(startRange, changedDate)
-      )
-        return;
-
-      setDate(changedDate);
-      onChange?.(changedDate);
-    },
-    [date, endRange, isPickingEnd, isPickingStart, onChange, startRange, type],
-  );
-
-  const onClearClick = useCallback(() => {
-    setDate(null);
-    onChange?.(null);
-  }, [onChange]);
-
-  const toggleCalendar = useCallback(() => {
-    setShowCalendar((prev) => !prev);
-  }, []);
+  const {
+    date,
+    showCalendar,
+    handlers: { toggleCalendar, onDateChange, onClearClick },
+  } = useDatePicker({
+    type,
+    startRange,
+    isPickingStart,
+    endRange,
+    isPickingEnd,
+    onChange,
+  });
 
   return (
     <ErrorBoundary>

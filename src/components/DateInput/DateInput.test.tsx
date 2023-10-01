@@ -70,8 +70,8 @@ describe("DateInput", () => {
       <DateInput
         title="Date"
         dateString="22/09/2021"
-        startDate={new Date(2023, 0, 1)}
-        endDate={new Date(2023, 11, 31)}
+        startDate={new Date("01/01/2023")}
+        endDate={new Date("12/31/2023")}
         onDateChange={jest.fn()}
         onCalendarClick={jest.fn()}
         onClearClick={jest.fn()}
@@ -88,8 +88,8 @@ describe("DateInput", () => {
     const { getByText } = render(
       <DateInput
         dateString="22/09/2021"
-        startDate={new Date(2023, 0, 1)}
-        endDate={new Date(2023, 11, 31)}
+        startDate={new Date("01/01/2023")}
+        endDate={new Date("12/31/2023")}
         onDateChange={jest.fn()}
         onCalendarClick={jest.fn()}
         onClearClick={jest.fn()}

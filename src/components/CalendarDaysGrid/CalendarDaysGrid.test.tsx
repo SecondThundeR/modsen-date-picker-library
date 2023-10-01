@@ -11,8 +11,8 @@ describe("CalendarDaysGrid", () => {
     ["2022", "01", "02"],
     ["2022", "01", "03"],
   ];
-  const startDate = new Date("2022-01-01");
-  const endDate = new Date("2022-12-31");
+  const startDate = new Date("01/01/2022");
+  const endDate = new Date("12/31/2022");
   const startRange = null;
   const endRange = null;
   const onChange = jest.fn();

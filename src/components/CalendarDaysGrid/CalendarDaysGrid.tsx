@@ -1,6 +1,7 @@
-import React, { memo, useCallback, useMemo } from "react";
+import React, { memo, useMemo } from "react";
 
 import CalendarDay from "@/components/CalendarDay";
+import { getDayKey } from "@/utils/calendar";
 
 import { Grid } from "./CalendarDaysGrid.styled";
 import { CalendarDaysGridProps } from "./interfaces";
@@ -22,10 +23,6 @@ const CalendarDaysGrid = memo(function CalendarDaysGrid({
     () => datesArray.map((date) => new Date(date.join("/"))),
     [datesArray],
   );
-
-  const getDayKey = useCallback((date: Date) => {
-    return `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`;
-  }, []);
 
   return (
     <Grid>

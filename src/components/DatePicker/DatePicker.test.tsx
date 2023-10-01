@@ -9,8 +9,8 @@ describe("DatePicker", () => {
   const onChange = jest.fn();
   const onChangeStart = jest.fn();
   const onChangeEnd = jest.fn();
-  const startDate = new Date("2021-01-01");
-  const endDate = new Date("2023-12-31");
+  const startDate = new Date("01/01/2021");
+  const endDate = new Date("12/31/2023");
 
   it("opens and closes the calendar when the calendar icon is clicked", () => {
     const { getByTestId, queryByTestId } = render(
