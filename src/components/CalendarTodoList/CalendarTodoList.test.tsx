@@ -4,7 +4,7 @@ import { fireEvent, render } from "@testing-library/react";
 import CalendarTodoList from "./CalendarTodoList";
 
 describe("CalendarTodoList", () => {
-  const todoDate = new Date("2022-01-01");
+  const todoDate = new Date("01/01/2022");
   const onModalClose = jest.fn();
 
   it("should stop propagation on click", () => {

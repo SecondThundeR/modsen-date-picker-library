@@ -7,6 +7,8 @@ module.exports = {
     "src/components/**/*.{ts,tsx}",
     "src/hooks/**/*.{ts,tsx}",
     "!src/**/*.stories.{ts,tsx}",
+    "!src/**/index.ts",
+    "!src/**/interfaces.ts",
   ],
   coverageDirectory: "coverage",
   moduleNameMapper: {

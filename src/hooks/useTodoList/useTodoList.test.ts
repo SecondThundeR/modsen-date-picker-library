@@ -12,7 +12,7 @@ const mockUseLocalStorage = useLocalStorage as jest.MockedFunction<
 >;
 
 describe("useTodoList", () => {
-  const date = new Date("2022-01-01");
+  const date = new Date("01/01/2022");
   const onLocalDelete = jest.fn();
 
   beforeEach(() => {

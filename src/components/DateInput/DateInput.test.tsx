@@ -1,13 +1,13 @@
 import React from "react";
 import { fireEvent, render } from "@testing-library/react";
 
-import Input from "./Input";
+import DateInput from "./DateInput";
 
-describe("Input", () => {
+describe("DateInput", () => {
   it("should call onDateChange with the parsed date when a valid date is entered", () => {
     const onDateChange = jest.fn();
     const { getByTestId } = render(
-      <Input
+      <DateInput
         title="Date"
         onDateChange={onDateChange}
         dateString="22/09/2021"
@@ -25,7 +25,7 @@ describe("Input", () => {
   it("should call onClearClick when input is not empty", () => {
     const onClearClick = jest.fn();
     const { getByTestId } = render(
-      <Input
+      <DateInput
         title="Date"
         onDateChange={jest.fn()}
         dateString="22/09/2021"
@@ -46,7 +46,7 @@ describe("Input", () => {
   it("should not call onDateChange when an invalid date is entered or non-digits are entered", () => {
     const onDateChange = jest.fn();
     const { getByTestId } = render(
-      <Input
+      <DateInput
         title="Date"
         onDateChange={onDateChange}
         dateString="22/09/2021"
@@ -67,11 +67,11 @@ describe("Input", () => {
 
   it("should display an error message when the entered date is outside the allowed range", () => {
     const { getByText, getByTestId } = render(
-      <Input
+      <DateInput
         title="Date"
         dateString="22/09/2021"
-        startDate={new Date(2023, 0, 1)}
-        endDate={new Date(2023, 11, 31)}
+        startDate={new Date("01/01/2023")}
+        endDate={new Date("12/31/2023")}
         onDateChange={jest.fn()}
         onCalendarClick={jest.fn()}
         onClearClick={jest.fn()}
@@ -86,10 +86,10 @@ describe("Input", () => {
 
   it("should display default title when not passed", () => {
     const { getByText } = render(
-      <Input
+      <DateInput
         dateString="22/09/2021"
-        startDate={new Date(2023, 0, 1)}
-        endDate={new Date(2023, 11, 31)}
+        startDate={new Date("01/01/2023")}
+        endDate={new Date("12/31/2023")}
         onDateChange={jest.fn()}
         onCalendarClick={jest.fn()}
         onClearClick={jest.fn()}
@@ -100,7 +100,7 @@ describe("Input", () => {
 
   it("should change maxLength attribute when changing type", () => {
     const { rerender, getByTestId } = render(
-      <Input
+      <DateInput
         type="regular"
         dateString="22/09/2021"
         onDateChange={jest.fn()}
@@ -111,7 +111,7 @@ describe("Input", () => {
     expect(getByTestId("input")).toHaveAttribute("maxlength", "10");
 
     rerender(
-      <Input
+      <DateInput
         type="month"
         dateString="22/09/2021"
         onDateChange={jest.fn()}
@@ -122,7 +122,7 @@ describe("Input", () => {
     expect(getByTestId("input")).toHaveAttribute("maxlength", "7");
 
     rerender(
-      <Input
+      <DateInput
         type="year"
         dateString="22/09/2021"
         onDateChange={jest.fn()}

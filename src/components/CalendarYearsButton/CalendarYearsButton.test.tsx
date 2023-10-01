@@ -4,10 +4,10 @@ import { fireEvent, render } from "@testing-library/react";
 import CalendarYearsButton from "./CalendarYearsButton";
 
 describe("CalendarYearsButton", () => {
-  const dateStart = new Date("2021-01-01");
-  const dateEnd = new Date("2023-01-01");
-  const startDate = new Date("2022-02-01");
-  const endDate = new Date("2022-12-01");
+  const dateStart = new Date("01/01/2021");
+  const dateEnd = new Date("01/01/2023");
+  const startDate = new Date("01/02/2022");
+  const endDate = new Date("01/12/2022");
   const onChange = jest.fn();
 
   it("should not call onChange when date is not within startRange", () => {

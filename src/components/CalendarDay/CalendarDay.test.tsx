@@ -4,10 +4,10 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import CalendarDay from "./CalendarDay";
 
 describe("CalendarDay", () => {
-  const date = new Date(2022, 0, 1);
-  const previousDate = new Date(2022, 0, 1);
+  const date = new Date("01/01/2022");
+  const previousDate = new Date("01/01/2022");
   previousDate.setDate(previousDate.getDate() - 1);
-  const tomorrowDate = new Date(2022, 0, 1);
+  const tomorrowDate = new Date("01/01/2022");
   tomorrowDate.setDate(tomorrowDate.getDate() + 1);
   const onChange = jest.fn();
 
@@ -32,28 +32,6 @@ describe("CalendarDay", () => {
     fireEvent.click(button);
     expect(onChange).not.toHaveBeenCalled();
   });
-
-  // it("should not call onChange when date is not within endRange", () => {
-  //   const { getByRole } = render(
-  //     <CalendarDay
-  //       date={tomorrowDate}
-  //       startDate={previousDate}
-  //       endDate={date}
-  //       startRange={null}
-  //       endRange={null}
-  //       selectedDate={tomorrowDate}
-  //       selectedMonth={1}
-  //       displayWeekends={false}
-  //       isTodosEnabled={false}
-  //       holidays={null}
-  //       onChange={onChange}
-  //     />,
-  //   );
-  //   const button = getByRole("button");
-
-  //   fireEvent.click(button);
-  //   expect(onChange).not.toHaveBeenCalled();
-  // });
 
   it("isWeekend is true for weekend dates when displayWeekends is true", () => {
     const { rerender } = render(

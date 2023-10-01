@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useState } from "react";
+import React, { memo } from "react";
 
 import CalendarHeader from "@/components/CalendarHeader";
 import CalendarMonths from "@/components/CalendarMonths";
@@ -6,19 +6,8 @@ import CalendarRegular from "@/components/CalendarRegular";
 import CalendarWrapper from "@/components/CalendarWrapper";
 import CalendarYears from "@/components/CalendarYears";
 import FooterButton from "@/components/FooterButton";
-import {
-  DateState,
-  extractDateState,
-  formatDateState,
-  getNextDecade,
-  getNextMonth,
-  getNextYear,
-  getPreviousDecade,
-  getPreviousMonth,
-  getPreviousYear,
-  isDateInEndRange,
-  isDateInStartRange,
-} from "@/utils/calendar";
+import useCalendarNavigaton from "@/hooks/useCalendarNavigation";
+import { formatDateState } from "@/utils/calendar";
 
 import { Wrapper } from "./Calendar.styled";
 import { CalendarProps } from "./interfaces";
@@ -37,36 +26,16 @@ const Calendar = memo(function Calendar({
   hasClearButton = false,
   onChange,
 }: CalendarProps) {
-  const [dateState, setDateState] = useState<DateState>(() =>
-    extractDateState(date),
-  );
+  const {
+    dateState,
+    handlers: { onPrevClick, onNextClick },
+  } = useCalendarNavigaton({
+    date,
+    startDate,
+    endDate,
+    type,
+  });
   const headerTitle = formatDateState(type, dateState);
-
-  useEffect(() => {
-    setDateState(extractDateState(date));
-  }, [date]);
-
-  const onPrevClick = useCallback(() => {
-    const { month, year } = dateState;
-    const prevDate =
-      type === "regular"
-        ? getPreviousMonth(month, year)
-        : type === "month"
-        ? getPreviousYear(month, year)
-        : getPreviousDecade(year);
-    if (isDateInStartRange(startDate, prevDate)) setDateState(prevDate);
-  }, [dateState, startDate, type]);
-
-  const onNextClick = useCallback(() => {
-    const { month, year } = dateState;
-    const nextDate =
-      type === "regular"
-        ? getNextMonth(month, year)
-        : type === "month"
-        ? getNextYear(month, year)
-        : getNextDecade(year);
-    if (isDateInEndRange(endDate, nextDate)) setDateState(nextDate);
-  }, [dateState, endDate, type]);
 
   return (
     <Wrapper data-testid="calendar">

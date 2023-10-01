@@ -4,10 +4,10 @@ import { fireEvent, render } from "@testing-library/react";
 import CalendarYears from "./CalendarYears";
 
 describe("CalendarYears", () => {
-  const date = new Date("2022-01-01");
+  const date = new Date("01/01/2022");
   const dateState = { year: 2022, month: 1, day: 1 };
-  const startDate = new Date("2022-01-01");
-  const endDate = new Date("2022-12-31");
+  const startDate = new Date("01/01/2022");
+  const endDate = new Date("12/31/2023");
   const startRange = null;
   const endRange = null;
   const onChange = jest.fn();
@@ -47,6 +47,6 @@ describe("CalendarYears", () => {
 
     fireEvent.click(button);
 
-    expect(onChange).toHaveBeenCalledWith(new Date("2022-01-01"));
+    expect(onChange).toHaveBeenCalledWith(new Date("01/01/2022"));
   });
 });
