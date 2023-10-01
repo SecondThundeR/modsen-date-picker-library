@@ -3,12 +3,12 @@ import { renderHook } from "@testing-library/react";
 import useDateInput from "./useDateInput";
 
 describe("useDateInput", () => {
-  test("should use regular as default type", () => {
+  it("should use regular as default type", () => {
     const { result } = renderHook(() =>
       useDateInput({
         dateString: "01/01/2022",
-        startDate: new Date("2022-01-01"),
-        endDate: new Date("2022-12-31"),
+        startDate: new Date("01/01/2022"),
+        endDate: new Date("12/31/2022"),
         onDateChange: jest.fn(),
         onClearClick: jest.fn(),
       }),

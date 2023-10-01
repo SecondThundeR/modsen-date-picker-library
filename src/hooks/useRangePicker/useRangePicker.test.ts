@@ -7,19 +7,19 @@ describe("useRangePicker", () => {
     const { result } = renderHook(() => useRangePicker());
 
     act(() => {
-      result.current.actions.updateStartRange(new Date("2022-01-01"));
+      result.current.actions.updateStartRange(new Date("01/01/2022"));
     });
 
-    expect(result.current.values.startRange).toEqual(new Date("2022-01-01"));
+    expect(result.current.values.startRange).toEqual(new Date("01/01/2022"));
   });
 
   it("should update endRange state", () => {
     const { result } = renderHook(() => useRangePicker());
 
     act(() => {
-      result.current.actions.updateEndRange(new Date("2022-01-01"));
+      result.current.actions.updateEndRange(new Date("01/01/2022"));
     });
 
-    expect(result.current.values.endRange).toEqual(new Date("2022-01-01"));
+    expect(result.current.values.endRange).toEqual(new Date("01/01/2022"));
   });
 });
