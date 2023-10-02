@@ -4,6 +4,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import {
   withCalendarType,
   withHolidays,
+  withHolidaysAPI,
   withMondayFirst,
   withTodos,
   withWeekends,
@@ -116,6 +117,14 @@ const DatePickerWithHolidays = withHolidays(DatePicker, {
 });
 export const WithHolidaysHOC: Story = {
   render: () => <DatePickerWithHolidays />,
+};
+
+const DatePickerWithHolidaysAPI = withHolidaysAPI(DatePicker, {
+  holidayCountry: "BY",
+  year: 2022,
+});
+export const WithHolidaysApiHOC: Story = {
+  render: () => <DatePickerWithHolidaysAPI />,
 };
 
 const DatePickerWithMondayFirst = withMondayFirst(DatePicker);
