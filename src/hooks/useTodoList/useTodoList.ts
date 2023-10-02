@@ -1,7 +1,7 @@
 import { ChangeEventHandler, useCallback, useState } from "react";
 
 import { TodoElement } from "@/components/CalendarTodoItem/interfaces";
-import { useLocalStorage } from "@/hooks";
+import useLocalStorage from "@/hooks/useLocalStorage";
 
 function useTodoList(date: Date) {
   const { onGetData, onLocalUpdate, onLocalDelete } = useLocalStorage<

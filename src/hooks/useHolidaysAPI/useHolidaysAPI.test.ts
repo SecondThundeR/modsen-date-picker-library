@@ -1,7 +1,7 @@
 import { act, renderHook } from "@testing-library/react";
 
 import { getHolidaysData } from "@/features";
-import { useLocalStorage } from "@/hooks";
+import useLocalStorage from "@/hooks/useLocalStorage";
 
 import useHolidaysAPI from "./useHolidaysAPI";
 

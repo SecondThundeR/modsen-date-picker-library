@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 
 import { getHolidaysData } from "@/features";
-import { useLocalStorage } from "@/hooks";
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { isHolidaysExpired } from "@/utils/api";
 import { Holidays } from "@/utils/calendar";
 
