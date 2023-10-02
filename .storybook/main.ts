@@ -15,6 +15,10 @@ const config: StorybookConfig = {
   docs: {
     autodocs: "tag",
   },
+  env: (config) => ({
+    ...config,
+    HOLIDAYS_API_KEY: process.env.HOLIDAYS_API_KEY as string,
+  }),
   async webpackFinal(config) {
     if (config?.resolve?.alias) {
       config.resolve.alias = {
