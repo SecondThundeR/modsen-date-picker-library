@@ -1,7 +1,7 @@
 import { ChangeEvent } from "react";
 import { act, renderHook } from "@testing-library/react";
 
-import useLocalStorage from "@/hooks/useLocalStorage";
+import { useLocalStorage } from "@/hooks";
 
 import useTodoList from "./useTodoList";
 

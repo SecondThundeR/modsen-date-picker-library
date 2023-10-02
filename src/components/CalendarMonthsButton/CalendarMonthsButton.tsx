@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 
 import CalendarButton from "@/components/CalendarButton";
-import useCalendarMonth from "@/hooks/useCalendarMonth";
+import { useCalendarMonth } from "@/hooks";
 
 import { CalendarMonthsButtonProps } from "./interfaces";
 

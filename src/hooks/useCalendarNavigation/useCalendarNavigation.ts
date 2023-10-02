@@ -15,7 +15,7 @@ import {
 
 import { UseCalendarNavigationOptions } from "./interfaces";
 
-function useCalendarNavigaton({
+function useCalendarNavigation({
   date,
   startDate,
   endDate,
@@ -60,4 +60,4 @@ function useCalendarNavigaton({
   };
 }
 
-export default useCalendarNavigaton;
+export default useCalendarNavigation;

@@ -6,7 +6,7 @@ import CalendarRegular from "@/components/CalendarRegular";
 import CalendarWrapper from "@/components/CalendarWrapper";
 import CalendarYears from "@/components/CalendarYears";
 import FooterButton from "@/components/FooterButton";
-import useCalendarNavigaton from "@/hooks/useCalendarNavigation";
+import { useCalendarNavigation } from "@/hooks";
 import { formatDateState } from "@/utils/calendar";
 
 import { Wrapper } from "./Calendar.styled";
@@ -29,7 +29,7 @@ const Calendar = memo(function Calendar({
   const {
     dateState,
     handlers: { onPrevClick, onNextClick },
-  } = useCalendarNavigaton({
+  } = useCalendarNavigation({
     date,
     startDate,
     endDate,

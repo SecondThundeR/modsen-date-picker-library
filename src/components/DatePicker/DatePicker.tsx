@@ -3,7 +3,7 @@ import React, { memo } from "react";
 import Calendar from "@/components/Calendar";
 import DateInput from "@/components/DateInput";
 import ErrorBoundary from "@/components/ErrorBoundary";
-import useDatePicker from "@/hooks/useDatePicker";
+import { useDatePicker } from "@/hooks";
 import { getDefaultEndDate, getDefaultStartDate } from "@/utils/date";
 
 import { Wrapper } from "./DatePicker.styled";
