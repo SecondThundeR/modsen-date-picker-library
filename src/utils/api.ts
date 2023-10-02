@@ -2,6 +2,8 @@ import { HolidayAPIResponse } from "@/features/api/interfaces";
 
 import { Holidays } from "./calendar";
 
+const ONE_MONTH = 1000 * 60 * 60 * 24 * 30;
+
 export function validateResponseData(
   responseData: unknown,
 ): responseData is HolidayAPIResponse {
@@ -25,3 +27,6 @@ export function transformResponseData({
   }, {} as Holidays);
 }
 
+export function isHolidaysExpired(lastUpdated: number): boolean {
+  return Date.now() - lastUpdated > ONE_MONTH;
+}
