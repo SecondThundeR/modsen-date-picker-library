@@ -1,12 +1,12 @@
 import { act, renderHook } from "@testing-library/react";
 
 import { getHolidaysData } from "@/features";
-import useLocalStorage from "@/hooks/useLocalStorage";
 
+import useLocalStorage from "../useLocalStorage";
 import useHolidaysAPI from "./useHolidaysAPI";
 
 jest.mock("@/features");
-jest.mock("@/hooks");
+jest.mock("../useLocalStorage");
 
 const getHolidaysDataMock = getHolidaysData as jest.MockedFunction<
   typeof getHolidaysData
