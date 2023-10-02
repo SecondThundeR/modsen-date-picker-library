@@ -15,10 +15,11 @@
     "allowSyntheticDefaultImports": true,
     "emitDeclarationOnly": true,
     "baseUrl": "src",
+    "types": ["@testing-library/jest-dom", "jest-styled-components"],
     "paths": {
       "@/*": ["./*"]
     }
   },
-  "include": ["src", "./jestSetup.ts"],
+  "include": ["src"],
   "exclude": ["node_modules", "dist"]
 }
