@@ -14,7 +14,7 @@ export const Wrapper = styled.div`
 export const Title = styled.h1<{ $isChecked?: boolean }>`
   width: 100%;
   margin: 0;
-  font-family: "Open Sans";
+  font-family: "Open Sans", sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 600;

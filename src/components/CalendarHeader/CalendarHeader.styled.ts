@@ -9,7 +9,7 @@ export const Header = styled.div`
 export const HeaderTitle = styled.h1`
   color: #000;
   margin: 0;
-  font-family: "Open Sans";
+  font-family: "Open Sans", sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 700;

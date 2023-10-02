@@ -24,7 +24,7 @@ export const ListWrapper = styled.div`
 
 export const Title = styled.h1`
   margin: 0;
-  font-family: "Open Sans";
+  font-family: "Open Sans", sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
@@ -33,7 +33,7 @@ export const Title = styled.h1`
 
 export const Hint = styled.p`
   margin: 0;
-  font-family: "Open Sans";
+  font-family: "Open Sans", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -57,7 +57,7 @@ export const Input = styled.input`
 
 export const FooterHint = styled.p`
   margin: 0;
-  font-family: "Open Sans";
+  font-family: "Open Sans", sans-serif;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;

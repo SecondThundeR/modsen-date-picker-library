@@ -10,7 +10,7 @@ export const Button = styled.button`
   border: 1px solid #e1e1e1;
   background: #fff;
   color: #333;
-  font-family: Open Sans;
+  font-family: "Open Sans", sans-serif;
   font-size: 12px;
   font-style: normal;
   font-weight: 600;

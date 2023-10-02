@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
 export const Title = styled.h1`
   margin: 0;
   color: #333;
-  font-family: "Open Sans";
+  font-family: "Open Sans", sans-serif;
   font-size: 15px;
   font-style: normal;
   font-weight: 600;
@@ -19,7 +19,7 @@ export const Title = styled.h1`
 export const ErrorMessage = styled.p`
   margin: 0;
   color: #ff0000;
-  font-family: "Open Sans";
+  font-family: "Open Sans", sans-serif;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -42,7 +42,7 @@ export const Input = styled.input`
   border: none;
   outline: none;
   flex: 2;
-  font-family: "Open Sans";
+  font-family: "Open Sans", sans-serif;
   font-size: 15px;
   font-style: normal;
   font-weight: 400;

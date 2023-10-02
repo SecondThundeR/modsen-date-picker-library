@@ -38,7 +38,7 @@ export const Item = styled.button<CalendarButtonStyleProps>`
       : "transparent"};
   color: ${(props) => calculateTextColor(props)};
   border: none;
-  font-family: "Open Sans";
+  font-family: "Open Sans", sans-serif;
   font-size: 13px;
   font-style: normal;
   font-weight: 600;
