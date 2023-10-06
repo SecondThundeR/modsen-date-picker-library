@@ -25,7 +25,7 @@ const CalendarDaysGrid = memo(function CalendarDaysGrid({
   );
 
   return (
-    <Grid>
+    <Grid data-testid="days-grid">
       {monthDatesArray.map((date) => {
         const dayKey = getDayKey(date);
         return (
