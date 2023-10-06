@@ -3,6 +3,7 @@ import React, { memo } from "react";
 import Calendar from "@/components/Calendar";
 import DateInput from "@/components/DateInput";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import { withHolidays, withHolidaysAPI } from "@/hocs";
 import { useDatePicker } from "@/hooks";
 import { getDefaultEndDate, getDefaultStartDate } from "@/utils/date";
 
@@ -18,6 +19,8 @@ const DatePicker = memo(function DatePicker({
   endRange = null,
   isPickingEnd = false,
   holidays = null,
+  holidayCountry,
+  holidayYear,
   displayWeekends = false,
   isSundayFirst = true,
   isTodosEnabled = false,
@@ -35,6 +38,16 @@ const DatePicker = memo(function DatePicker({
     onChange,
   });
 
+  const WrapperCalendar =
+    holidays !== null
+      ? withHolidays(Calendar, {
+          holidays,
+        })
+      : withHolidaysAPI(Calendar, {
+          holidayCountry,
+          year: holidayYear,
+        });
+
   return (
     <ErrorBoundary>
       <Wrapper>
@@ -48,7 +61,7 @@ const DatePicker = memo(function DatePicker({
           onClearClick={onClearClick}
         />
         {showCalendar && (
-          <Calendar
+          <WrapperCalendar
             date={date ?? new Date()}
             startDate={startDate}
             endDate={endDate}
@@ -57,7 +70,6 @@ const DatePicker = memo(function DatePicker({
             isSundayFirst={isSundayFirst}
             displayWeekends={displayWeekends}
             isTodosEnabled={isTodosEnabled}
-            holidays={holidays}
             onChange={onDateChange}
           />
         )}

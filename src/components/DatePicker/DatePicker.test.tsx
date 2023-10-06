@@ -1,7 +1,16 @@
 import React from "react";
 import { fireEvent, render } from "@testing-library/react";
 
+import * as hocs from "@/hocs";
+
 import DatePicker from "./DatePicker";
+
+jest.mock("@/hocs", () => {
+  return {
+    __esModule: true,
+    ...jest.requireActual("@/hocs"),
+  } as unknown;
+});
 
 describe("DatePicker", () => {
   const onChange = jest.fn();
@@ -128,5 +137,32 @@ describe("DatePicker", () => {
     const button = getAllByText("1")[0];
     fireEvent.click(button);
     expect(onChangeEnd).not.toHaveBeenCalled();
+  });
+
+  it("calls withHolidays HOC on render", () => {
+    const withHolidaysSpy = jest.spyOn(hocs, "withHolidays");
+    render(
+      <DatePicker
+        startDate={startDate}
+        endDate={endDate}
+        holidays={{
+          1: [1, 2, 3],
+        }}
+      />,
+    );
+    expect(withHolidaysSpy).toBeCalled();
+  });
+
+  it("calls withHolidaysAPI HOC on render", () => {
+    const withHolidaysAPISpy = jest.spyOn(hocs, "withHolidaysAPI");
+    render(
+      <DatePicker
+        startDate={startDate}
+        endDate={endDate}
+        holidayCountry="BY"
+        holidayYear={2022}
+      />,
+    );
+    expect(withHolidaysAPISpy).toBeCalled();
   });
 });
