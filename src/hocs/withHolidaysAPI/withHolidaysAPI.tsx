@@ -7,7 +7,7 @@ import { WithHolidaysAPIOptions, WithHolidaysAPIProps } from "./interfaces";
 function withHolidaysAPI<T extends WithHolidaysAPIProps>(
   WrappedComponent: ComponentType<T>,
   {
-    holidayCountry,
+    holidayCountry = "US",
     year = new Date().getFullYear() - 1,
   }: WithHolidaysAPIOptions,
 ) {
