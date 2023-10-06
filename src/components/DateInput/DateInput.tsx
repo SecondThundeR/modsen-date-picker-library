@@ -4,7 +4,6 @@ import CalendarIcon from "@/assets/CalendarIcon";
 import ClearIcon from "@/assets/ClearIcon";
 import { useDateInput } from "@/hooks";
 import { getDefaultEndDate, getDefaultStartDate } from "@/utils/date";
-import { getInputMaxLength } from "@/utils/input";
 
 import {
   ErrorMessage,
@@ -28,6 +27,7 @@ const DateInput = memo(function DateInput({
 }: InputProps) {
   const {
     value,
+    maxLength,
     isClearEnabled,
     isError,
     handlers: { onInputChange, onClear },
@@ -39,7 +39,6 @@ const DateInput = memo(function DateInput({
     onClearClick,
     onDateChange,
   });
-  const maxLength = getInputMaxLength(type);
 
   return (
     <Wrapper>
