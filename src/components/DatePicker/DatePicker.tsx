@@ -11,7 +11,6 @@ import { DatePickerProps } from "./interfaces";
 
 const DatePicker = memo(function DatePicker({
   title,
-  type = "regular",
   startDate = getDefaultStartDate(),
   endDate = getDefaultEndDate(),
   startRange = null,
@@ -29,7 +28,6 @@ const DatePicker = memo(function DatePicker({
     showCalendar,
     handlers: { toggleCalendar, onDateChange, onClearClick },
   } = useDatePicker({
-    type,
     startRange,
     isPickingStart,
     endRange,
@@ -42,7 +40,6 @@ const DatePicker = memo(function DatePicker({
       <Wrapper>
         <DateInput
           title={title}
-          type={type}
           dateString={date?.toLocaleDateString("en-GB") ?? ""}
           startDate={startDate}
           endDate={endDate}
@@ -53,7 +50,6 @@ const DatePicker = memo(function DatePicker({
         {showCalendar && (
           <Calendar
             date={date ?? new Date()}
-            type={type}
             startDate={startDate}
             endDate={endDate}
             startRange={startRange}

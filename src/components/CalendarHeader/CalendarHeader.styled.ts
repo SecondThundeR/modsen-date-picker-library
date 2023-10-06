@@ -7,6 +7,7 @@ export const Header = styled.div`
 `;
 
 export const HeaderTitle = styled.h1`
+  cursor: pointer;
   color: #000;
   margin: 0;
   font-family: "Open Sans", sans-serif;
@@ -16,4 +17,9 @@ export const HeaderTitle = styled.h1`
   line-height: normal;
   flex: 2;
   text-align: center;
+  transition: 0.3s;
+
+  &:hover {
+    opacity: 0.6;
+  }
 `;

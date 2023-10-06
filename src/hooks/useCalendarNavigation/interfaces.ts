@@ -1,4 +1,4 @@
-import { CalendarType } from "@/components/Calendar/interfaces";
+import { CalendarType } from "@/hooks/useCalendarType/interfaces";
 
 export interface UseCalendarNavigationOptions {
   date: Date;

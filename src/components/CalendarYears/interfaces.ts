@@ -4,7 +4,6 @@ import { DateState } from "@/utils/calendar";
 export interface CalendarYearsProps
   extends Omit<
     CalendarProps,
-    | "type"
     | "hasClearButton"
     | "displayWeekends"
     | "holidays"
