@@ -1,6 +1,12 @@
 import { useCallback, useState } from "react";
 
-import { isEndRangeCorrect, isStartRangeCorrect } from "@/utils/calendar";
+import {
+  isEndRangeCorrect,
+  isSameDay,
+  isSameMonth,
+  isSameYear,
+  isStartRangeCorrect,
+} from "@/utils/calendar";
 
 import { UseDatePickerOptions } from "./interfaces";
 
@@ -17,16 +23,9 @@ function useDatePicker({
 
   const onDateChange = useCallback(
     (changedDate: Date) => {
-      if (
-        type === "regular" &&
-        changedDate.getDate() === date?.getDate() &&
-        changedDate.getMonth() === date?.getMonth()
-      )
-        return;
-      if (type === "month" && changedDate.getMonth() === date?.getMonth())
-        return;
-      if (type === "year" && changedDate.getFullYear() === date?.getFullYear())
-        return;
+      if (type === "regular" && isSameDay(changedDate, date)) return;
+      if (type === "month" && isSameMonth(changedDate, date)) return;
+      if (type === "year" && isSameYear(changedDate, date)) return;
       if (
         isPickingStart &&
         endRange &&

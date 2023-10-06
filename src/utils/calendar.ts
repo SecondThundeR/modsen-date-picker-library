@@ -90,7 +90,7 @@ export const isDateAWeekend = (date: Date) => {
   return date.getDay() === 0 || date.getDay() === 6;
 };
 
-export const isSameMonth = (date: Date, basedate = new Date()) => {
+export const isSameMonth = (date: Date, basedate: Date | null) => {
   if (!(isDate(date) && isDate(basedate))) return false;
 
   const basedateMonth = basedate.getMonth() + 1;
@@ -101,7 +101,16 @@ export const isSameMonth = (date: Date, basedate = new Date()) => {
   return basedateMonth === dateMonth && basedateYear === dateYear;
 };
 
-export const isSameDay = (date: Date, basedate = new Date()) => {
+export const isSameYear = (date: Date, basedate: Date | null) => {
+  if (!(isDate(date) && isDate(basedate))) return false;
+
+  const basedateYear = basedate.getFullYear();
+  const dateYear = date.getFullYear();
+
+  return basedateYear === dateYear;
+};
+
+export const isSameDay = (date: Date, basedate: Date | null) => {
   if (!(isDate(date) && isDate(basedate))) return false;
 
   const basedateDate = basedate.getDate();
