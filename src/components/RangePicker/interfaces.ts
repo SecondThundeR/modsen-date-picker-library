@@ -6,6 +6,8 @@ export interface RangePickerProps
     | "startDate"
     | "endDate"
     | "holidays"
+    | "holidayCountry"
+    | "holidayYear"
     | "displayWeekends"
     | "isSundayFirst"
     | "isTodosEnabled"
