@@ -1,13 +1,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import {
-  withHolidays,
-  withHolidaysAPI,
-  withMondayFirst,
-  withTodos,
-  withWeekends,
-} from "@/hocs";
+import { withMondayFirst, withTodos, withWeekends } from "@/hocs";
 
 import RangePicker from "./RangePicker";
 
@@ -43,6 +37,15 @@ const meta: Meta<typeof RangePicker> = {
     holidays: {
       name: "Holidays data",
       description: "Defines data for days, which defined as holidays",
+      defaultValue: {},
+    },
+    holidayCountry: {
+      name: "Holidays country",
+      description: "Defines country for holidays, fetched with API",
+    },
+    holidayYear: {
+      name: "Holidays year",
+      description: "Defines year for holidays, fetched with API",
     },
   },
   args: {
@@ -60,19 +63,17 @@ export const WithWeekendsHOC: Story = {
   render: () => <RangePickerWithWeekends />,
 };
 
-const RangePickerWithHolidays = withHolidays(RangePicker, {
-  [new Date().getMonth() + 1]: [2, 10, 18, 19, 20, 30],
-});
-export const WithHolidaysHOC: Story = {
-  render: () => <RangePickerWithHolidays />,
+export const RangePickerWithHolidays: Story = {
+  args: {
+    holidays: { [new Date().getMonth() + 1]: [2, 10, 18, 19, 20, 30] },
+  },
 };
 
-const RangePickerWithHolidaysAPI = withHolidaysAPI(RangePicker, {
-  holidayCountry: "BY",
-  year: 2022,
-});
-export const WithHolidaysApiHOC: Story = {
-  render: () => <RangePickerWithHolidaysAPI />,
+export const RangePickerWithHolidaysAPI: Story = {
+  args: {
+    holidayCountry: "BY",
+    holidayYear: 2022,
+  },
 };
 
 const RangePickerWithMondayFirst = withMondayFirst(RangePicker);

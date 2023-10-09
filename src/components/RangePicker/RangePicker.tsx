@@ -10,6 +10,8 @@ const RangePicker = memo(function RangePicker({
   startDate,
   endDate,
   holidays,
+  holidayCountry,
+  holidayYear,
   isSundayFirst,
   displayWeekends,
   isTodosEnabled,
@@ -27,6 +29,8 @@ const RangePicker = memo(function RangePicker({
         isPickingStart
         endDate={endDate}
         holidays={holidays}
+        holidayCountry={holidayCountry}
+        holidayYear={holidayYear}
         startRange={startRange}
         endRange={endRange}
         isSundayFirst={isSundayFirst}
@@ -40,6 +44,8 @@ const RangePicker = memo(function RangePicker({
         endDate={endDate}
         isPickingEnd
         holidays={holidays}
+        holidayCountry={holidayCountry}
+        holidayYear={holidayYear}
         startRange={startRange}
         endRange={endRange}
         isSundayFirst={isSundayFirst}
