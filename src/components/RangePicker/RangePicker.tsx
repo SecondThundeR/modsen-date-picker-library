@@ -16,7 +16,7 @@ const RangePicker = memo(function RangePicker({
 }: RangePickerProps) {
   const {
     values: { startRange, endRange },
-    actions: { updateStartRange, updateEndRange },
+    actions: { onUpdate },
   } = useRangePicker();
 
   return (
@@ -32,7 +32,7 @@ const RangePicker = memo(function RangePicker({
         isSundayFirst={isSundayFirst}
         displayWeekends={displayWeekends}
         isTodosEnabled={isTodosEnabled}
-        onChange={updateStartRange}
+        onChange={onUpdate}
       />
       <DatePicker
         title="End range date"
@@ -45,7 +45,7 @@ const RangePicker = memo(function RangePicker({
         isSundayFirst={isSundayFirst}
         displayWeekends={displayWeekends}
         isTodosEnabled={isTodosEnabled}
-        onChange={updateEndRange}
+        onChange={onUpdate}
       />
     </Wrapper>
   );

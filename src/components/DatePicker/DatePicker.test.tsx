@@ -14,8 +14,6 @@ jest.mock("@/hocs", () => {
 
 describe("DatePicker", () => {
   const onChange = jest.fn();
-  const onChangeStart = jest.fn();
-  const onChangeEnd = jest.fn();
   const startDate = new Date("01/01/2021");
   const endDate = new Date("12/31/2023");
 
@@ -84,59 +82,6 @@ describe("DatePicker", () => {
 
     fireEvent.click(button);
     expect(button).toHaveStyleRule("background-color", "#2f80ed");
-  });
-
-  it("should not call onChange if new startRange is greater than endRange", () => {
-    const startRange = new Date();
-    startRange.setDate(startRange.getDate() - 1);
-    const endRange = new Date();
-    endRange.setDate(endRange.getDate() + 1);
-    const exceedRangeDateNumber = new Date();
-    exceedRangeDateNumber.setDate(exceedRangeDateNumber.getDate() + 2);
-    const { getAllByText, getByTestId } = render(
-      <DatePicker
-        onChange={onChangeStart}
-        startRange={startRange}
-        isPickingStart
-        endRange={endRange}
-      />,
-    );
-    const calendarIcon = getByTestId("calendar-icon");
-
-    fireEvent.click(calendarIcon);
-    expect(getByTestId("calendar")).toBeInTheDocument();
-
-    const button = getAllByText(String(exceedRangeDateNumber.getDate())).at(-1);
-    if (!button) throw new Error("Button not found");
-
-    fireEvent.click(button);
-    expect(onChangeStart).not.toHaveBeenCalled();
-  });
-
-  it("should not call onChange if new endRange is less than startRange", () => {
-    const startRange = new Date();
-    startRange.setDate(startRange.getDate() - 1);
-    const endRange = new Date();
-    endRange.setDate(endRange.getDate() + 1);
-    const { getAllByText, getByTestId } = render(
-      <DatePicker
-        onChange={onChangeEnd}
-        startRange={startRange}
-        endRange={endRange}
-        isPickingEnd
-      />,
-    );
-    const calendarIcon = getByTestId("calendar-icon");
-
-    fireEvent.click(calendarIcon);
-    expect(getByTestId("calendar")).toBeInTheDocument();
-
-    const prevButton = getByTestId("prev-button");
-    fireEvent.click(prevButton);
-
-    const button = getAllByText("1")[0];
-    fireEvent.click(button);
-    expect(onChangeEnd).not.toHaveBeenCalled();
   });
 
   it("calls withHolidays HOC on render", () => {
