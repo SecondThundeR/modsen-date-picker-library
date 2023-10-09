@@ -1,11 +1,10 @@
 import { useCallback, useState } from "react";
 
-import { isEndRangeCorrect, isStartRangeCorrect } from "@/utils/calendar";
+import { isSameDay } from "@/utils/calendar";
 
 import { UseDatePickerOptions } from "./interfaces";
 
 function useDatePicker({
-  type,
   startRange,
   endRange,
   isPickingStart,
@@ -14,36 +13,19 @@ function useDatePicker({
 }: UseDatePickerOptions) {
   const [date, setDate] = useState<Date | null>(new Date());
   const [showCalendar, setShowCalendar] = useState(false);
+  const calendarDate = isPickingStart
+    ? startRange
+    : isPickingEnd
+    ? endRange
+    : date;
 
   const onDateChange = useCallback(
     (changedDate: Date) => {
-      if (
-        type === "regular" &&
-        changedDate.getDate() === date?.getDate() &&
-        changedDate.getMonth() === date?.getMonth()
-      )
-        return;
-      if (type === "month" && changedDate.getMonth() === date?.getMonth())
-        return;
-      if (type === "year" && changedDate.getFullYear() === date?.getFullYear())
-        return;
-      if (
-        isPickingStart &&
-        endRange &&
-        !isStartRangeCorrect(endRange, changedDate)
-      )
-        return;
-      if (
-        isPickingEnd &&
-        startRange &&
-        !isEndRangeCorrect(startRange, changedDate)
-      )
-        return;
-
+      if (isSameDay(changedDate, date)) return;
       setDate(changedDate);
       onChange?.(changedDate);
     },
-    [date, endRange, isPickingEnd, isPickingStart, onChange, startRange, type],
+    [date, onChange],
   );
 
   const onClearClick = useCallback(() => {
@@ -56,7 +38,7 @@ function useDatePicker({
   }, []);
 
   return {
-    date,
+    date: calendarDate,
     showCalendar,
     handlers: { onDateChange, onClearClick, toggleCalendar },
   };

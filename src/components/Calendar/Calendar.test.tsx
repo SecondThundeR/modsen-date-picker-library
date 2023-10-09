@@ -31,10 +31,9 @@ describe("Calendar", () => {
     expect(title).toBeInTheDocument();
   });
 
-  it("renders the months and years grid", () => {
-    const { getByTestId, rerender } = render(
+  it("should cycle between months, years and regular views", () => {
+    const { getByTestId, getByText } = render(
       <Calendar
-        type="month"
         date={date}
         startDate={startDate}
         endDate={endDate}
@@ -47,36 +46,27 @@ describe("Calendar", () => {
         onChange={onChange}
       />,
     );
-    const monthsGrid = getByTestId("months-grid");
+    expect(getByTestId("days-grid")).toBeInTheDocument();
+    expect(getByText("January 2022")).toBeInTheDocument();
 
-    expect(monthsGrid).toBeInTheDocument();
+    fireEvent.click(getByTestId("calendar-title"));
+    expect(getByTestId("months-grid")).toBeInTheDocument();
+    expect(getByText("2022")).toBeInTheDocument();
 
-    rerender(
-      <Calendar
-        type="year"
-        date={date}
-        startDate={startDate}
-        endDate={endDate}
-        startRange={null}
-        endRange={null}
-        isSundayFirst={false}
-        displayWeekends={false}
-        isTodosEnabled={false}
-        holidays={null}
-        onChange={onChange}
-      />,
-    );
-    const years = getByTestId("years-grid");
+    fireEvent.click(getByTestId("calendar-title"));
+    expect(getByTestId("years-grid")).toBeInTheDocument();
+    expect(getByText("2017 - 2028")).toBeInTheDocument();
 
-    expect(years).toBeInTheDocument();
+    fireEvent.click(getByTestId("calendar-title"));
+    expect(getByTestId("days-grid")).toBeInTheDocument();
+    expect(getByText("January 2022")).toBeInTheDocument();
   });
 
   it("should call correct utils function when calling onPrevClick with other types", () => {
     const spyPrevYear = jest.spyOn(utils, "getPreviousYear");
     const spyPrevDecade = jest.spyOn(utils, "getPreviousDecade");
-    const { getByTestId, rerender } = render(
+    const { getByTestId } = render(
       <Calendar
-        type="month"
         date={date}
         startDate={startDate}
         endDate={endDate}
@@ -89,29 +79,16 @@ describe("Calendar", () => {
         onChange={onChange}
       />,
     );
+    fireEvent.click(getByTestId("calendar-title"));
+
     const monthsGrid = getByTestId("months-grid");
     expect(monthsGrid).toBeInTheDocument();
 
     fireEvent.click(getByTestId("prev-button"));
     expect(spyPrevYear).toHaveBeenCalled();
 
-    rerender(
-      <Calendar
-        type="year"
-        date={date}
-        startDate={startDate}
-        endDate={endDate}
-        startRange={null}
-        endRange={null}
-        isSundayFirst={false}
-        displayWeekends={false}
-        isTodosEnabled={false}
-        holidays={null}
-        onChange={onChange}
-      />,
-    );
+    fireEvent.click(getByTestId("calendar-title"));
     const years = getByTestId("years-grid");
-
     expect(years).toBeInTheDocument();
 
     fireEvent.click(getByTestId("prev-button"));
@@ -121,9 +98,8 @@ describe("Calendar", () => {
   it("should call correct utils function when calling onNextClick with other types", () => {
     const spyNextYear = jest.spyOn(utils, "getNextYear");
     const spyNextDecade = jest.spyOn(utils, "getNextDecade");
-    const { getByTestId, rerender } = render(
+    const { getByTestId } = render(
       <Calendar
-        type="month"
         date={date}
         startDate={startDate}
         endDate={endDate}
@@ -136,29 +112,16 @@ describe("Calendar", () => {
         onChange={onChange}
       />,
     );
+    fireEvent.click(getByTestId("calendar-title"));
+
     const monthsGrid = getByTestId("months-grid");
     expect(monthsGrid).toBeInTheDocument();
 
     fireEvent.click(getByTestId("next-button"));
     expect(spyNextYear).toHaveBeenCalled();
 
-    rerender(
-      <Calendar
-        type="year"
-        date={date}
-        startDate={startDate}
-        endDate={endDate}
-        startRange={null}
-        endRange={null}
-        isSundayFirst={false}
-        displayWeekends={false}
-        isTodosEnabled={false}
-        holidays={null}
-        onChange={onChange}
-      />,
-    );
+    fireEvent.click(getByTestId("calendar-title"));
     const years = getByTestId("years-grid");
-
     expect(years).toBeInTheDocument();
 
     fireEvent.click(getByTestId("next-button"));

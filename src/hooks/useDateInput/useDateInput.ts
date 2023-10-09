@@ -1,5 +1,6 @@
 import { ChangeEventHandler, useCallback, useState } from "react";
 
+import { MAX_LENGTH } from "@/constants/date";
 import useClearEnabled from "@/hooks/useClearEnabled";
 import useDateValue from "@/hooks/useDateValue";
 import { isInRange, isValidDate, parseDate } from "@/utils/date";
@@ -9,7 +10,6 @@ import { UseInputOptions } from "./interfaces";
 
 function useDateInput({
   dateString,
-  type = "regular",
   startDate,
   endDate,
   onDateChange,
@@ -18,7 +18,7 @@ function useDateInput({
   const {
     value,
     handlers: { setInputValue, clearValue },
-  } = useDateValue(dateString, type);
+  } = useDateValue(dateString);
   const isClearEnabled = useClearEnabled(value);
   const [isError, setIsError] = useState(false);
 
@@ -32,10 +32,17 @@ function useDateInput({
     (event) => {
       setIsError(false);
       const { value: inputValue } = event.target;
-      if (!isValidValue(inputValue)) return;
+      if (!isValidValue(inputValue)) {
+        setIsError(true);
+        return;
+      }
 
       setInputValue(inputValue);
-      if (!isValidDate(inputValue, type)) return;
+      if (inputValue.length < MAX_LENGTH) return;
+      if (!isValidDate(inputValue)) {
+        setIsError(true);
+        return;
+      }
 
       const parsedDate = parseDate(inputValue);
       if (!isInRange(parsedDate, startDate, endDate)) {
@@ -45,7 +52,7 @@ function useDateInput({
 
       onDateChange(parsedDate);
     },
-    [setInputValue, type, startDate, endDate, onDateChange],
+    [setInputValue, startDate, endDate, onDateChange],
   );
 
   return {

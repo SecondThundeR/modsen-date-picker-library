@@ -1,14 +1,19 @@
 import React from "react";
 import { fireEvent, render } from "@testing-library/react";
 
-import { CALENDAR_MONTHS } from "@/constants/date";
+import * as hocs from "@/hocs";
 
 import DatePicker from "./DatePicker";
 
+jest.mock("@/hocs", () => {
+  return {
+    __esModule: true,
+    ...jest.requireActual("@/hocs"),
+  } as unknown;
+});
+
 describe("DatePicker", () => {
   const onChange = jest.fn();
-  const onChangeStart = jest.fn();
-  const onChangeEnd = jest.fn();
   const startDate = new Date("01/01/2021");
   const endDate = new Date("12/31/2023");
 
@@ -57,39 +62,6 @@ describe("DatePicker", () => {
     expect(onChange).not.toHaveBeenCalled();
   });
 
-  it("should not call onChange if clicking already selected month", () => {
-    const currDate = new Date();
-    const { getByText, getByTestId } = render(
-      <DatePicker type="month" onChange={onChange} />,
-    );
-    const calendarIcon = getByTestId("calendar-icon");
-
-    fireEvent.click(calendarIcon);
-    expect(getByTestId("calendar")).toBeInTheDocument();
-
-    const monthName = Object.values(CALENDAR_MONTHS)[currDate.getMonth()];
-    const button = getByText(monthName);
-
-    fireEvent.click(button);
-    expect(onChange).not.toHaveBeenCalled();
-  });
-
-  it("should not call onChange if clicking already selected year", () => {
-    const currDate = new Date();
-    const { getByText, getByTestId } = render(
-      <DatePicker type="year" onChange={onChange} />,
-    );
-    const calendarIcon = getByTestId("calendar-icon");
-
-    fireEvent.click(calendarIcon);
-    expect(getByTestId("calendar")).toBeInTheDocument();
-
-    const button = getByText(currDate.getFullYear().toString());
-
-    fireEvent.click(button);
-    expect(onChange).not.toHaveBeenCalled();
-  });
-
   it("should fallback to currentDate on clear button", () => {
     const currDate = new Date();
     const { getAllByText, getByTestId } = render(
@@ -112,56 +84,30 @@ describe("DatePicker", () => {
     expect(button).toHaveStyleRule("background-color", "#2f80ed");
   });
 
-  it("should not call onChange if new startRange is greater than endRange", () => {
-    const startRange = new Date();
-    startRange.setDate(startRange.getDate() - 1);
-    const endRange = new Date();
-    endRange.setDate(endRange.getDate() + 1);
-    const exceedRangeDateNumber = new Date();
-    exceedRangeDateNumber.setDate(exceedRangeDateNumber.getDate() + 2);
-    const { getAllByText, getByTestId } = render(
+  it("calls withHolidays HOC on render", () => {
+    const withHolidaysSpy = jest.spyOn(hocs, "withHolidays");
+    render(
       <DatePicker
-        onChange={onChangeStart}
-        startRange={startRange}
-        isPickingStart
-        endRange={endRange}
+        startDate={startDate}
+        endDate={endDate}
+        holidays={{
+          1: [1, 2, 3],
+        }}
       />,
     );
-    const calendarIcon = getByTestId("calendar-icon");
-
-    fireEvent.click(calendarIcon);
-    expect(getByTestId("calendar")).toBeInTheDocument();
-
-    const button = getAllByText(String(exceedRangeDateNumber.getDate())).at(-1);
-    if (!button) throw new Error("Button not found");
-
-    fireEvent.click(button);
-    expect(onChangeStart).not.toHaveBeenCalled();
+    expect(withHolidaysSpy).toBeCalled();
   });
 
-  it("should not call onChange if new endRange is less than startRange", () => {
-    const startRange = new Date();
-    startRange.setDate(startRange.getDate() - 1);
-    const endRange = new Date();
-    endRange.setDate(endRange.getDate() + 1);
-    const { getAllByText, getByTestId } = render(
+  it("calls withHolidaysAPI HOC on render", () => {
+    const withHolidaysAPISpy = jest.spyOn(hocs, "withHolidaysAPI");
+    render(
       <DatePicker
-        onChange={onChangeEnd}
-        startRange={startRange}
-        endRange={endRange}
-        isPickingEnd
+        startDate={startDate}
+        endDate={endDate}
+        holidayCountry="BY"
+        holidayYear={2022}
       />,
     );
-    const calendarIcon = getByTestId("calendar-icon");
-
-    fireEvent.click(calendarIcon);
-    expect(getByTestId("calendar")).toBeInTheDocument();
-
-    const prevButton = getByTestId("prev-button");
-    fireEvent.click(prevButton);
-
-    const button = getAllByText("1")[0];
-    fireEvent.click(button);
-    expect(onChangeEnd).not.toHaveBeenCalled();
+    expect(withHolidaysAPISpy).toBeCalled();
   });
 });

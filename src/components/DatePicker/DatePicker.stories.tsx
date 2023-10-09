@@ -1,14 +1,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import {
-  withCalendarType,
-  withHolidays,
-  withHolidaysAPI,
-  withMondayFirst,
-  withTodos,
-  withWeekends,
-} from "@/hocs";
+import { withMondayFirst, withTodos, withWeekends } from "@/hocs";
 
 import DatePicker from "./DatePicker";
 
@@ -20,11 +13,6 @@ const meta: Meta<typeof DatePicker> = {
       name: "Title",
       defaultValue: "Date picker",
       description: "Title of the date picker",
-    },
-    type: {
-      name: "Calendar type",
-      description: "Type of calendar",
-      type: "string",
     },
     startDate: {
       name: "Start date",
@@ -81,13 +69,20 @@ const meta: Meta<typeof DatePicker> = {
       description: "Defines data for days, which defined as holidays",
       defaultValue: {},
     },
+    holidayCountry: {
+      name: "Holidays country",
+      description: "Defines country for holidays, fetched with API",
+    },
+    holidayYear: {
+      name: "Holidays year",
+      description: "Defines year for holidays, fetched with API",
+    },
     onChange: {
       name: "On change",
       description: "Callback, which will be called on date change",
     },
   },
   args: {
-    type: "regular",
     holidays: null,
   },
 };
@@ -97,34 +92,22 @@ type Story = StoryObj<typeof DatePicker>;
 
 export const Primary: Story = {};
 
-const DatePickerWithCalendarTypeMonth = withCalendarType(DatePicker, "month");
-export const WithCalendarTypeMonthHOC: Story = {
-  render: () => <DatePickerWithCalendarTypeMonth />,
-};
-
-const DatePickerWithCalendarTypeYear = withCalendarType(DatePicker, "year");
-export const WithCalendarTypeYearHOC: Story = {
-  render: () => <DatePickerWithCalendarTypeYear />,
-};
-
 const DatePickerWithWeekends = withWeekends(DatePicker);
 export const WithWeekendsHOC: Story = {
   render: () => <DatePickerWithWeekends />,
 };
 
-const DatePickerWithHolidays = withHolidays(DatePicker, {
-  [new Date().getMonth() + 1]: [2, 10, 18, 19, 20, 30],
-});
-export const WithHolidaysHOC: Story = {
-  render: () => <DatePickerWithHolidays />,
+export const WithHolidays: Story = {
+  args: {
+    holidays: { [new Date().getMonth() + 1]: [2, 10, 18, 19, 20, 30] },
+  },
 };
 
-const DatePickerWithHolidaysAPI = withHolidaysAPI(DatePicker, {
-  holidayCountry: "BY",
-  year: 2022,
-});
-export const WithHolidaysApiHOC: Story = {
-  render: () => <DatePickerWithHolidaysAPI />,
+export const WithHolidaysApi: Story = {
+  args: {
+    holidayCountry: "BY",
+    holidayYear: 2022,
+  },
 };
 
 const DatePickerWithMondayFirst = withMondayFirst(DatePicker);

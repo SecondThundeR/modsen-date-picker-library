@@ -8,7 +8,7 @@ import {
   isDateInRange,
   isDateInStartRange,
 } from "@/utils/calendar";
-import { isDatesMonthsEqual } from "@/utils/date";
+import { getMonthDateToUpdate, isDatesMonthsEqual } from "@/utils/date";
 
 function useCalendarMonth({
   date,
@@ -30,13 +30,14 @@ function useCalendarMonth({
   );
 
   const onClick = useCallback(() => {
+    const newDate = getMonthDateToUpdate(date, selectedDate);
     if (
-      !isDateInStartRange(startDate, extractDateState(date)) ||
-      !isDateInEndRange(endDate, extractDateState(date))
+      !isDateInStartRange(startDate, extractDateState(newDate)) ||
+      !isDateInEndRange(endDate, extractDateState(newDate))
     )
       return;
-    onChange(date);
-  }, [date, endDate, onChange, startDate]);
+    onChange(newDate);
+  }, [date, endDate, onChange, selectedDate, startDate]);
 
   return {
     isMonthSelected,

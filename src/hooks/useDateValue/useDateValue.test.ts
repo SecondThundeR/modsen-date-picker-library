@@ -1,53 +1,33 @@
 import { act, renderHook } from "@testing-library/react";
 
-import { UseDateValueRenderHook } from "./interfaces";
 import useDateValue from "./useDateValue";
 
 describe("useDateValue", () => {
-  it("should update type and return the formatted date value", () => {
-    const dateString = "01/01/2022";
-    const { result, rerender } = renderHook(
-      ({ dateString, type }: UseDateValueRenderHook) =>
-        useDateValue(dateString, type),
-      {
-        initialProps: {
-          dateString,
-          type: "regular",
-        },
-      },
-    );
+  const dateString = "01/01/2022";
+  const newDateString = "01/01/2022";
 
-    expect(result.current.value).toBe("01/01/2022");
+  it("should render date string", () => {
+    const { result } = renderHook(() => useDateValue(dateString));
 
-    rerender({ dateString, type: "month" });
-
-    expect(result.current.value).toBe("01/2022");
-
-    rerender({ dateString, type: "year" });
-
-    expect(result.current.value).toBe("2022");
+    expect(result.current.value).toBe(dateString);
   });
 
   it("should update the value when setInputValue is called", () => {
-    const dateString = "01/01/2022";
-    const type = "regular";
-    const { result } = renderHook(() => useDateValue(dateString, type));
+    const { result } = renderHook(() => useDateValue(dateString));
 
-    expect(result.current.value).toBe("01/01/2022");
+    expect(result.current.value).toBe(dateString);
 
     act(() => {
-      result.current.handlers.setInputValue("02/01/2022");
+      result.current.handlers.setInputValue(newDateString);
     });
 
-    expect(result.current.value).toBe("02/01/2022");
+    expect(result.current.value).toBe(newDateString);
   });
 
   it("should clear the value when clearValue is called", () => {
-    const dateString = "01/01/2022";
-    const type = "regular";
-    const { result } = renderHook(() => useDateValue(dateString, type));
+    const { result } = renderHook(() => useDateValue(dateString));
 
-    expect(result.current.value).toBe("01/01/2022");
+    expect(result.current.value).toBe(dateString);
 
     act(() => {
       result.current.handlers.clearValue();

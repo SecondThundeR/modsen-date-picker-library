@@ -11,6 +11,11 @@ const meta: Meta<typeof CalendarHeader> = {
       type: "string",
       description: "Title of calendar element",
     },
+    onTitle: {
+      name: "onTitle",
+      type: "function",
+      description: "Function to call when user clicked on title",
+    },
     onPrevClick: {
       name: "onPrevClick",
       type: "function",
@@ -30,6 +35,7 @@ type Story = StoryObj<typeof CalendarHeader>;
 export const Primary: Story = {
   args: {
     title: "November 2022",
+    onTitle: () => console.log("Title clicked"),
     onPrevClick: () => console.log("Prev clicked"),
     onNextClick: () => console.log("Next clicked"),
   },

@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useCallback } from "react";
 
 import CalendarHeader from "@/components/CalendarHeader";
 import CalendarMonths from "@/components/CalendarMonths";
@@ -6,7 +6,7 @@ import CalendarRegular from "@/components/CalendarRegular";
 import CalendarWrapper from "@/components/CalendarWrapper";
 import CalendarYears from "@/components/CalendarYears";
 import FooterButton from "@/components/FooterButton";
-import { useCalendarNavigation } from "@/hooks";
+import { useCalendarNavigation, useCalendarType } from "@/hooks";
 import { formatDateState } from "@/utils/calendar";
 
 import { Wrapper } from "./Calendar.styled";
@@ -14,7 +14,6 @@ import { CalendarProps } from "./interfaces";
 
 const Calendar = memo(function Calendar({
   date,
-  type = "regular",
   startDate,
   endDate,
   startRange,
@@ -27,6 +26,10 @@ const Calendar = memo(function Calendar({
   onChange,
 }: CalendarProps) {
   const {
+    type,
+    handlers: { onTitle, onDateChange },
+  } = useCalendarType({ onChange });
+  const {
     dateState,
     handlers: { onPrevClick, onNextClick },
   } = useCalendarNavigation({
@@ -37,15 +40,10 @@ const Calendar = memo(function Calendar({
   });
   const headerTitle = formatDateState(type, dateState);
 
-  return (
-    <Wrapper data-testid="calendar">
-      <CalendarWrapper removeBottomBorder={hasClearButton}>
-        <CalendarHeader
-          title={headerTitle}
-          onPrevClick={onPrevClick}
-          onNextClick={onNextClick}
-        />
-        {type === "regular" && (
+  const currentCalendarView = useCallback(() => {
+    switch (type) {
+      case "regular":
+        return (
           <CalendarRegular
             date={date}
             dateState={dateState}
@@ -57,10 +55,11 @@ const Calendar = memo(function Calendar({
             isTodosEnabled={isTodosEnabled}
             holidays={holidays}
             isSundayFirst={isSundayFirst}
-            onChange={onChange}
+            onChange={onDateChange}
           />
-        )}
-        {type === "month" && (
+        );
+      case "month":
+        return (
           <CalendarMonths
             date={date}
             dateState={dateState}
@@ -68,10 +67,11 @@ const Calendar = memo(function Calendar({
             endDate={endDate}
             startRange={startRange}
             endRange={endRange}
-            onChange={onChange}
+            onChange={onDateChange}
           />
-        )}
-        {type === "year" && (
+        );
+      case "year":
+        return (
           <CalendarYears
             date={date}
             dateState={dateState}
@@ -79,9 +79,35 @@ const Calendar = memo(function Calendar({
             endDate={endDate}
             startRange={startRange}
             endRange={endRange}
-            onChange={onChange}
+            onChange={onDateChange}
           />
-        )}
+        );
+    }
+  }, [
+    date,
+    dateState,
+    displayWeekends,
+    endDate,
+    endRange,
+    holidays,
+    isSundayFirst,
+    isTodosEnabled,
+    onDateChange,
+    startDate,
+    startRange,
+    type,
+  ]);
+
+  return (
+    <Wrapper data-testid="calendar">
+      <CalendarWrapper removeBottomBorder={hasClearButton}>
+        <CalendarHeader
+          title={headerTitle}
+          onTitle={onTitle}
+          onPrevClick={onPrevClick}
+          onNextClick={onNextClick}
+        />
+        {currentCalendarView()}
       </CalendarWrapper>
       {hasClearButton && <FooterButton title="Clear" />}
     </Wrapper>

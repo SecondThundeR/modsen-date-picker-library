@@ -1,12 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 
-import { CalendarType } from "@/components/Calendar/interfaces";
-import { formatDateForValue } from "@/utils/date";
-
-function useDateValue(dateString: string, type: CalendarType) {
-  const [value, setValue] = useState(() =>
-    formatDateForValue(dateString, type),
-  );
+function useDateValue(dateString: string) {
+  const [value, setValue] = useState(dateString);
 
   const setInputValue = useCallback((value: string) => {
     setValue(value);
@@ -17,8 +12,8 @@ function useDateValue(dateString: string, type: CalendarType) {
   }, []);
 
   useEffect(() => {
-    setValue(() => formatDateForValue(dateString, type));
-  }, [dateString, type]);
+    setValue(dateString);
+  }, [dateString]);
 
   return { value, handlers: { setInputValue, clearValue } };
 }

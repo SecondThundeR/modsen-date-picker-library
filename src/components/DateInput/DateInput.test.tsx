@@ -97,39 +97,4 @@ describe("DateInput", () => {
     );
     expect(getByText("Date")).toBeInTheDocument();
   });
-
-  it("should change maxLength attribute when changing type", () => {
-    const { rerender, getByTestId } = render(
-      <DateInput
-        type="regular"
-        dateString="22/09/2021"
-        onDateChange={jest.fn()}
-        onCalendarClick={jest.fn()}
-        onClearClick={jest.fn()}
-      />,
-    );
-    expect(getByTestId("input")).toHaveAttribute("maxlength", "10");
-
-    rerender(
-      <DateInput
-        type="month"
-        dateString="22/09/2021"
-        onDateChange={jest.fn()}
-        onCalendarClick={jest.fn()}
-        onClearClick={jest.fn()}
-      />,
-    );
-    expect(getByTestId("input")).toHaveAttribute("maxlength", "7");
-
-    rerender(
-      <DateInput
-        type="year"
-        dateString="22/09/2021"
-        onDateChange={jest.fn()}
-        onCalendarClick={jest.fn()}
-        onClearClick={jest.fn()}
-      />,
-    );
-    expect(getByTestId("input")).toHaveAttribute("maxlength", "4");
-  });
 });

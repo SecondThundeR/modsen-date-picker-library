@@ -1,9 +1,8 @@
-import { CalendarType } from "@/components/Calendar/interfaces";
+import { HolidayCountries } from "@/features/api/interfaces";
 import { Holidays } from "@/utils/calendar";
 
 export interface DatePickerProps {
   title?: string;
-  type?: CalendarType;
   startDate?: Date;
   endDate?: Date;
   startRange?: Date | null;
@@ -11,6 +10,8 @@ export interface DatePickerProps {
   endRange?: Date | null;
   isPickingEnd?: boolean;
   holidays?: Holidays | null;
+  holidayCountry?: HolidayCountries;
+  holidayYear?: number;
   displayWeekends?: boolean;
   isSundayFirst?: boolean;
   isTodosEnabled?: boolean;

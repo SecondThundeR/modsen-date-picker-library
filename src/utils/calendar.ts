@@ -1,4 +1,3 @@
-import { CalendarType } from "@/components/Calendar/interfaces";
 import { RangeState } from "@/components/CalendarButton/interfaces";
 import {
   CALENDAR_MONTHS,
@@ -10,6 +9,7 @@ import {
   THIS_MONTH,
   THIS_YEAR,
 } from "@/constants/date";
+import { CalendarType } from "@/hooks/useCalendarType/interfaces";
 
 import { isInRange } from "./date";
 
@@ -90,18 +90,7 @@ export const isDateAWeekend = (date: Date) => {
   return date.getDay() === 0 || date.getDay() === 6;
 };
 
-export const isSameMonth = (date: Date, basedate = new Date()) => {
-  if (!(isDate(date) && isDate(basedate))) return false;
-
-  const basedateMonth = basedate.getMonth() + 1;
-  const basedateYear = basedate.getFullYear();
-  const dateMonth = date.getMonth() + 1;
-  const dateYear = date.getFullYear();
-
-  return basedateMonth === dateMonth && basedateYear === dateYear;
-};
-
-export const isSameDay = (date: Date, basedate = new Date()) => {
+export const isSameDay = (date: Date, basedate: Date | null) => {
   if (!(isDate(date) && isDate(basedate))) return false;
 
   const basedateDate = basedate.getDate();
