@@ -2,7 +2,6 @@ import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import {
-  withCalendarType,
   withHolidays,
   withHolidaysAPI,
   withMondayFirst,
@@ -20,11 +19,6 @@ const meta: Meta<typeof DatePicker> = {
       name: "Title",
       defaultValue: "Date picker",
       description: "Title of the date picker",
-    },
-    type: {
-      name: "Calendar type",
-      description: "Type of calendar",
-      type: "string",
     },
     startDate: {
       name: "Start date",
@@ -87,7 +81,6 @@ const meta: Meta<typeof DatePicker> = {
     },
   },
   args: {
-    type: "regular",
     holidays: null,
   },
 };
@@ -96,16 +89,6 @@ export default meta;
 type Story = StoryObj<typeof DatePicker>;
 
 export const Primary: Story = {};
-
-const DatePickerWithCalendarTypeMonth = withCalendarType(DatePicker, "month");
-export const WithCalendarTypeMonthHOC: Story = {
-  render: () => <DatePickerWithCalendarTypeMonth />,
-};
-
-const DatePickerWithCalendarTypeYear = withCalendarType(DatePicker, "year");
-export const WithCalendarTypeYearHOC: Story = {
-  render: () => <DatePickerWithCalendarTypeYear />,
-};
 
 const DatePickerWithWeekends = withWeekends(DatePicker);
 export const WithWeekendsHOC: Story = {

@@ -1,9 +1,7 @@
-import { CalendarType } from "@/components/Calendar/interfaces";
 import { Holidays } from "@/utils/calendar";
 
 export interface DatePickerProps {
   title?: string;
-  type?: CalendarType;
   startDate?: Date;
   endDate?: Date;
   startRange?: Date | null;

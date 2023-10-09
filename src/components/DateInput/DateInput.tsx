@@ -2,6 +2,7 @@ import React, { memo } from "react";
 
 import CalendarIcon from "@/assets/CalendarIcon";
 import ClearIcon from "@/assets/ClearIcon";
+import { MAX_LENGTH } from "@/constants/date";
 import { useDateInput } from "@/hooks";
 import { getDefaultEndDate, getDefaultStartDate } from "@/utils/date";
 
@@ -16,7 +17,6 @@ import { InputProps } from "./interfaces";
 
 const DateInput = memo(function DateInput({
   title = "Date",
-  type = "regular",
   dateString,
   startDate = getDefaultStartDate(),
   endDate = getDefaultEndDate(),
@@ -27,13 +27,11 @@ const DateInput = memo(function DateInput({
 }: InputProps) {
   const {
     value,
-    maxLength,
     isClearEnabled,
     isError,
     handlers: { onInputChange, onClear },
   } = useDateInput({
     dateString,
-    type,
     startDate,
     endDate,
     onClearClick,
@@ -53,7 +51,7 @@ const DateInput = memo(function DateInput({
           type="text"
           placeholder="Choose date"
           value={value}
-          maxLength={maxLength}
+          maxLength={MAX_LENGTH}
           onChange={onInputChange}
         />
         {isClearEnabled && <ClearIcon data-testid="clear" onClick={onClear} />}

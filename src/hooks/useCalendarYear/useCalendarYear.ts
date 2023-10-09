@@ -8,7 +8,11 @@ import {
   isDateInRange,
   isDateInStartRange,
 } from "@/utils/calendar";
-import { isDatesYearsEqual, isInRange } from "@/utils/date";
+import {
+  getYearDateToUpdate,
+  isDatesYearsEqual,
+  isInRange,
+} from "@/utils/date";
 
 function useCalendarYear({
   date,
@@ -31,13 +35,14 @@ function useCalendarYear({
   );
 
   const onClick = useCallback(() => {
+    const newDate = getYearDateToUpdate(date, selectedDate);
     if (
-      !isDateInStartRange(startDate, extractDateState(date)) ||
-      !isDateInEndRange(endDate, extractDateState(date))
+      !isDateInStartRange(startDate, extractDateState(newDate)) ||
+      !isDateInEndRange(endDate, extractDateState(newDate))
     )
       return;
-    onChange(date);
-  }, [date, endDate, onChange, startDate]);
+    onChange(newDate);
+  }, [date, endDate, onChange, selectedDate, startDate]);
 
   return {
     isYearSelected,

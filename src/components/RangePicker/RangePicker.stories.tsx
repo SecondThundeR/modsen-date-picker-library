@@ -2,7 +2,6 @@ import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import {
-  withCalendarType,
   withHolidays,
   withHolidaysAPI,
   withMondayFirst,
@@ -16,11 +15,6 @@ const meta: Meta<typeof RangePicker> = {
   title: "Component/RangePicker",
   component: RangePicker,
   argTypes: {
-    type: {
-      name: "Calendar type",
-      description: "Type of calendar",
-      type: "string",
-    },
     startDate: {
       name: "Start date",
       defaultValue: new Date(),
@@ -52,7 +46,6 @@ const meta: Meta<typeof RangePicker> = {
     },
   },
   args: {
-    type: "regular",
     holidays: null,
   },
 };
@@ -61,16 +54,6 @@ export default meta;
 type Story = StoryObj<typeof RangePicker>;
 
 export const Primary: Story = {};
-
-const RangePickerWithCalendarTypeMonth = withCalendarType(RangePicker, "month");
-export const WithCalendarTypeMonthHOC: Story = {
-  render: () => <RangePickerWithCalendarTypeMonth />,
-};
-
-const RangePickerWithCalendarTypeYear = withCalendarType(RangePicker, "year");
-export const WithCalendarTypeYearHOC: Story = {
-  render: () => <RangePickerWithCalendarTypeYear />,
-};
 
 const RangePickerWithWeekends = withWeekends(RangePicker);
 export const WithWeekendsHOC: Story = {

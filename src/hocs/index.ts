@@ -1,4 +1,3 @@
-export { default as withCalendarType } from "./withCalendarType";
 export { default as withHolidays } from "./withHolidays";
 export { default as withHolidaysAPI } from "./withHolidaysAPI";
 export { default as withMondayFirst } from "./withMondayFirst";

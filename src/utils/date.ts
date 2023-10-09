@@ -1,37 +1,16 @@
-import { CalendarType } from "@/components/Calendar/interfaces";
 import {
   DATE_REGEX,
   DEFAULT_DAY,
   DEFAULT_MONTH,
   DEFAULT_YEAR,
-  MONTH_REGEX,
-  YEAR_REGEX,
 } from "@/constants/date";
 
-export const formatDateForValue = (dateString: string, type: CalendarType) => {
-  switch (type) {
-    case "regular":
-      return dateString;
-    case "month":
-      return dateString.split("/").slice(1).join("/");
-    case "year":
-      return dateString.split("/").slice(2)[0];
-    default:
-      return dateString;
-  }
+export const formatDateForValue = (dateString: string) => {
+  return dateString;
 };
 
-export const isValidDate = (dateString: string, type: CalendarType) => {
-  switch (type) {
-    case "regular":
-      return DATE_REGEX.test(dateString);
-    case "month":
-      return MONTH_REGEX.test(dateString);
-    case "year":
-      return YEAR_REGEX.test(dateString);
-    default:
-      return DATE_REGEX.test(dateString);
-  }
+export const isValidDate = (dateString: string) => {
+  return DATE_REGEX.test(dateString);
 };
 
 export const parseDate = (dateString: string) => {
@@ -87,6 +66,19 @@ export const isDatesEqual = (date1: Date | null, date2: Date | null) => {
     date1.getMonth() === date2.getMonth() &&
     date1.getFullYear() === date2.getFullYear()
   );
+};
+
+export const getMonthDateToUpdate = (date: Date, selectedDate: Date) => {
+  const dateToUpdate = new Date(date);
+  dateToUpdate.setDate(selectedDate.getDate());
+  return dateToUpdate;
+};
+
+export const getYearDateToUpdate = (date: Date, selectedDate: Date) => {
+  const dateToUpdate = new Date(date);
+  dateToUpdate.setDate(selectedDate.getDate());
+  dateToUpdate.setMonth(selectedDate.getMonth());
+  return dateToUpdate;
 };
 
 export const getDefaultStartDate = () => {

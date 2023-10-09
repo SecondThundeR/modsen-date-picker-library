@@ -36,6 +36,7 @@ export const CALENDAR_MONTHS = {
   December: "Dec",
 } as const;
 
+export const MAX_LENGTH = 10;
 export const CALENDAR_WEEKS = 6;
 export const CALENDAR_NON_REGULAR_GRID_SIZE = 12;
 export const FEBRUARY_MONTH_NUMBER = 2;

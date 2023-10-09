@@ -1,6 +1,7 @@
 export { default as useCalendarDay } from "./useCalendarDay";
 export { default as useCalendarMonth } from "./useCalendarMonth";
 export { default as useCalendarNavigation } from "./useCalendarNavigation";
+export { default as useCalendarType } from "./useCalendarType";
 export { default as useCalendarYear } from "./useCalendarYear";
 export { default as useDateInput } from "./useDateInput";
 export { default as useDatePicker } from "./useDatePicker";
