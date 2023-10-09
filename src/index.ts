@@ -1,2 +1,2 @@
 export * from "@/components";
-export * from "@/hocs";
+export { withMondayFirst, withTodos, withWeekends } from "@/hocs";
