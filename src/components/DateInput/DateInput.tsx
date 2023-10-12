@@ -2,17 +2,12 @@ import React, { memo } from "react";
 
 import CalendarIcon from "@/components/CalendarIcon";
 import ClearIcon from "@/components/ClearIcon";
+import Input from "@/components/Input";
 import { DATE_INPUT_MAX_LENGTH } from "@/constants/date";
 import { useDateInput } from "@/hooks";
 import { getDefaultEndDate, getDefaultStartDate } from "@/utils/date";
 
-import {
-  ErrorMessage,
-  Input,
-  InputWrapper,
-  Title,
-  Wrapper,
-} from "./DateInput.styled";
+import { ErrorMessage, Title, Wrapper } from "./DateInput.styled";
 import { InputProps } from "./interfaces";
 
 const DateInput = memo(function DateInput({
@@ -42,20 +37,24 @@ const DateInput = memo(function DateInput({
     <Wrapper>
       <Title>{title}</Title>
       {isError && <ErrorMessage>Invalid date!</ErrorMessage>}
-      <InputWrapper $isError={isError}>
-        {isCalendarEnabled && (
-          <CalendarIcon data-testid="calendar-icon" onClick={onCalendarClick} />
-        )}
-        <Input
-          data-testid="input"
-          type="text"
-          placeholder="Choose date"
-          value={value}
-          maxLength={DATE_INPUT_MAX_LENGTH}
-          onChange={onInputChange}
-        />
-        {isClearEnabled && <ClearIcon data-testid="clear" onClick={onClear} />}
-      </InputWrapper>
+      <Input
+        placeholder="Choose date"
+        value={value}
+        maxLength={DATE_INPUT_MAX_LENGTH}
+        onChange={onInputChange}
+        isError={isError}
+        leftSlot={
+          isCalendarEnabled && (
+            <CalendarIcon
+              data-testid="calendar-icon"
+              onClick={onCalendarClick}
+            />
+          )
+        }
+        rightSlot={
+          isClearEnabled && <ClearIcon data-testid="clear" onClick={onClear} />
+        }
+      />
     </Wrapper>
   );
 });

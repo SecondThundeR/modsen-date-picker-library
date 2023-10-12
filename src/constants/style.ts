@@ -147,22 +147,25 @@ export const CALENDAR_WRAPPER_STYLE = {
 export const DATE_PICKER_WRAPPER_GAP = "4px";
 
 export const DATE_INPUT_STYLE = {
-  flexLength: 2,
   placeholderColor: "#bbb",
   wrapperGap: "4px",
   title: { color: "#333", fontSize: "15px" },
   errorMessage: { color: "#ff0000", fontSize: "12px" },
-  input: {
-    width: "250px",
-    gap: "8px",
-    padding: "12px 16px",
-    borderColor: {
-      error: "#ff0000",
-      regular: "#ddd",
-    },
-    radius: "8px",
-    fontSize: "15px",
+} as const;
+
+export const INPUT_STYLE = {
+  flexLength: 2,
+  fontSize: "15px",
+  width: "250px",
+  gap: "8px",
+  padding: "12px 16px",
+  color: {
+    placeholder: "#bbb",
+    error: "#ff0000",
+    regular: "#000",
+    outline: "#ddd",
   },
+  radius: "8px",
 } as const;
 
 export const ERROR_BOUNDARY_STYLE = {

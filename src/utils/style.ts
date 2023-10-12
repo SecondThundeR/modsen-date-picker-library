@@ -7,7 +7,7 @@ import {
   BUTTON_DIMENSION,
   BUTTON_TEXT_COLOR,
   CALENDAR_WRAPPER_STYLE,
-  DATE_INPUT_STYLE,
+  INPUT_STYLE,
   TODO_ITEM_TITLE_DECORATION,
 } from "@/constants/style";
 
@@ -70,5 +70,8 @@ export const getCalendarWrapperRadius = (
   return radius[removeBottomBorder ? "empty" : "regular"];
 };
 
-export const getDateInputBorderColor = (isError = false) =>
-  DATE_INPUT_STYLE.input.borderColor[isError ? "error" : "regular"];
+export const getInputTextColor = (isError = false) =>
+  INPUT_STYLE.color[isError ? "error" : "regular"];
+
+export const getInputBorderColor = (isError = false) =>
+  INPUT_STYLE.color[isError ? "error" : "outline"];
