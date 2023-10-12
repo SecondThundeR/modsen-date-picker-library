@@ -1,4 +1,4 @@
-import { HolidayAPIResponse } from "@/features/api/interfaces";
+import { HolidayAPIResponse } from "@/api/interfaces";
 
 import { Holidays } from "./calendar";
 

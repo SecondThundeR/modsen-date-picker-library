@@ -1,5 +1,5 @@
+import { HolidayCountries } from "@/api/interfaces";
 import { HOLIDAYS_API_ENDPOINT } from "@/constants/endpoints";
-import { HolidayCountries } from "@/features/api/interfaces";
 import { transformResponseData, validateResponseData } from "@/utils/api";
 
 async function getHolidaysData(year: number, holidayCountry: HolidayCountries) {

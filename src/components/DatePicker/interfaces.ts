@@ -1,4 +1,4 @@
-import { HolidayCountries } from "@/features/api/interfaces";
+import { HolidayCountries } from "@/api/interfaces";
 import { Holidays } from "@/utils/calendar";
 
 export interface DatePickerProps {

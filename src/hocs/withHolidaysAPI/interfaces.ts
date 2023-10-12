@@ -1,5 +1,5 @@
+import { HolidayCountries } from "@/api/interfaces";
 import { DatePickerProps } from "@/components/DatePicker/interfaces";
-import { HolidayCountries } from "@/features/api/interfaces";
 
 export interface WithHolidaysAPIProps
   extends Pick<
