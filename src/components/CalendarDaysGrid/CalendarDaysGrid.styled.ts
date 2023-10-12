@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
+import { REGULAR_GRID_STYLE } from "@/constants/style";
+
 export const Grid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(5, 1fr);
+  display: ${REGULAR_GRID_STYLE.display};
+  grid-template-columns: ${REGULAR_GRID_STYLE.columns};
+  grid-template-rows: ${REGULAR_GRID_STYLE.rows};
 `;

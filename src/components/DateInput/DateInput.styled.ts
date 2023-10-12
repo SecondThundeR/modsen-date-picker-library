@@ -1,54 +1,68 @@
 import styled from "styled-components";
 
+import {
+  BOX_SIZING,
+  DATE_INPUT_STYLE,
+  FLEXBOX_STYLE,
+  FONT_FAMILY,
+  FONT_STYLE,
+  FONT_WEIGHT_MAP,
+  FULL_HEIGHT,
+  LINE_HEIGHT,
+  MARGIN_RESET,
+  NO_BORDER,
+} from "@/constants/style";
+import { getDateInputBorderColor } from "@/utils/style";
+
 export const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  display: ${FLEXBOX_STYLE.display};
+  flex-direction: ${FLEXBOX_STYLE.direction.column};
+  gap: ${DATE_INPUT_STYLE.wrapperGap};
 `;
 
 export const Title = styled.h1`
-  margin: 0;
-  color: #333;
-  font-family: "Open Sans", sans-serif;
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
+  margin: ${MARGIN_RESET};
+  color: ${DATE_INPUT_STYLE.title.color};
+  font-family: ${FONT_FAMILY};
+  font-size: ${DATE_INPUT_STYLE.title.fontSize};
+  font-style: ${FONT_STYLE};
+  font-weight: ${FONT_WEIGHT_MAP.semiBold};
+  line-height: ${LINE_HEIGHT};
 `;
 
 export const ErrorMessage = styled.p`
-  margin: 0;
-  color: #ff0000;
-  font-family: "Open Sans", sans-serif;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+  margin: ${MARGIN_RESET};
+  color: ${DATE_INPUT_STYLE.errorMessage.color};
+  font-family: ${FONT_FAMILY};
+  font-size: ${DATE_INPUT_STYLE.errorMessage.fontSize};
+  font-style: ${FONT_STYLE};
+  font-weight: ${FONT_WEIGHT_MAP.regular};
+  line-height: ${LINE_HEIGHT};
 `;
 
 export const InputWrapper = styled.div<{ $isError?: boolean }>`
-  width: 250px;
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  padding: 12px 16px;
-  border: 1px solid ${({ $isError }) => ($isError ? "#ff0000" : "#dddddd")};
-  border-radius: 8px;
+  width: ${DATE_INPUT_STYLE.input.width};
+  display: ${FLEXBOX_STYLE.display};
+  gap: ${DATE_INPUT_STYLE.input.gap};
+  align-items: ${FLEXBOX_STYLE.alignCenter};
+  padding: ${DATE_INPUT_STYLE.input.padding};
+  border: 1px solid ${({ $isError }) => getDateInputBorderColor($isError)};
+  border-radius: ${DATE_INPUT_STYLE.input.radius};
 `;
 
 export const Input = styled.input`
-  height: 100%;
-  box-sizing: border-box;
-  border: none;
-  outline: none;
-  flex: 2;
-  font-family: "Open Sans", sans-serif;
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+  height: ${FULL_HEIGHT};
+  box-sizing: ${BOX_SIZING};
+  border: ${NO_BORDER};
+  outline: ${NO_BORDER};
+  flex: ${DATE_INPUT_STYLE.flexLength};
+  font-family: ${FONT_FAMILY};
+  font-size: ${DATE_INPUT_STYLE.input.fontSize};
+  font-style: ${FONT_STYLE};
+  font-weight: ${FONT_WEIGHT_MAP.regular};
+  line-height: ${LINE_HEIGHT};
 
   &::placeholder {
-    color: #bbbbbb;
+    color: ${DATE_INPUT_STYLE.placeholderColor};
   }
 `;

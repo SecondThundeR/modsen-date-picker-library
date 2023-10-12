@@ -1,15 +1,25 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div<{ $removeBottomBorder?: boolean }>`
-  display: flex;
-  width: fit-content;
-  flex-direction: column;
-  padding: 10px;
-  border: 1px solid #e1e1e1;
-  border-radius: 8px;
-  border-bottom-left-radius: ${(props) =>
-    props.$removeBottomBorder ? 0 : "8px"};
-  border-bottom-right-radius: ${(props) =>
-    props.$removeBottomBorder ? 0 : "8px"};
-  border-bottom: ${(props) => props.$removeBottomBorder && "none"};
+import {
+  CALENDAR_WRAPPER_STYLE,
+  FIT_WIDTH,
+  FLEXBOX_STYLE,
+} from "@/constants/style";
+import { getCalendarWrapperRadius } from "@/utils/style";
+
+import { CalendarWrapperStyleProps } from "./interfaces";
+
+export const Wrapper = styled.div<CalendarWrapperStyleProps>`
+  display: ${FLEXBOX_STYLE.display};
+  width: ${FIT_WIDTH};
+  flex-direction: ${FLEXBOX_STYLE.direction.column};
+  padding: ${CALENDAR_WRAPPER_STYLE.padding};
+  border: ${CALENDAR_WRAPPER_STYLE.border};
+  border-radius: ${CALENDAR_WRAPPER_STYLE.radius.regular};
+  border-bottom-left-radius: ${({ $removeBottomBorder }) =>
+    getCalendarWrapperRadius($removeBottomBorder)};
+  border-bottom-right-radius: ${({ $removeBottomBorder }) =>
+    getCalendarWrapperRadius($removeBottomBorder)};
+  border-bottom: ${({ $removeBottomBorder }) =>
+    getCalendarWrapperRadius($removeBottomBorder, true)};
 `;

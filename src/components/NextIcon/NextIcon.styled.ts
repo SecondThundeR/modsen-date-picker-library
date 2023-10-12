@@ -1,12 +1,15 @@
 import styled from "styled-components";
 
+import { ICON_STYLE, TRANSITION_TIME } from "@/constants/style";
+
 export const Icon = styled.svg`
-  transition: 0.2s;
+  transition: ${TRANSITION_TIME};
+
   &:hover {
-    transform: scale(1.05);
+    transform: ${ICON_STYLE.hoverScale};
   }
 
   &:active {
-    transform: scale(0.95);
+    transform: ${ICON_STYLE.activeScale};
   }
 `;

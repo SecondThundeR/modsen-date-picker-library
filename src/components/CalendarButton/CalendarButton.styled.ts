@@ -1,63 +1,62 @@
-import { rgba } from "polished";
 import styled from "styled-components";
+
+import {
+  BUTTON_PADDING,
+  CURSOR_POINTER,
+  FLEXBOX_STYLE,
+  FONT_FAMILY,
+  FONT_SIZE_REGULAR,
+  FONT_STYLE,
+  FONT_WEIGHT_MAP,
+  LINE_HEIGHT,
+  NO_BORDER,
+  TRANSFORM_ACTIVE_SCALE,
+  TRANSITION_TIME,
+} from "@/constants/style";
+import {
+  getButtonBackgroundColor,
+  getButtonHoverBackgroundColor,
+  getButtonRadius,
+  getButtonSize,
+  getButtonTextColor,
+} from "@/utils/style";
 
 import { CalendarButtonStyleProps } from "./interfaces";
 
-const calculateTextColor = ({
-  $isSelected,
-  $range,
-  $isDisabled,
-  $isWeekend,
-  $isHoliday,
-}: CalendarButtonStyleProps) => {
-  if ($isSelected || $range === "start" || $range === "end") return "#fff";
-  if ($range === "between") return "#2f80ed";
-  if ($isHoliday) return "#b0578d";
-  if ($isWeekend) return "#f6546a";
-  if ($isDisabled) return "#aaa";
-  return "#333";
-};
-
 export const Item = styled.button<CalendarButtonStyleProps>`
-  cursor: pointer;
-  width: ${(props) => (props.$unlockedSize ? "auto" : "32px")};
-  height: ${(props) => (props.$unlockedSize ? "auto" : "32px")};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  border-radius: ${(props) => (props.$range === "between" ? "0" : "8px")};
-  background-color: ${(props) =>
-    props.$isSelected || props.$range !== undefined
-      ? rgba(
-          47,
-          128,
-          237,
-          props.$range === "start" ? 0.6 : props.$range === "between" ? 0.1 : 1,
-        )
-      : "transparent"};
-  color: ${(props) => calculateTextColor(props)};
-  border: none;
-  font-family: "Open Sans", sans-serif;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  border-top-right-radius: ${(props) =>
-    props.$range === "start" || props.$range === "between" ? "0px" : "8px"};
-  border-bottom-right-radius: ${(props) =>
-    props.$range === "start" || props.$range === "between" ? "0px" : "8px"};
-  border-top-left-radius: ${(props) =>
-    props.$range === "end" || props.$range === "between" ? "0px" : "8px"};
-  border-bottom-left-radius: ${(props) =>
-    props.$range === "end" || props.$range === "between" ? "0px" : "8px"};
-  transition: 0.2s;
+  cursor: ${CURSOR_POINTER};
+  width: ${({ $unlockedSize }) => getButtonSize($unlockedSize)};
+  height: ${({ $unlockedSize }) => getButtonSize($unlockedSize)};
+  display: ${FLEXBOX_STYLE.display};
+  justify-content: ${FLEXBOX_STYLE.justifyCenter};
+  align-items: ${FLEXBOX_STYLE.alignCenter};
+  padding: ${BUTTON_PADDING};
+  border-radius: ${({ $range }) => getButtonRadius($range === "between")};
+  background-color: ${({ $isSelected, $range }) =>
+    getButtonBackgroundColor({ $isSelected, $range })};
+  color: ${(props) => getButtonTextColor(props)};
+  border: ${NO_BORDER};
+  font-family: ${FONT_FAMILY};
+  font-size: ${FONT_SIZE_REGULAR};
+  font-style: ${FONT_STYLE};
+  font-weight: ${FONT_WEIGHT_MAP.semiBold};
+  line-height: ${LINE_HEIGHT};
+  border-top-right-radius: ${({ $range }) =>
+    getButtonRadius($range === "start" || $range === "between")};
+  border-bottom-right-radius: ${({ $range }) =>
+    getButtonRadius($range === "start" || $range === "between")};
+  border-top-left-radius: ${({ $range }) =>
+    getButtonRadius($range === "end" || $range === "between")};
+  border-bottom-left-radius: ${({ $range }) =>
+    getButtonRadius($range === "end" || $range === "between")};
+  transition: ${TRANSITION_TIME};
 
   &:hover {
-    background-color: ${(props) => (props.$isSelected ? "#1261ca" : "#f1f1f1")};
+    background-color: ${({ $isSelected }) =>
+      getButtonHoverBackgroundColor($isSelected)};
   }
 
   &:active {
-    transform: scale(0.98);
+    transform: ${TRANSFORM_ACTIVE_SCALE};
   }
 `;

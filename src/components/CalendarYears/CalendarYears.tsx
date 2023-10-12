@@ -1,7 +1,7 @@
 import React, { memo, useMemo } from "react";
 
 import CalendarYearsButton from "@/components/CalendarYearsButton";
-import { DEFAULT_DAY, DEFAULT_MONTH } from "@/constants/date";
+import { DEFAULT_DAY, DEFAULT_MONTH } from "@/constants/defaultValues";
 import { getCalendarYearsData } from "@/utils/calendar";
 
 import { Grid } from "./CalendarYears.styled";

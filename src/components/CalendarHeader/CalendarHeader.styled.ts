@@ -1,25 +1,39 @@
 import styled from "styled-components";
 
+import {
+  CURSOR_POINTER,
+  DEFAULT_OPACITY,
+  FLEXBOX_STYLE,
+  FONT_FAMILY,
+  FONT_SIZE_TITLE,
+  FONT_STYLE,
+  FONT_WEIGHT_MAP,
+  HEADER_TITLE_STYLE,
+  LINE_HEIGHT,
+  MARGIN_RESET,
+  TRANSITION_TIME,
+} from "@/constants/style";
+
 export const Header = styled.div`
-  display: flex;
-  padding: 5px 0px;
-  align-items: center;
+  display: ${FLEXBOX_STYLE.display};
+  padding: ${HEADER_TITLE_STYLE.padding};
+  align-items: ${FLEXBOX_STYLE.alignCenter};
 `;
 
 export const HeaderTitle = styled.h1`
-  cursor: pointer;
-  color: #000;
-  margin: 0;
-  font-family: "Open Sans", sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  flex: 2;
-  text-align: center;
-  transition: 0.3s;
+  cursor: ${CURSOR_POINTER};
+  color: ${HEADER_TITLE_STYLE.color};
+  margin: ${MARGIN_RESET};
+  font-family: ${FONT_FAMILY};
+  font-size: ${FONT_SIZE_TITLE};
+  font-style: ${FONT_STYLE};
+  font-weight: ${FONT_WEIGHT_MAP.bold};
+  line-height: ${LINE_HEIGHT};
+  flex: ${HEADER_TITLE_STYLE.flexLength};
+  text-align: ${HEADER_TITLE_STYLE.align};
+  transition: ${TRANSITION_TIME};
 
   &:hover {
-    opacity: 0.6;
+    opacity: ${DEFAULT_OPACITY};
   }
 `;

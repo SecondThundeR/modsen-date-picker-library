@@ -1,27 +1,40 @@
 import styled from "styled-components";
 
+import {
+  CURSOR_POINTER,
+  FLEXBOX_STYLE,
+  FONT_FAMILY,
+  FONT_STYLE,
+  FONT_WEIGHT_MAP,
+  FOOTER_BUTTON_STYLE,
+  FULL_WIDTH,
+  LINE_HEIGHT,
+  TRANSFORM_ACTIVE_SCALE,
+  TRANSITION_TIME,
+} from "@/constants/style";
+
 export const Button = styled.button`
-  cursor: pointer;
-  width: 100%;
-  display: flex;
-  padding: 10px 0px;
-  justify-content: center;
-  border-radius: 0px 0px 8px 8px;
-  border: 1px solid #e1e1e1;
-  background: #fff;
-  color: #333;
-  font-family: "Open Sans", sans-serif;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  transition: 0.2s;
+  cursor: ${CURSOR_POINTER};
+  width: ${FULL_WIDTH};
+  display: ${FLEXBOX_STYLE.display};
+  padding: ${FOOTER_BUTTON_STYLE.padding};
+  justify-content: ${FLEXBOX_STYLE.justifyCenter};
+  border: ${FOOTER_BUTTON_STYLE.border};
+  border-radius: ${FOOTER_BUTTON_STYLE.radius};
+  background: ${FOOTER_BUTTON_STYLE.backgroundColor};
+  color: ${FOOTER_BUTTON_STYLE.textColor};
+  font-family: ${FONT_FAMILY};
+  font-size: ${FOOTER_BUTTON_STYLE.fontSize};
+  font-style: ${FONT_STYLE};
+  font-weight: ${FONT_WEIGHT_MAP.semiBold};
+  line-height: ${LINE_HEIGHT};
+  transition: ${TRANSITION_TIME};
 
   &:hover {
     background-color: #f6f6f6;
   }
 
   &:active {
-    transform: scale(0.98);
+    transform: ${TRANSFORM_ACTIVE_SCALE};
   }
 `;
