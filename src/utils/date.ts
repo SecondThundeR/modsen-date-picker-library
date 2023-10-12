@@ -1,9 +1,9 @@
 import {
-  DATE_REGEX,
   DEFAULT_DAY,
   DEFAULT_MONTH,
   DEFAULT_YEAR,
-} from "@/constants/date";
+} from "@/constants/defaultValues";
+import { DATE_REGEX } from "@/constants/regexRules";
 
 export const formatDateForValue = (dateString: string) => {
   return dateString;

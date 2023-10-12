@@ -1,6 +1,6 @@
 import { ChangeEventHandler, useCallback, useState } from "react";
 
-import { MAX_LENGTH } from "@/constants/date";
+import { DATE_INPUT_MAX_LENGTH } from "@/constants/date";
 import useClearEnabled from "@/hooks/useClearEnabled";
 import useDateValue from "@/hooks/useDateValue";
 import { isInRange, isValidDate, parseDate } from "@/utils/date";
@@ -38,7 +38,7 @@ function useDateInput({
       }
 
       setInputValue(inputValue);
-      if (inputValue.length < MAX_LENGTH) return;
+      if (inputValue.length < DATE_INPUT_MAX_LENGTH) return;
       if (!isValidDate(inputValue)) {
         setIsError(true);
         return;

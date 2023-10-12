@@ -2,13 +2,14 @@ import { RangeState } from "@/components/CalendarButton/interfaces";
 import {
   CALENDAR_MONTHS,
   CALENDAR_NON_REGULAR_GRID_SIZE,
-  CALENDAR_WEEKS,
+  CALENDAR_WEEKS_LENGTH,
+} from "@/constants/calendar";
+import { FEBRUARY_MONTH_NUMBER, MONTHS_WITH_30_DAYS } from "@/constants/date";
+import {
+  CURRENT_MONTH,
+  CURRENT_YEAR,
   DEFAULT_MONTH,
-  FEBRUARY_MONTH_NUMBER,
-  MONTHS_WITH_30_DAYS,
-  THIS_MONTH,
-  THIS_YEAR,
-} from "@/constants/date";
+} from "@/constants/defaultValues";
 import { CalendarType } from "@/hooks/useCalendarType/interfaces";
 
 import { isInRange } from "./date";
@@ -51,7 +52,10 @@ export const getNextDay = () => {
   return nextDay;
 };
 
-export const getMonthDays = (monthNumber = THIS_MONTH, year = THIS_YEAR) => {
+export const getMonthDays = (
+  monthNumber = CURRENT_MONTH,
+  year = CURRENT_YEAR,
+) => {
   const isLeapYear = year % 4 === 0;
 
   if (monthNumber === FEBRUARY_MONTH_NUMBER) {
@@ -64,8 +68,8 @@ export const getMonthDays = (monthNumber = THIS_MONTH, year = THIS_YEAR) => {
 };
 
 export const getMonthFirstDay = (
-  monthNumber = THIS_MONTH,
-  year = THIS_YEAR,
+  monthNumber = CURRENT_MONTH,
+  year = CURRENT_YEAR,
 ) => {
   return new Date(`${year}-${zeroPad(monthNumber, 2)}-01`).getDay() + 1;
 };
@@ -277,7 +281,7 @@ export const getCalendarData = (
     }
   }
   const daysFromNextMonth =
-    CALENDAR_WEEKS * 7 - (daysFromPrevMonth + monthDays);
+    CALENDAR_WEEKS_LENGTH * 7 - (daysFromPrevMonth + monthDays);
 
   const { month: prevMonth, year: prevMonthYear } = getPreviousMonth(
     monthNumber,
