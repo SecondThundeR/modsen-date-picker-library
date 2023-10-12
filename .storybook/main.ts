@@ -23,7 +23,7 @@ const config: StorybookConfig = {
     if (config?.resolve?.alias) {
       config.resolve.alias = {
         ...config.resolve.alias,
-        "@/assets": path.resolve(__dirname, "../src/assets"),
+        "@/api": path.resolve(__dirname, "../src/api"),
         "@/components": path.resolve(__dirname, "../src/components/"),
         "@/constants": path.resolve(__dirname, "../src/constants/"),
         "@/features": path.resolve(__dirname, "../src/features/"),
