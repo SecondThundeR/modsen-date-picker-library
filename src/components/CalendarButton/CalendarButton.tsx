@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 
+import { Item } from "./CalendarButton.styled";
 import { CalendarButtonProps } from "./interfaces";
-import { Item } from "./Item";
 
 const CalendarButton = memo(function CalendarButton({
   title,

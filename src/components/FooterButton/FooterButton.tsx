@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 
-import { Button } from "./Button";
+import { Button } from "./FooterButton.styled";
 import { FooterButtonProps } from "./interfaces";
 
 const FooterButton = memo(function FooterButton({
