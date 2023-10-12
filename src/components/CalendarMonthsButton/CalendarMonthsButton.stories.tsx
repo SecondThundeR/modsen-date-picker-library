@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { CALENDAR_MONTHS } from "@/constants/date";
+import { CALENDAR_MONTHS } from "@/constants/calendar";
 import { getDefaultEndDate, getDefaultStartDate } from "@/utils/date";
 
 import CalendarMonthsButton from "./CalendarMonthsButton";
