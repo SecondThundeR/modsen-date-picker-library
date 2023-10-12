@@ -5,15 +5,29 @@ import {
 } from "@/constants/defaultValues";
 import { DATE_REGEX } from "@/constants/regexRules";
 
-export const formatDateForValue = (dateString: string) => {
-  return dateString;
+import { isDate } from "./calendar";
+
+export interface DateState {
+  month: number;
+  year: number;
+}
+
+export const extractDateState = (date = new Date()) => {
+  if (!isDate(date)) {
+    const today = new Date();
+    return {
+      month: today.getMonth() + 1,
+      year: today.getFullYear(),
+    };
+  }
+
+  return {
+    month: date.getMonth() + 1,
+    year: date.getFullYear(),
+  };
 };
 
-export const isValidDate = (dateString: string) => {
-  return DATE_REGEX.test(dateString);
-};
-
-export const parseDate = (dateString: string) => {
+export const parseDateString = (dateString: string) => {
   const splittedString = dateString.split(/[./]/).map(Number);
   let day = DEFAULT_DAY,
     month = DEFAULT_MONTH,
@@ -37,19 +51,17 @@ export const parseDate = (dateString: string) => {
   return new Date(year, month - 1, day);
 };
 
-export const isInRange = (date: Date, startDate?: Date, endDate?: Date) => {
-  if (!startDate || !endDate) return true;
-
-  return date >= startDate && date <= endDate;
+export const isValidDate = (dateString: string) => {
+  return DATE_REGEX.test(dateString);
 };
 
-export const isDatesYearsEqual = (date1: Date | null, date2: Date | null) => {
+export const isYearsEqual = (date1: Date | null, date2: Date | null) => {
   if (!date1 || !date2) return false;
 
   return date1.getFullYear() === date2.getFullYear();
 };
 
-export const isDatesMonthsEqual = (date1: Date | null, date2: Date | null) => {
+export const isMonthsEqual = (date1: Date | null, date2: Date | null) => {
   if (!date1 || !date2) return false;
 
   return (
@@ -58,7 +70,7 @@ export const isDatesMonthsEqual = (date1: Date | null, date2: Date | null) => {
   );
 };
 
-export const isDatesEqual = (date1: Date | null, date2: Date | null) => {
+export const isFullDatesEqual = (date1: Date | null, date2: Date | null) => {
   if (!date1 || !date2) return false;
 
   return (
@@ -68,27 +80,18 @@ export const isDatesEqual = (date1: Date | null, date2: Date | null) => {
   );
 };
 
-export const getMonthDateToUpdate = (date: Date, selectedDate: Date) => {
-  const dateToUpdate = new Date(date);
-  dateToUpdate.setDate(selectedDate.getDate());
-  return dateToUpdate;
-};
+export const isSameDay = (date: Date, basedate: Date | null) => {
+  if (!(isDate(date) && isDate(basedate))) return false;
 
-export const getYearDateToUpdate = (date: Date, selectedDate: Date) => {
-  const dateToUpdate = new Date(date);
-  dateToUpdate.setDate(selectedDate.getDate());
-  dateToUpdate.setMonth(selectedDate.getMonth());
-  return dateToUpdate;
-};
-
-export const getDefaultStartDate = () => {
-  const today = new Date();
-  const year = today.getFullYear() - 10;
-  return new Date(year, 0, 1);
-};
-
-export const getDefaultEndDate = () => {
-  const today = new Date();
-  const year = today.getFullYear() + 10;
-  return new Date(year, 11, 31);
+  const basedateDate = basedate.getDate();
+  const basedateMonth = basedate.getMonth() + 1;
+  const basedateYear = basedate.getFullYear();
+  const dateDate = date.getDate();
+  const dateMonth = date.getMonth() + 1;
+  const dateYear = date.getFullYear();
+  return (
+    basedateDate === dateDate &&
+    basedateMonth === dateMonth &&
+    basedateYear === dateYear
+  );
 };

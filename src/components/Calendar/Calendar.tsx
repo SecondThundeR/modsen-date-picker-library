@@ -7,7 +7,7 @@ import CalendarWrapper from "@/components/CalendarWrapper";
 import CalendarYears from "@/components/CalendarYears";
 import FooterButton from "@/components/FooterButton";
 import { useCalendarNavigation, useCalendarType } from "@/hooks";
-import { formatDateState } from "@/utils/calendar";
+import { getFormattedDateState } from "@/utils/calendar";
 
 import { Wrapper } from "./Calendar.styled";
 import { CalendarProps } from "./interfaces";
@@ -38,7 +38,7 @@ const Calendar = memo(function Calendar({
     endDate,
     type,
   });
-  const headerTitle = formatDateState(type, dateState);
+  const headerTitle = getFormattedDateState(type, dateState);
 
   const currentCalendarView = useCallback(() => {
     switch (type) {

@@ -5,7 +5,7 @@ import DateInput from "@/components/DateInput";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { withHolidays, withHolidaysAPI } from "@/hocs";
 import { useDatePicker } from "@/hooks";
-import { getDefaultEndDate, getDefaultStartDate } from "@/utils/date";
+import { getDefaultEndDate, getDefaultStartDate } from "@/utils/calendar";
 
 import { Wrapper } from "./DatePicker.styled";
 import { DatePickerProps } from "./interfaces";

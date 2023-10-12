@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 
-import { isSameDay } from "@/utils/calendar";
+import { isSameDay } from "@/utils/date";
 
 import { UseDatePickerOptions } from "./interfaces";
 

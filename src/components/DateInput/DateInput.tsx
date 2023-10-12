@@ -5,7 +5,7 @@ import ClearIcon from "@/components/ClearIcon";
 import Input from "@/components/Input";
 import { DATE_INPUT_MAX_LENGTH } from "@/constants/date";
 import { useDateInput } from "@/hooks";
-import { getDefaultEndDate, getDefaultStartDate } from "@/utils/date";
+import { getDefaultEndDate, getDefaultStartDate } from "@/utils/calendar";
 
 import { ErrorMessage, Title, Wrapper } from "./DateInput.styled";
 import { InputProps } from "./interfaces";

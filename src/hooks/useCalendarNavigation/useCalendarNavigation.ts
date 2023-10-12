@@ -1,8 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 
 import {
-  DateState,
-  extractDateState,
   getNextDecade,
   getNextMonth,
   getNextYear,
@@ -12,6 +10,7 @@ import {
   isDateInEndRange,
   isDateInStartRange,
 } from "@/utils/calendar";
+import { DateState, extractDateState } from "@/utils/date";
 
 import { UseCalendarNavigationOptions } from "./interfaces";
 

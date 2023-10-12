@@ -1,10 +1,11 @@
 import { ChangeEventHandler, useCallback, useState } from "react";
 
 import { DATE_INPUT_MAX_LENGTH } from "@/constants/date";
+import { INPUT_REGEX } from "@/constants/regexRules";
 import useClearEnabled from "@/hooks/useClearEnabled";
 import useDateValue from "@/hooks/useDateValue";
-import { isInRange, isValidDate, parseDate } from "@/utils/date";
-import { isValidValue } from "@/utils/input";
+import { isDateInRange } from "@/utils/calendar";
+import { isValidDate, parseDateString } from "@/utils/date";
 
 import { UseInputOptions } from "./interfaces";
 
@@ -32,7 +33,7 @@ function useDateInput({
     (event) => {
       setIsError(false);
       const { value: inputValue } = event.target;
-      if (!isValidValue(inputValue)) {
+      if (!INPUT_REGEX.test(inputValue)) {
         setIsError(true);
         return;
       }
@@ -44,8 +45,8 @@ function useDateInput({
         return;
       }
 
-      const parsedDate = parseDate(inputValue);
-      if (!isInRange(parsedDate, startDate, endDate)) {
+      const parsedDate = parseDateString(inputValue);
+      if (!isDateInRange(parsedDate, startDate, endDate)) {
         setIsError(true);
         return;
       }

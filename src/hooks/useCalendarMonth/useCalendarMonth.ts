@@ -2,13 +2,13 @@ import { useCallback } from "react";
 
 import { CalendarMonthsButtonProps } from "@/components/CalendarMonthsButton/interfaces";
 import {
-  extractDateState,
+  getMonthDateToUpdate,
   getRangeState,
   isDateInEndRange,
   isDateInRange,
   isDateInStartRange,
 } from "@/utils/calendar";
-import { getMonthDateToUpdate, isDatesMonthsEqual } from "@/utils/date";
+import { extractDateState, isMonthsEqual } from "@/utils/date";
 
 function useCalendarMonth({
   date,
@@ -19,10 +19,10 @@ function useCalendarMonth({
   endRange,
   onChange,
 }: Omit<CalendarMonthsButtonProps, "title">) {
-  const isMonthSelected = isDatesMonthsEqual(date, selectedDate);
-  const isStartRangeMonth = isDatesMonthsEqual(date, startRange);
-  const isEndRangeMonth = isDatesMonthsEqual(date, endRange);
-  const isBetweenRangeDates = isDateInRange(startRange, endRange, date);
+  const isMonthSelected = isMonthsEqual(date, selectedDate);
+  const isStartRangeMonth = isMonthsEqual(date, startRange);
+  const isEndRangeMonth = isMonthsEqual(date, endRange);
+  const isBetweenRangeDates = isDateInRange(date, startRange, endRange);
   const rangeState = getRangeState(
     isStartRangeMonth,
     isBetweenRangeDates,

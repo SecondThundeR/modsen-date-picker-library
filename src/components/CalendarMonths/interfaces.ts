@@ -1,5 +1,5 @@
 import { CalendarProps } from "@/components/Calendar/interfaces";
-import { DateState } from "@/utils/calendar";
+import { DateState } from "@/utils/date";
 
 export interface CalendarMonthsProps
   extends Omit<

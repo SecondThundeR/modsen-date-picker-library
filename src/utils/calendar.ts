@@ -12,12 +12,8 @@ import {
 } from "@/constants/defaultValues";
 import { CalendarType } from "@/hooks/useCalendarType/interfaces";
 
-import { isInRange } from "./date";
-
-export interface DateState {
-  month: number;
-  year: number;
-}
+import { DateState } from "./date";
+import { zeroPad } from "./string";
 
 /**
  * Defines structure for holidays data
@@ -30,10 +26,6 @@ export interface DateState {
 export interface Holidays {
   [month: string]: number[];
 }
-
-export const zeroPad = (value: number | string, length: number) => {
-  return `${value}`.padStart(length, "0");
-};
 
 export const getDayKey = (date: Date) =>
   `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`;
@@ -92,22 +84,6 @@ export const isDate = (date: unknown): date is Date => {
 
 export const isDateAWeekend = (date: Date) => {
   return date.getDay() === 0 || date.getDay() === 6;
-};
-
-export const isSameDay = (date: Date, basedate: Date | null) => {
-  if (!(isDate(date) && isDate(basedate))) return false;
-
-  const basedateDate = basedate.getDate();
-  const basedateMonth = basedate.getMonth() + 1;
-  const basedateYear = basedate.getFullYear();
-  const dateDate = date.getDate();
-  const dateMonth = date.getMonth() + 1;
-  const dateYear = date.getFullYear();
-  return (
-    basedateDate === dateDate &&
-    basedateMonth === dateMonth &&
-    basedateYear === dateYear
-  );
 };
 
 export const getPreviousMonth = (monthNumber: number, year: number) => {
@@ -187,30 +163,16 @@ export const isDateInEndRange = (
 };
 
 export const isDateInRange = (
-  startDate: Date | null,
-  endDate: Date | null,
   date: Date,
+  startDate?: Date | null,
+  endDate?: Date | null,
 ) => {
   if (!(isDate(startDate) && isDate(endDate) && isDate(date))) return false;
-  return isInRange(date, startDate, endDate);
+
+  return date >= startDate && date <= endDate;
 };
 
-export const extractDateState = (date = new Date()) => {
-  if (!isDate(date)) {
-    const today = new Date();
-    return {
-      month: today.getMonth() + 1,
-      year: today.getFullYear(),
-    };
-  }
-
-  return {
-    month: date.getMonth() + 1,
-    year: date.getFullYear(),
-  };
-};
-
-export const formatDateState = (
+export const getFormattedDateState = (
   calendarType: CalendarType,
   dateState: DateState,
 ) => {
@@ -314,4 +276,29 @@ export const getCalendarData = (
     });
 
   return [...prevMonthDates, ...thisMonthDates, ...nextMonthDates];
+};
+
+export const getMonthDateToUpdate = (date: Date, selectedDate: Date) => {
+  const dateToUpdate = new Date(date);
+  dateToUpdate.setDate(selectedDate.getDate());
+  return dateToUpdate;
+};
+
+export const getYearDateToUpdate = (date: Date, selectedDate: Date) => {
+  const dateToUpdate = new Date(date);
+  dateToUpdate.setDate(selectedDate.getDate());
+  dateToUpdate.setMonth(selectedDate.getMonth());
+  return dateToUpdate;
+};
+
+export const getDefaultStartDate = () => {
+  const today = new Date();
+  const year = today.getFullYear() - 10;
+  return new Date(year, 0, 1);
+};
+
+export const getDefaultEndDate = () => {
+  const today = new Date();
+  const year = today.getFullYear() + 10;
+  return new Date(year, 11, 31);
 };

@@ -2,7 +2,6 @@ import { useCallback, useState } from "react";
 
 import { CalendarDayProps } from "@/components/CalendarDay/interfaces";
 import {
-  extractDateState,
   getRangeState,
   isDateAHoliday,
   isDateAWeekend,
@@ -10,7 +9,7 @@ import {
   isDateInRange,
   isDateInStartRange,
 } from "@/utils/calendar";
-import { isDatesEqual } from "@/utils/date";
+import { extractDateState, isFullDatesEqual } from "@/utils/date";
 
 function useCalendarDay({
   date,
@@ -26,13 +25,13 @@ function useCalendarDay({
   onChange,
 }: CalendarDayProps) {
   const [isTodoVisible, setIsTodoVisible] = useState(false);
-  const isDateSelected = isDatesEqual(date, selectedDate);
+  const isDateSelected = isFullDatesEqual(date, selectedDate);
   const isNotCurrentMonth = date.getMonth() !== selectedMonth - 1;
   const isWeekend = displayWeekends && isDateAWeekend(date);
   const isHoliday = isDateAHoliday(date, holidays);
-  const isStartRangeDate = isDatesEqual(date, startRange);
-  const isEndRangeDate = isDatesEqual(date, endRange);
-  const isBetweenRangeDates = isDateInRange(startRange, endRange, date);
+  const isStartRangeDate = isFullDatesEqual(date, startRange);
+  const isEndRangeDate = isFullDatesEqual(date, endRange);
+  const isBetweenRangeDates = isDateInRange(date, startRange, endRange);
   const rangeState = getRangeState(
     isStartRangeDate,
     isBetweenRangeDates,

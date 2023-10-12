@@ -2,17 +2,13 @@ import { useCallback } from "react";
 
 import { CalendarYearsButtonProps } from "@/components/CalendarYearsButton/interfaces";
 import {
-  extractDateState,
   getRangeState,
+  getYearDateToUpdate,
   isDateInEndRange,
   isDateInRange,
   isDateInStartRange,
 } from "@/utils/calendar";
-import {
-  getYearDateToUpdate,
-  isDatesYearsEqual,
-  isInRange,
-} from "@/utils/date";
+import { extractDateState, isYearsEqual } from "@/utils/date";
 
 function useCalendarYear({
   date,
@@ -23,11 +19,11 @@ function useCalendarYear({
   endRange,
   onChange,
 }: Omit<CalendarYearsButtonProps, "title">) {
-  const isYearSelected = isDatesYearsEqual(date, selectedDate);
-  const isStartRangeYear = isDatesYearsEqual(date, startRange);
-  const isEndRangeYear = isDatesYearsEqual(date, endRange);
-  const isBetweenRangeDates = isDateInRange(startRange, endRange, date);
-  const isNotInRange = !isInRange(date, startDate, endDate);
+  const isYearSelected = isYearsEqual(date, selectedDate);
+  const isStartRangeYear = isYearsEqual(date, startRange);
+  const isEndRangeYear = isYearsEqual(date, endRange);
+  const isBetweenRangeDates = isDateInRange(date, startRange, endRange);
+  const isNotInRange = !isDateInRange(date, startDate, endDate);
   const rangeState = getRangeState(
     isStartRangeYear,
     isBetweenRangeDates,
