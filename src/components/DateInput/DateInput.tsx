@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 
-import CalendarIcon from "@/assets/CalendarIcon";
-import ClearIcon from "@/assets/ClearIcon";
+import CalendarIcon from "@/components/CalendarIcon";
+import ClearIcon from "@/components/ClearIcon";
 import { DATE_INPUT_MAX_LENGTH } from "@/constants/date";
 import { useDateInput } from "@/hooks";
 import { getDefaultEndDate, getDefaultStartDate } from "@/utils/date";

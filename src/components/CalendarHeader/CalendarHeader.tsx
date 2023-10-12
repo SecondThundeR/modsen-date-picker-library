@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 
-import NextIcon from "@/assets/NextIcon";
-import PrevIcon from "@/assets/PrevIcon";
+import NextIcon from "@/components/NextIcon";
+import PrevIcon from "@/components/PrevIcon";
 
 import { Header, HeaderTitle } from "./CalendarHeader.styled";
 import { CalendarHeaderProps } from "./interfaces";
